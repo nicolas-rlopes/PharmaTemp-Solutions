@@ -22,7 +22,7 @@ CREATE TABLE sensor(
     tipo VARCHAR(45)
 );
 
-/* --- Dados de Temperatura e Umidade --- */
+/* --- Dados de Temperatura  --- */
 CREATE TABLE dado_sensor (
 	idDado INT PRIMARY KEY AUTO_INCREMENT,
     sensor_id INT NOT NULL,  -- FOREIGN KEY
@@ -37,7 +37,8 @@ CREATE TABLE condicaoIdeal
 idCondIdeal INT AUTO_INCREMENT PRIMARY KEY,
 dispositivo_id INT, -- FOREIGN KEY(idDispositivo) -- Dispositivo com condições ideais para o armazenamento.
 temperaturaMinIdeal DOUBLE, -- >= 2°C
-temperaturaMaxIdeal DOUBLE -- <= 8°C
+temperaturaMaxIdeal DOUBLE, -- <= 8°C
+CONSTRAINT chkTemp CHECK(temperatura >= 2 AND temperatura <=8)
 );
 
 
@@ -48,5 +49,6 @@ CREATE TABLE alerta
 idAlerta INT AUTO_INCREMENT PRIMARY KEY,
 dispositivo_id INT, -- FOREIGN KEY(idDispositivo) -- Dispositivo que emitirá o alerta.
 temperaturaMinAlerta DOUBLE, -- < 2°C
-temperaturaMaxAlerta DOUBLE -- > 8°C 
-);s
+temperaturaMaxAlerta DOUBLE, -- > 8°C 
+CONSTRAINT chkTemp CHECK(temperatura < 2 AND temperatura >8)
+);
