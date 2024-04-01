@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+
+<body>
+
+    <h1 class="fonte"> Calculadora Financeira </h1>
+
+
+    <div class="card fonte">
+        <h4>Possui a funcionalidade de quantificar, em reais, o potencial de perda dos termolábeis <br> caso o nivel de
+            temperatura
+            do refrigerador não seja monitorado corretamente.</h4><br> <br>
+
+        <div class="texto fonte">
+            Insira a quantidade de lotes de termolábeis que sua empresa possui: <input style="margin-left: 9%;"
+                type="number" id="input_lote"><br> <br>
+
+            Insira o valor de um lote de termolabel: <input style="margin-left: 24%;" type="number"
+                id="input_valor"><br> <br>
+
+            Insira o custo total para a posse dos termolábeis <br> (Custos com água, empregados, manutenção,
+            energia
+            <br> e
+            todos os gastos necessários para a posse dos termolábeis): <input style="margin-left: 11%;" type="number"
+                id="input_custo"><br><br><br>
+
+        </div>
+
+        <button class="button fonte" onclick="calcular()"> Calcular potencial de perda dos termolábeis </button> <br>
+        <br>
+
+
+
+        <div class="divs">
+            <div id="div_perda"></div>
+            <div id="div_porcentagem"></div>
+            <div id="div_lucro"></div>
+        </div>
+
+    </div>
+
+    <br>
+
+</body>
+
+</html>
+<script>
+    function calcular() {
+        var lote = Number(input_lote.value)
+        var valor = Number(input_valor.value)
+        var custo = Number(input_custo.value)
+
+        var receitatot = lote * valor
+        var luc_brut = (lote * valor) - (custo * lote)
+
+        var media = Number(lote * valor) * 0.3
+        var prodlote = custo * lote
+
+        var perdalotem = (media * 100) / prodlote
+
+        div_perda.innerHTML = `Potencial de perda dos lotes: <b style="color: red;"> R$ ${media} </b> <br>`
+
+        div_porcentagem.innerHTML = ` Custo de produção: <b style="color: red;"> R$ ${prodlote} </b> <br> 
+        Média de perda em relação ao custo de produção: <b style="color: red;">  ${perdalotem} % </b> <br> <br> `
+
+        div_lucro.innerHTML = `Caso ocorra a adoção do projeto, a perda causada pela temperatura incorreta será neutralizada,<br> fazendo com que a receita total da posse dos lotes se torne: <b style="color: green;"> R$ ${receitatot} </b> <br>
+       Lucro bruto: <b style="color: green;"> R$ ${luc_brut} </b>
+        `
+    }
+</script>
