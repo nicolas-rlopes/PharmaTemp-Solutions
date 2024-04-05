@@ -1,64 +1,92 @@
-.body {
-background-image: url();
-    color: #fff;
-    border-bottom: 3px solid black;
-    display: flex;
-    justify-content: space-around;
+body {
     margin: 0;
-    background-size: cover;
-   
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #064186;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    
+
+}
+.logo {
+    width: 80px; 
+    margin-right: 0px; 
+}
+.titulo {
+    color: white;
 
 }
 
 .header {
-    background-color: #2D64C2;
-    color: #fff;
+    border-bottom: 3px solid white;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    width: 300px;
+    justify-content: space-between;
+    color: white;
+    align-items: center;
+}
+
+.header .container {
+    justify-content: space-between;
+
+}
+
+.banner {
+    padding: 40px 0;
+    /* espacamento interno topo direito baixo esquerdo */
+    color: black;
+    height: 400px;
+    background-image: url("imagens/remedio2.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*background-position: center;*/
+}
+
+.banner .container{
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.banner .container p{
+    font-size: 24px;
+}
+.social{
+    background-color: #fff;
+    padding: 40px 0px;
+}
+.social .container{
+    justify-content: space-around;
+}
+.card{
+    width: 300px;
     text-align: center;
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    align-items: center;
-    justify-content:start;
-    width: 100%;
-  
-
+    border: 5px solid black;
+    padding: 20px 50px;
+    border-radius: 10px;
 }
-
-.footer {
-    background-color: #064186;
-    color: #fff;
-    padding: 15px;
-    position: fixed;
-    bottom: 0;
- width: 100%;
- display: flex;
- align-self: flex-end;
- text-align: center;
- justify-content:space-evenly
- ;
-
+.card img{
+    width: 100px;
 }
-
-.titulo {
-    display: flex;
-    justify-content: start;
-    align-self: self-start;
-    flex-direction: row;
-    text-align: start;
-
-
+.card h4{
+    font-size: 24px;
+    color: #064186;
 }
-.navbar{
-    background-color: #2D64C2;
-    color: #fff;
-    width:80%;
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    align-items: center;
-    justify-content: space-evenly;
+.box{
+    width: 300px;
+    padding: 20px 50px;}
+    .box h4{
+        font-size: 36px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
     
-    
-}
-
-
