@@ -1,53 +1,64 @@
-.body{
-/* background-image: url(file:///home/aluno/Downloads/download.png); */
+.body {
 background-image: url();
-background-repeat: no-repeat;
-background-size: cover;
-width:100%;
-margin: 0;
-padding: 0;
+    color: #fff;
+    border-bottom: 3px solid black;
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    background-size: cover;
+   
+
+}
+
+.header {
+    background-color: #2D64C2;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    align-items: center;
+    justify-content:start;
+    width: 100%;
+  
+
+}
+
+.footer {
+    background-color: #064186;
+    color: #fff;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+ width: 100%;
+ display: flex;
+ align-self: flex-end;
+ text-align: center;
+ justify-content:space-evenly
+ ;
+
+}
+
+.titulo {
+    display: flex;
+    justify-content: start;
+    align-self: self-start;
+    flex-direction: row;
+    text-align: start;
+
+
 }
 .navbar{
-display: flex;
-flex-direction:row;
-list-style: none;
-width: 300px;
-justify-content: space-around;
-color: white;
-align-items: center;
-background-color: #2D64C2;
-}
-.titulo{
-font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-color: white;
-}
-.header{
-    border-bottom: 3px solid black;
     background-color: #2D64C2;
-}
-.container{
-display: flex;
-width: 80%;
-margin: auto;
-background-color:#2D64C2;
-}
-.header .container {
-    justify-content: space-between;
-    flex-direction: row;
-}
-.rodape{
+    color: #fff;
+    width:80%;
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     list-style: none;
-    width: 300px;
-    justify-content: end;
-    color: white;
-    align-items: self-end;
-    background-color: #2D64C2;
-    margin-bottom: 3px solid black;
+    align-items: center;
+    justify-content: space-evenly;
+    
     
 }
-.espaco{
-    display: flex;
-    justify-content: space-evenly;
-}
+
+
