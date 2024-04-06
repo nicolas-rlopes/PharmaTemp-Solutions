@@ -12,7 +12,7 @@ body {
     
 
 }
-.logo {
+    .logo {
     width: 80px; 
     margin-right: 0px; 
 }
@@ -22,7 +22,7 @@ body {
 }
 
 .header {
-    border-bottom: 3px solid white;
+    border-bottom: 3px solid black;
 }
 
 .navbar {
@@ -30,7 +30,7 @@ body {
     flex-direction: row;
     list-style: none;
     width: 300px;
-    justify-content: space-between;
+    justify-content: space-around;
     color: white;
     align-items: center;
 }
@@ -52,12 +52,12 @@ body {
 }
 
 .banner .container{
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     height: 100%;
 }
 .banner .container p{
-    font-size: 24px;
+    font-size: 25px;
 }
 .social{
     background-color: #fff;
@@ -72,6 +72,7 @@ body {
     border: 5px solid black;
     padding: 20px 50px;
     border-radius: 10px;
+
 }
 .card img{
     width: 100px;
@@ -89,4 +90,15 @@ body {
         justify-content: center;
         text-align: center;
     }
+    .footer{
+        height: 100px;
+        background-color: #064186;}
+
+        .footer .container{
+            justify-content: start;
+            align-items: center;
+            height: 120px;
+            color: #fff;
+            justify-content: space-between;
+        }
     
