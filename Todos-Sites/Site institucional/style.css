@@ -101,4 +101,11 @@ body {
             color: #fff;
             justify-content: space-between;
         }
-    
+        .imagem{
+     width:425px;
+     height:425px;
+     display: flex;
+     align-items: self-end;
+     justify-content: end;
+        }
+      
