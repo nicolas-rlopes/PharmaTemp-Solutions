@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="titulo"><img src="LOGO.PNG" alt=""></h1>
+            <ul class="navbar">
+                <li><a href="Site institucional/Site institucional.html">Inicio</a></li>
+                <li><a href="Calc+CSS/calc_financeira.html">Simulador</a></li>
+                <li>|</li>
+                <li><a href="cadastro.html">Cadastro</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="pai">
+        <div class="box">
+            <div class="icone">
+                <img src="PHARMA_TEMP.png" alt="" class="imagem">
+            </div>
+            <div class="formulario">
+                <h2>LOGIN</h2>
+                <span><input type="email" placeholder="E-mail" id="input_email"><br></span>
+                <div id="div_email" class="resposta"></div>
+                <span><input type="password" placeholder="Senha" id="input_senha"><br></span>
+                <div id="div_senha" class="resposta"></div>
+                <span><button onclick="logar()">Cadastre-se</button></span>
+                <div id="div_nulo" class="resposta"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function logar() {
+        var email = input_email.value;
+        var senha = input_senha.value;
+
+        var login = true;
+
+        if (email == '' || senha == '') {
+            div_nulo.innerHTML = `*Preencha o(s) campo(s) acima com o seus dados`
+        } else {
+            div_nulo.innerHTML = ''
+        }
+
+        if (login = true) {
+            if (email != 'fernando.brandao@sptech.school') {
+                div_email.innerHTML = `Esse e-mail não está cadastrado`
+                login = false
+            } else {
+                div_email.innerHTML = ''
+            }
+
+            if (senha != 'Sptech#2024') {
+                div_senha.innerHTML = `A senha está incorreta`
+                login = false
+                cadastro = false;
+            } else {
+                div_senha.innerHTML = ''
+            }
+        }
+        
+        if (login == true) {
+            alert('Usuario fez o seu login')
+        }
+
+} 
+</script>
