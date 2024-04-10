@@ -33,6 +33,7 @@ body {
     justify-content: space-around;
     color: white;
     align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .header .container {
@@ -72,6 +73,8 @@ body {
     border: 5px solid black;
     padding: 20px 50px;
     border-radius: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
 
 }
 .card img{
@@ -79,7 +82,7 @@ body {
 }
 .card h4{
     font-size: 24px;
-    color: #064186;
+    color: #000000;
 }
 .box{
     width: 300px;
@@ -101,11 +104,17 @@ body {
             color: #fff;
             justify-content: space-between;
         }
-        .imagem{
-     width:425px;
-     height:425px;
-     display: flex;
-     align-items: self-end;
-     justify-content: end;
-        }
-      
+
+    .fonte{
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: 40px;
+    }
+    .card_sobrenos{
+    width: 300px;
+    text-align: center;
+    border: 5px solid black;
+    padding: 20px 50px;
+    border-radius: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+background-color:#4490ec;
+    }
