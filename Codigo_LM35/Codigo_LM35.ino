@@ -1,7 +1,5 @@
 int pinoSensor = 0;
 int valorLido = 0;
-int maximo = 34;
-int minimo = 29;
 float temperatura = 0;
 //bloco de variavel
 
@@ -12,13 +10,10 @@ void setup(){
 void loop(){
   valorLido = analogRead(pinoSensor);
   temperatura = (valorLido * 0.00488);
-  temperatura = temperatura * 100 + 5;
+  temperatura = (temperatura * 100 + 5) - 30;
 
-  Serial.print(temperatura);
-  Serial.print(",");
-  Serial.print(minimo);
-  Serial.print(",");
-  Serial.println(maximo);
+  Serial.println(temperatura);
 
-  delay(100);
+
+  delay(1000);
 }
