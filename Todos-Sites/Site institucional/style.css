@@ -9,6 +9,7 @@ body {
     display: flex;
     width: 80%;
     margin: auto;
+
     
 
 }
@@ -21,9 +22,6 @@ body {
 
 }
 
-.header {
-    border-bottom: 3px solid black;
-}
 
 .navbar {
     display: flex;
@@ -46,7 +44,7 @@ body {
     /* espacamento interno topo direito baixo esquerdo */
     color: black;
     height: 400px;
-    background-image: url("imagens/remedio2.webp");
+    background-image: url("imagem/remedio2.webp");
     background-repeat: no-repeat;
     background-size: cover;
     /*background-position: center;*/
