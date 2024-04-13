@@ -1,7 +1,9 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-image: linear-gradient(to left, rgb(42, 92, 255) , rgb(77, 119, 255), white);
+    background-image: linear-gradient(to left, rgb(255, 255, 255) , rgb(16, 50, 163), white);
+    justify-content: center;
+    
 }
 
 .container {
@@ -13,13 +15,14 @@ body {
 }
 
 .header img {
-    height: 25px;
+    height: 35px;
     margin-left: 50px;
 }
 
 
 .header {
     border-bottom: 3px solid black;
+    
 }
 
 .navbar {
@@ -31,9 +34,7 @@ body {
     color: white;
     align-items: center;
     margin-right: 50px;
-    text-decoration: none;
 }
-
 
 li a {
     color: white;
@@ -47,6 +48,7 @@ li a:hover {
 
 .header .container {
     justify-content: space-between;
+    
 
 }
 
@@ -58,10 +60,10 @@ h2 {
 
 .box {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: center;
     margin: auto;
-    margin-top: 160px;
+    margin-top: 200px;
     width: fit-content;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.403);
     border-radius: 15px;
@@ -69,16 +71,20 @@ h2 {
 }
 
 .icone {
-    background-color: white;
+    background-color: #064186;
     display: flex;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 0px 10px 10px 0px;
+    align-items: center;
 }
 
 .imagem {
-    border-radius: 10px 0px 0px 10px;
-    width: 270px;
+    width: 180px;
+    height: 150px;
     align-self: center;
-    background-color: white;
+    background-color: #064186;
+    height: 40px;
+
+    
 }
 
 .formulario {
@@ -86,8 +92,7 @@ h2 {
    display: flex;
    flex-direction: column;
    align-items: center;
-   justify-content: center;
-   border-left: 2px solid black;
+   border-right: 2px solid black;
 }
 
 
@@ -143,3 +148,4 @@ button:hover {
     color: red;
     margin: 5px 0px 5px 0px;
 }
+
