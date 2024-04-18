@@ -97,7 +97,18 @@
 
 
 }
-
+.card_sobrenos {
+    width: 300px; 
+    text-align: center;
+    padding: 20px 50px;
+    border-radius: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.imagem{
+    width: 300px;
+    height: 300px;
+    border-radius: 4%;
+}
 .card img {
     width: 100px;
 }
@@ -228,7 +239,28 @@ li a:hover {
      margin: 5px 0px 5px 0px;
  }
  
+ .resultado {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border-color: #000;
+}
 
+.resultado h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.resultado p {
+    margin: 0;
+    color: #555;
+}
+
+.resultado strong {
+    color: #000;
+}
 
  
 

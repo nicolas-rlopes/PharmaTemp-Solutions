@@ -5,16 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    Quantidade de lotes termolábeis: <input type="text" id="input_qtdlotes"><br>
-    Valor do lote de termolabel: <input type="text" id="input_valor"><br>
-    Perda percentual nos lotes: <input type="text" id="input_perda"><br>
-    Valor Investido no Armazenamento: <input type="text" id="input_investido"><br>
-    <button onclick="calcular()">Calcular</button><br>
-    <div id="div_resultado_mercado"></div>
-    <div id="div_resultado_cliente"></div>
+<body class="body_login_cadastro">
+    <div class="body">
+        <div class="header">
+            <div class="container">
+                <h1 class="titulo"><img src="imagem/LOGO.PNG" alt=""></h1>
+                <ul class="navbar">
+                    <li><a href="Site institucional.html">Inicio</a></li>
+                    <li>|</li>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="icone">
+            <img src="imagem/LOGO.PNG" alt="">
+        </div>
+        <div class="formulario">
+            <h2>Simulador Finaceiro</h2>
+            <span> Quantidade de lotes termolábeis:<input type="text" id="input_qtdlotes"><br></span>
+
+            <span> Valor do lote de termolabel:<input type="text" id="input_valor"><br></span>
+
+            <span>Perda percentual nos lotes: <input type="text" id="input_perda"><br></span>
+
+            <span> Valor Investido no Armazenamento:<input type="text" id="input_investido"></span><br>
+
+            <button onclick="calcular()">Calcular</button><br>
+            <div id="div_resultado_mercado" class="resultado"></div>
+            <div id="div_resultado_cliente" class="resultado"></div>
+            
 </body>
 
 </html>
@@ -41,7 +66,7 @@
 
         //Contas relacionadas a perda do cliente
         var perdaCliente = perda / 100
-        
+
         var lucroSemPerdaC = producao - investido; // Calcular o lucro sem perda        
         var totalVendidoC = producao * (1 - perdaCliente);  // Calcular o total vendido mas com perda do cliente
         var lucroComPerdaC = totalVendidoC - investido;  // Calcular o lucro com perda, considerando a perda do cliente 
