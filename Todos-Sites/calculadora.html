@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Quantidade de lotes termolábeis: <input type="text" id="input_qtdlotes"><br>
+    Valor do lote de termolabel: <input type="text" id="input_valor"><br>
+    Perda percentual nos lotes: <input type="text" id="input_perda"><br>
+    Valor Investido no Armazenamento: <input type="text" id="input_investido"><br>
+    <button onclick="calcular()">Calcular</button><br>
+    <div id="div_resultado_mercado"></div>
+    <div id="div_resultado_cliente"></div>
+</body>
+
+</html>
+<script>
+    function calcular() {
+        var qtdLote = Number(input_qtdlotes.value);
+        var valor = Number(input_valor.value);
+        var perda = Number(input_perda.value);
+        var investido = Number(input_investido.value);
+
+        // Contas relacionadas a perda fixa do mercado
+        var producao = valor * qtdLote  // Calcular a produção total
+        var perdaMercado = 0.3 // Definir a percentagem de perda do mercado
+        var totalVendido = producao * (1 - perdaMercado);  // Calcular o total vendido mas com perda do mercado
+        var lucroSemPerdaM = totalVendido - investido; // Calcular o lucro sem perda
+        var lucroComPerdaM = (totalVendido * (1 - perdaMercado / 100)) - investido;  // Calcular o lucro com perda, considerando a perda percentual nos lotes
+        var perdaMensalM = (producao * perdaMercado) * valor;// Calcular a perda mensal no mercado
+        var perdaAnualM = perdaMensalM * 12;// Calcular a perda anual no mercad0
+        var mediaPerdaLote = 0;
+        for (var cont = 1; cont <= qtdLote; cont++) {
+            mediaPerdaLote += (perda * valor) / cont; // Calcular a média de perda por lote
+        }
+
+
+        //Contas relacionadas a perda do cliente
+        var perdaCliente = perda / 100
+        
+        var lucroSemPerdaC = producao - investido; // Calcular o lucro sem perda        
+        var totalVendidoC = producao * (1 - perdaCliente);  // Calcular o total vendido mas com perda do cliente
+        var lucroComPerdaC = totalVendidoC - investido;  // Calcular o lucro com perda, considerando a perda do cliente 
+        var perdaMensalC = (producao * perdaCliente) * valor;// Calcular a perda mensal com o valor do cliente 
+        var perdaAnualC = perdaMensalC * 12;// Calcular a perda anual com o valor do cliente 
+
+
+        // Exibir os resultados para o mercado
+        div_resultado_mercado.innerHTML =
+            `<h2>Resultados para o Mercado:</h2><br>
+            <p>A perda percentual de acordo com o mercado é de <strong>30%</strong></p><br>
+           <p><strong>A média da perda por lote :</strong> R$${mediaPerdaLote}</p><br>
+           <p><strong>Lucro sem perda percentual dos lotes:</strong> R$${lucroSemPerdaM} </p><br>
+           <p><strong>Lucro com perda de 30% dos lotes:</strong> R$${lucroComPerdaM}</p><br>
+           <p><strong>Perda mensal:</strong> R$${perdaMensalM}</p><br>
+           <p><strong>Perda anual:</strong> R$${perdaAnualM}</p>`;
+
+        // Exibir os resultados para o cliente
+        div_resultado_cliente.innerHTML =
+            `<h2>Resultados para o Cliente:</h2>
+               <p>A perda percentual de acordo foi de: <strong> ${perda} </strong></p><br>
+           <p><strong>Lucro sem perda:</strong> R$${lucroSemPerdaC}</p>
+           <p><strong>Lucro com perda:</strong> R$${lucroComPerdaC}</p>
+           <p><strong>Perda mensal:</strong> R$${perdaMensalC}</p>
+           <p><strong>Perda anual:</strong> R$${perdaAnualC}</p>`;
+    }
+
+
+</script>
+</body>
