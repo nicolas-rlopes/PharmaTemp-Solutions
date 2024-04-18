@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="body_login_cadastro">
+    <div class="body">
+    <div class="header">
+        <div class="container">
+            <h1 class="titulo"><img  src="imagem/LOGO.PNG" alt=""></h1>
+            <ul class="navbar">
+                <li><a href="Site institucional.html">Inicio</a></li>
+                <li><a href="calc_financeira.html">Simulador</a></li>
+                <li>|</li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    <div class="body2">
+        <div class="box">
+            <div class="icone">
+                <img    src="imagem/LOGO.PNG" alt="" >
+            </div>
+            <div class="formulario">
+                <h2>CADASTRO</h2>
+                <span><input type="text" placeholder="Nome Completo" id="input_nome"><br></span>
+                <div id="div_nome" class="resposta"></div>
+                <span><input type="text" placeholder="Data de Nascimento" id="input_dtNascimento"><br></span>
+                <div id="div_nascimento" class="resposta"></div>
+                <span><input type="text" placeholder="CPF" id="input_cpf"><br></span>
+                <div id="div_cpf" class="resposta"></div>
+                <span><input type="email" placeholder="E-mail" id="input_email"><br></span>
+                <div id="div_email" class="resposta"></div>
+                <span><input type="tel" placeholder="Telefone" id="input_telefone"><br></span>
+                <div id="div_telefone" class="resposta"></div>
+                <span><input type="password" placeholder="Senha" id="input_senha"><br></span>
+                <div id="div_senha" class="resposta"></div>
+                <span><input type="password" placeholder="Confirme a sua senha" id="input_senha_confirme"><br></span>
+                <div id="div_senha_confirme" class="resposta"></div>
+                <span><select id="select_empresa">
+                        <option value="0" selected disabled>Selecionar Empresa que trabalha</option>
+                        <option value="1">Empresa 1</option>
+                        <option value="2">Empresa 2</option>
+                        <option value="3">Empresa 3</option>
+                    </select></span>
+                <div id="div_empresa" class="resposta"></div>
+                <span><button onclick="cadastrar()">Cadastre-se</button></span>
+                <div id="div_nulo" class="resposta"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function cadastrar() {
+        var nome = input_nome.value;
+        var dtNascimento = input_dtNascimento.value;
+        var cpf = input_cpf.value;
+        var email = input_email.value;
+        var telefone = input_telefone.value;
+        var senha = input_senha.value;
+        var senha_confirme = input_senha_confirme.value;
+        var empresa = select_empresa.value;
+
+        var cadastro = true;
+
+        var tamanho_nome = nome.length;
+
+        var nascimento_barra = dtNascimento.indexOf('/');
+
+        var tamanho_cpf = cpf.length;
+
+        var arroba = email.indexOf('@');
+
+        var tamanho_telefone = telefone.length;
+
+        var tamanho_senha = senha.length;
+        var caracter_senha = senha.indexOf('#') >= 0 || senha.indexOf('%') >= 0|| senha.indexOf('!') >= 0
+
+        if (nome == '' || dtNascimento == '' || cpf == '' || email == '' || telefone == '' || senha == '' || senha_confirme == '' || empresa == 0) {
+            div_nulo.innerHTML = `*Preencha o(s) campo(s) acima com o seus dados`
+        } else {
+            div_nulo.innerHTML = ''
+        }
+
+        if (cadastro = true) {
+            if (nome >= 0 || nome <= 0) {
+                div_nome.innerHTML = `*Coloque apenas letras nesse campo`
+                cadastro = false;
+            } else if (nome.length < 8) {
+                div_nome.innerHTML = `Coloque não possui 8 letras`
+                cadastro = false;
+            } else {
+                div_nome.innerHTML = ''
+            }
+
+            if (nascimento_barra < 0) {
+                div_nascimento.innerHTML = `Separa as datas dessa maneira DD/MM/AAAA`
+                cadastro = false;
+            } else {
+                div_nascimento.innerHTML = ''
+            }
+
+            if (tamanho_cpf != 11) {
+                div_cpf.innerHTML = `Coloque um CPF válido 'apenas números'`
+                cadastro = false;
+            } else {
+                div_cpf.innerHTML = ''
+            }
+
+            if (tamanho_telefone != 13) {
+                div_telefone.innerHTML = `Siga o exemplo de telefone valido 55119XXXXYYYY`
+                cadastro = false;
+            } else {
+                div_telefone.innerHTML = ''
+            }
+
+            if (arroba < 0) {
+                div_email.innerHTML = `Coloque um E-mail valido`
+            } else {
+                div_email.innerHTML = ''
+            }
+
+            if (tamanho_senha < 8) {
+                div_senha.innerHTML = `A senha deve conter no mínimo 8 caracteres`
+                cadastro = false;
+            } else if (caracter_senha == false) {
+                div_senha.innerHTML = `Precisa de um dos três caracteres especiais '!' '#' '%'`
+                cadastro = false;
+            } else {
+                div_senha.innerHTML = ''
+            }
+
+            if (senha_confirme != senha) {
+                div_senha_confirme.innerHTML = `A senha não está igual a senha anterior`
+                cadastro = false;
+            } else {
+                div_senha_confirme.innerHTML = ''
+            }
+
+            if (empresa == 0) {
+                div_empresa.innerHTML = 'Selecione a empresa em que trabalha'
+                cadastro = false;
+            } else {
+                div_empresa.innerHTML = ''
+            }
+        } 
+        
+        if (cadastro == true) {
+            alert('O cadastro foi feito')
+        }
+    }
+</script>
