@@ -62,14 +62,3 @@ body{
     border-radius: 10px;
     align-items: center;
 }
-.centro{
-    width: 650px;
-    height: 780px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: rgb(0, 0, 0);
-    border: 2px solid black;
-    overflow-x: hidden;
-    word-wrap: break-word;
-    text-align: center;
-}
