@@ -55,15 +55,20 @@
     color: black;
     height: 400px;
     background-image: url("imagem/remedio2.webp");
+    background-attachment: fixed;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .banner .container {
-    justify-content: start;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
     align-items: center;
     height: 100%;
-    justify-content: center;
+    text-align: center;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.551);
 }
 
 .banner {
@@ -146,9 +151,16 @@
     justify-content: space-evenly;
 }
 
-.fonte {
+.titulo {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
     font-size: 40px;
+}
+
+.subtitulo {
+    padding-top: 5px;
+    align-items: center;
+    font-size: 30px;
 }
 
 li a {
@@ -188,10 +200,6 @@ input {
     border: 1px solid black;
     border-radius: 5px;
     padding: 0px 0px 5px 10px;
-}
-
-span {
-    width: 310px;
 }
 
 button {
