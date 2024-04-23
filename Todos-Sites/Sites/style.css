@@ -42,6 +42,7 @@
     align-items: center;
     margin-right: 50px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
 
 }
 
@@ -69,6 +70,7 @@
     height: 100%;
     text-align: center;
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.551);
+    
 }
 
 .banner {
@@ -124,7 +126,7 @@
     flex-direction: row-reverse;
     justify-content: center;
     margin: auto;
-    margin-top: 200px;
+    margin-top: 130px;
     width: fit-content;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.403);
     border-radius: 15px;
@@ -174,16 +176,18 @@ li a:hover {
 }
 
 .formulario {
+    margin: 0px;
     padding: 20px 40px 20px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
+  
 }
 
 
 input {
     height: 30px;
-    width: 300px;
+    width: 350px;
     justify-content: flex-end;
     align-items: end;
     border: 1px solid black;
@@ -193,7 +197,7 @@ input {
 
 #select_empresa {
     height: 30px;
-    width: 100%;
+    width: 362px;
     justify-content: flex-end;
     align-items: end;
     margin-bottom: 10px;
@@ -203,7 +207,7 @@ input {
 }
 
 .formulario span {
-    width: 310px;
+    width: 370px;
 }
 
 button {
@@ -255,4 +259,15 @@ button:hover {
 
 .resultado strong {
     color: #000;
+}
+.ja_possuo{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin: auto;
+}
+
+.li_black{color: black;
+    text-decoration: none;
+
 }
