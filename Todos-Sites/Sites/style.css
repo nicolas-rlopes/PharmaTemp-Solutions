@@ -264,11 +264,12 @@ button:hover {
 }
 
 .resultado {
-    background-color: rgba(255, 255, 255, 0.86);
+
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
     border-color: #000;
+
 }
 
 .resultado h2 {
@@ -299,5 +300,6 @@ button:hover {
 
 .social_sobre .img_remedio{
     width: 400px;
+    border-radius: 2%;
     justify-content: space-between;
 }
