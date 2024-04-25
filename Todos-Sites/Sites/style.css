@@ -155,7 +155,19 @@
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.86);
 }
-
+.box_cadastro{
+    display: flex;
+    justify-content: center;
+    margin: 50px auto 50px;
+    padding: auto;
+    width: 1000px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.403);
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.86);
+    align-items: center;
+    flex-direction: column;
+   
+}
 .box_login {
     display: flex;
     justify-content: center;
@@ -222,8 +234,25 @@ li a:hover {
     align-items: center;
   
 }
-
-
+.formulario_cadastro{
+    width: 800px;
+    margin: 0px;
+    padding: 40px 80px 40px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.esquerda{
+    flex-direction: column;
+    padding: 20px 40px 20px 40px;
+    display: flex;
+}
+.direta{
+    flex-direction: column;
+    padding: 20px 40px 20px 40px;
+    display: flex;
+    margin-top: 7px;
+}
 input {
     height: 30px;
     width: 350px;
@@ -235,7 +264,7 @@ input {
 }
 
 #select_empresa {
-    height: 30px;
+    height: 38px;
     width: 362px;
     justify-content: flex-end;
     align-items: end;
@@ -248,7 +277,7 @@ input {
 .formulario span {
     display: flex;
     text-align: left;
-    flex-direction: column;
+    flex-direction: row;
     width: 370px;
     padding: 4px;
 }
