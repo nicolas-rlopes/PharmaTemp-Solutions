@@ -6,7 +6,9 @@ idEmpresa int primary key auto_increment,
 nome varchar(45) not null,
 cnpj char(14) unique not null,
 telCelular char (11) not null,
-email varchar(60) unique not null);
+email varchar(60) unique not null,
+fkEndereco int,
+constraint fkEnderecoEmpresa foreign key (fkEndereco) references endereco(idEndereco));
 
 insert into empresa values
 	(default, 'Remédio Certo', '19.411.789/0001-00', '11 91234-5678', 'remedio.certo@gmail.com'),
@@ -85,20 +87,17 @@ tipo varchar (45),
 fkGeladeira int,
 constraint fkGeladeira foreign key (fkGeladeira) references geladeira(idGeladeira));
 
+insert into sensor values 
+(default, 'Sensor1', 'Temperatura'),
+(default, 'Sensor2', 'Temperatura'),
+(default, 'Sensor3', 'Temperatura');
+
 create table dado_sensor(
-idDado int auto_increment,
-fkSensor int,
-constraint pkComposta primary key (idDado, fkSensor),
-dtHora timestamp default current_timestamp,
-temperatura double,
-constraint fkSensor foreign key (fkSensor) references sensor(idSensor));
+idDado int primary key auto_increment,
+temperatura double);
 
 create table alerta(
 idAlerta int primary key auto_increment,
 resolvido varchar(45),
 fkDadoSensor int,
 constraint fkDadoSensor foreign key (fkDadoSensor) references dado_sensor(idDado));
-
-
-
-
