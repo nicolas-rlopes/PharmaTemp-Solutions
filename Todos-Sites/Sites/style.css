@@ -159,11 +159,17 @@
 .box_login {
     display: flex;
     justify-content: center;
-    margin: 50px auto;
-    width: fit-content;
+    align-items: center;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.403);
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.86);
+}
+
+.box2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
 }
 
 .box h4 {
