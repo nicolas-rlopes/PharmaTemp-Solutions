@@ -16,7 +16,7 @@
                 <h1 class="titulo"><img src="imagem/LOGO.PNG" alt=""></h1>
                 <ul class="navbar">
                     <li><a href="Site institucional.html">Inicio</a></li>
-                    <li class="agora" >Simulador</li>
+                    <li class="agora">Simulador</li>
                     <li>|</li>
                     <li><a href="login.html">Login</a></li>
                     <li><a href="cadastro.html">Cadastro</a></li>
@@ -30,13 +30,25 @@
         </div>
         <div class="formulario">
             <h2><b>Simulador Finaceiro</b></h2>
-            <span> <b>Quantidade de lotes termolábeis</b><input type="text" id="input_qtdlotes"><br></span>
+            
+            <span> <b>Quantidade de lotes termolábeis:</b><input type="text" id="input_qtdlotes">
+            <div id="div_qtdlotes" class="erro"></div>
+            </span>
+            
+            <span> <b>Valor do lote de termolabel:</b><input type="text" id="input_valor">
+            <div id="div_valorLote" class="erro"></div>
+            </span>
 
-            <span> <b>Valor do lote de termolabel</b><input type="text" id="input_valor"><br></span>
 
-            <span> <b>Perda percentual nos lotes</b><input type="text" id="input_perda"><br></span>
+            <span> <b>Perda percentual nos lotes:</b><input type="text" id="input_perda">
+            <div id="div_perdaLote" class="erro"></div>
+            </span>
 
-            <span> <b>Valor Investido no Armazenamento</b><input type="text" id="input_investido"></span><br>
+
+            <span> <b>Valor Investido no Armazenamento:</b><input type="text" id="input_investido">
+            <div id="div_investido" class="erro"></div>
+            </span><br>
+
 
             <button onclick="calcular()">Calcular</button><br>
             <div class="resultado">
@@ -44,12 +56,16 @@
                 <div id="div_resultado_cliente"></div>
             </div>
         </div>
-    </div> 
+    </div>
 </body>
 
 </html>
 <script>
     function calcular() {
+        div_qtdlotes.innerHTML = ``;
+        div_valorLote.innerHTML = ``;
+        div_perdaLote.innerHTML = ``;
+        div_investido.innerHTML = ``;
         var qtdLote = Number(input_qtdlotes.value);
         var valor = Number(input_valor.value);
         var perda = Number(input_perda.value);
@@ -60,10 +76,11 @@
         var perdaMercado = 0.3 // Definir a percentagem de perda do mercado
         var totalVendido = producao * (1 - perdaMercado);  // Calcular o total vendido mas com perda do mercado
         var lucroSemPerdaM = totalVendido - investido; // Calcular o lucro sem perda
-        var lucroComPerdaM = (totalVendido * (1 - perdaMercado / 100)) - investido;  // Calcular o lucro com perda, considerando a perda percentual nos lotes
-        var perdaMensalM = (producao * perdaMercado) * valor;// Calcular a perda mensal no mercado
+        var lucroComPerdaM = (totalVendido * 0.7) - investido;  // Calcular o lucro com perda, considerando a perda percentual nos lotes
+        var perdaMensalM = producao * perdaMercado;// Calcular a perda mensal no mercado
         var perdaAnualM = perdaMensalM * 12;// Calcular a perda anual no mercad0
         var mediaPerdaLote = 0;
+        
         for (var cont = 1; cont <= qtdLote; cont++) {
             mediaPerdaLote += (perda * valor) / cont; // Calcular a média de perda por lote
         }
@@ -72,33 +89,45 @@
         //Contas relacionadas a perda do cliente
         var perdaCliente = perda / 100
 
-        var lucroSemPerdaC = producao - investido; // Calcular o lucro sem perda        
-        var totalVendidoC = producao * (1 - perdaCliente);  // Calcular o total vendido mas com perda do cliente
+        var lucroSemPerdaC = producao - investido; // Calcular o     lucro sem perda        
+        var totalVendidoC = producao * perdaCliente;  // Calcular o total vendido mas com perda do cliente
         var lucroComPerdaC = totalVendidoC - investido;  // Calcular o lucro com perda, considerando a perda do cliente 
-        var perdaMensalC = (producao * perdaCliente) * valor;// Calcular a perda mensal com o valor do cliente 
+        var perdaMensalC = (producao * perdaCliente)// Calcular a perda mensal com o valor do cliente 
         var perdaAnualC = perdaMensalC * 12;// Calcular a perda anual com o valor do cliente 
 
+        if (qtdLote == "" || qtdLote <= 0) {
+            div_qtdlotes.innerHTML = `*Coloque um valor valido`
+        }
+         if (valor == "" || valor <= 0) {
+            div_valorLote.innerHTML = `*Coloque um valor valido`
+        }
+         if (perda == "" || perda <= 0) {
+            div_perdaLote.innerHTML = `*Coloque um valor valido`
+        }
+         if (investido == "" || investido <= 0) {
+            div_investido.innerHTML = `*Coloque um valor valido`
+        } else{
 
         // Exibir os resultados para o mercado
         div_resultado_mercado.innerHTML =
-            `<h2>Resultados para o Mercado:</h2><br>
-            <p>A perda percentual de acordo com o mercado é de <strong>30%</strong></p><br>
-           <p><strong>A média da perda por lote :</strong> R$${mediaPerdaLote}</p><br>
-           <p><strong>Lucro sem perda percentual dos lotes:</strong> R$${lucroSemPerdaM} </p><br>
-           <p><strong>Lucro com perda de 30% dos lotes:</strong> R$${lucroComPerdaM}</p><br>
-           <p><strong>Perda mensal:</strong> R$${perdaMensalM}</p><br>
-           <p><strong>Perda anual:</strong> R$${perdaAnualM}</p>`;
+            `<h2 style= "color: #064186;">Resultados para o Mercado</h2><br>
+            <p><strong>A perda percentual de acordo com o mercado é de: 30%</strong></p><br>
+           <p><strong> A média da perda por lote:</strong> <strong style= "color: green;">R$${mediaPerdaLote.toFixed(2)}</strong></p><br>
+           <p><strong>Lucro sem perda percentual dos lotes:</strong> <strong style= "color: green;">R$${lucroSemPerdaM.toFixed(2)}</strong></p><br>
+           <p><strong>Lucro com perda de 30% dos lotes:</strong> <strong style= "color: green;">R$${lucroComPerdaM.toFixed(2)}</strong></p><br>
+           <p><strong>Perda mensal:</strong> <strong style= "color: red;">R$${perdaMensalM.toFixed(2)}</strong></p><br>
+           <p><strong>Perda anual:</strong> <strong style= "color: red;">R$${perdaAnualM.toFixed(2)}</strong></p>`;
 
         // Exibir os resultados para o cliente
         div_resultado_cliente.innerHTML =
-            `<h2>Resultados para o Cliente:</h2>
-               <p>A perda percentual de acordo foi de: <strong> ${perda} </strong></p><br>
-           <p><strong>Lucro sem perda:</strong> R$${lucroSemPerdaC}</p>
-           <p><strong>Lucro com perda:</strong> R$${lucroComPerdaC}</p>
-           <p><strong>Perda mensal:</strong> R$${perdaMensalC}</p>
-           <p><strong>Perda anual:</strong> R$${perdaAnualC}</p>`;
+            `<br><h2 style= "color: #064186;">Resultados para o Cliente</h2><br>
+           <p><strong>A perda percentual de acordo foi de:</strong> <strong> ${perda}% </strong></p><br>
+           <p><strong>Lucro sem perda:</strong> <strong style= "color: green;"> R$${lucroSemPerdaC.toFixed(2)}</strong></p><br>
+           <p><strong>Lucro com perda:</strong> <strong style= "color: green;"> R$${lucroComPerdaC.toFixed(2)}</strong></p><br>
+           <p><strong>Perda mensal:</strong> <strong style= "color: red;"> R$${perdaMensalC.toFixed(2)}</strong></p><br>
+           <p><strong>Perda anual:</strong> <strong style= "color: red;"> R$${perdaAnualC.toFixed(2)}</strong></p><br>`;
     }
-
+}
 
 </script>
 </body>
