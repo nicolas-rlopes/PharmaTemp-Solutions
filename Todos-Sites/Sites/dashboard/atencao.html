@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Em Atenção</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="G03-removebg-preview.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="conteudo">
+        <div class="guia">
+            <div class="nome">
+                <img src="Fernando-Brandao.png" alt="Foto de identificação de usuario">
+                <h1>Fernando Brandão</h1>
+
+            </div>
+            <div class="info">
+                <ul class="bar">
+                    <li><a href="dash.html">Menu</a></li>
+                    <li class="aqui"><a href="atencao.html">Em Atençao</a></li>
+                    <li><a href="risco.html">Situação Crítica</a></li>
+                    <li><a href="avisos.html">Alertas</a></li>
+                    <li><a href="contato.html">Entrar em contato</a></li>
+                    <li><button onclick="voltar()"><span class="fa fa-sign-out"></span>Sair</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="grafico_dash">
+            <h1 id="h1_mensagem">Geladeiras em <span style="color: rgb(229, 255, 0);;">Atenção</span></h1>
+            <div class="dash">
+
+                <div class="geladeira">
+                    <h3>Geladeira 4</h3>
+                    <canvas id="myChart1" style="position: relative; width: 300px;"></canvas>
+                </div>
+
+                <div class="geladeira">
+                    <h3>Geladeira 5</h3>
+                    <canvas id="myChart2" style="position: relative; width: 300px;"></canvas>
+                </div>
+                <div class="geladeira">
+                    <h3>Geladeira 6</h3>
+                    <canvas id="myChart3" style="position: relative; width: 300px;"></canvas>
+                </div>
+                <div class="geladeira">
+                    <h3>Geladeira 7</h3>
+                    <canvas id="myChart4" style="position: relative; width: 300px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    function voltar() {
+        window.location.href = '../login.html'
+    }
+
+    var labels1 = [
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+    ];
+
+    var data1 = {
+        labels: labels1,
+        datasets: [{
+            label: 'Máxima',
+            backgroundColor: 'red',
+            borderColor: 'red',
+            data: [8, 8, 8, 8, 8, 8]
+        },
+        {
+            label: 'Mínima',
+            backgroundColor: 'red',
+            borderColor: 'red',
+            data: [2, 2, 2, 2, 2, 2]
+        },
+        {
+            label: 'Temperatura',
+            backgroundColor: 'blue',
+            borderColor: 'blue',
+            data: [2, 3, 2, 4, 2, 3]
+        }
+        ]
+    };
+
+    var config1 = {
+        type: 'line',
+        data: data1,
+        options: {}
+    };
+
+    // Geladeira 2
+
+    var labels2 = [
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+    ];
+
+    var data2 = {
+        labels: labels2,
+        datasets: [{
+            label: 'Máxima',
+            backgroundColor: 'red',
+            borderColor: 'red',
+            data: [8, 8, 8, 8, 8, 8]
+        },
+        {
+            label: 'Mínima',
+            backgroundColor: 'red',
+            borderColor: 'red',
+            data: [2, 2, 2, 2, 2, 2]
+        },
+        {
+            label: 'Temperatura',
+            backgroundColor: 'blue',
+            borderColor: 'blue',
+            data: [2, 8, 2, 3, 7, 2]
+        }
+        ]
+    };
+
+    var config2 = {
+        type: 'line',
+        data: data2,
+        options: {}
+    };
+
+    //Geladeira 3
+
+    var labels3 = [
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+    ];
+
+    var data3 = {
+        labels: labels3,
+        datasets: [{
+            label: 'Máxima',
+            backgroundColor: 'red',
+            borderColor: 'red',
+            data: [8, 8, 8, 8, 8, 8]
+        },
+        {
+            label: 'Mínima',
+            backgroundColor: 'red',
+            borderColor: 'red',
+            data: [2, 2, 2, 2, 2, 2]
+        },
+        {
+            label: 'Temperatura',
+            backgroundColor: 'blue',
+            borderColor: 'blue',
+            data: [7, 8, 7, 6, 8, 7]
+        }
+        ]
+    };
+
+    var config3 = {
+        type: 'line',
+        data: data3,
+        options: {}
+    };
+
+    // Geladeira 4
+
+    var labels4 = [
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+    ];
+
+    var data4 = {
+        labels: labels4,
+        datasets: [{
+            label: 'Máxima',
+            backgroundColor: 'red',
+            borderColor: 'red',
+            data: [8, 8, 8, 8, 8, 8]
+        },
+        {
+            label: 'Mínima',
+            backgroundColor: 'red',
+            borderColor: 'red',
+            data: [2, 2, 2, 2, 2, 2]
+        },
+        {
+            label: 'Temperatura',
+            backgroundColor: 'blue',
+            borderColor: 'blue',
+            data: [3, 2, 3, 2, 8, 2]
+        }
+        ]
+    };
+
+    var config4 = {
+        type: 'line',
+        data: data4,
+        options: {}
+    };
+
+
+    var myChart1 = new Chart(
+        document.getElementById('myChart1'),
+        config1
+    )
+
+    var myChart2 = new Chart(
+        document.getElementById('myChart2'),
+        config2
+    )
+
+    var myChart3 = new Chart(
+        document.getElementById('myChart3'),
+        config3
+    )
+
+    var myChart4 = new Chart(
+        document.getElementById('myChart4'),
+        config4
+    )
+
+</script>
+
+</html>

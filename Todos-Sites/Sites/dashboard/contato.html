@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entre em contato</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="G03-removebg-preview.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="conteudo">
+        <div class="guia">
+            <div class="nome">
+                <img src="Fernando-Brandao.png" alt="Foto de identificação de usuario">
+                <h1>Fernando Brandão</h1>
+            </div>
+            <div class="info">
+                <ul class="bar">
+                    <li class="aqui"><a href="dash.html">Menu</a></li>
+                    <li><a href="atencao.html">Em Atençao</a></li>
+                    <li><a href="risco.html">Situação Crítica</a></li>
+                    <li><a href="avisos.html">Alertas</a></li>
+                    <li><a href="contato.html">Entrar em contato</a></li>
+                    <li><button onclick="voltar()"><span class="fa fa-sign-out"></span>Sair</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="contato">
+            <span>Explique o erro que ocorreu durante o uso do Site:</span> <input type="text" placeholder="Escreva Aqui">
+            <button>Enviar</button>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+function voltar() {
+        window.location.href = '../login.html'
+    }
+
+</script>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Inicial</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="G03-removebg-preview.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="conteudo">
+        <div class="guia">
+            <div class="nome">
+                <img src="Fernando-Brandao.png" alt="Foto de identificação de usuario">
+                <h1>Fernando Brandão</h1>
+            </div>
+            <div class="info">
+                <ul class="bar">
+                    <li class="aqui"><a href="dash.html">Menu</a></li>
+                    <li><a href="atencao.html">Em Atençao</a></li>
+                    <li><a href="risco.html">Situação Crítica</a></li>
+                    <li><a href="avisos.html">Alertas</a></li>
+                    <li><a href="contato.html">Entrar em contato</a></li>
+                    <li><button onclick="voltar()"><span class="fa fa-sign-out"></span>Sair</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="menu">
+            <div class="notificacao">
+                <div class="alerta"><a href="avisos.html">12 Novas Notificações</a></div>
+            </div>
+            <div class="descricao">
+                
+                <div class="informacao">
+                    <h2><img width="20" height="20" src="https://img.icons8.com/ios-filled/50/chevron-up.png" alt="chevron-up"/> <span class="verde">4</span> Sensores </h2>
+                </div>
+                <div class="informacao">
+                    <h2><span class="vermelho">15%</span><br> das geladeiras estão acima da temperatura ideal</h2>
+                </div>
+                <div class="informacao">
+                    <h2>Gastos Gerais <br> <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/chevron-down.png" alt="chevron-down"/> R$ <span class="verde">15.000</span></h2>
+                </div>
+                
+            </div>
+            <div class="cont">
+                <div class="graficoMenu">
+                    <h3>Monitoramento de Novos Sensores</h3>
+                    <canvas id="myChart1" style="position: relative; width:100px"></canvas>
+                    <p>25% Dos novos sensores não estão se adaptando bem ao primeiro contato com as geladeiras <br> Revisão Necessária</p>
+                </div>
+                <div class="graficoMenu">
+                    <h3>Condição dos medicamentos nas 200 geladeiras</h3>
+                    <canvas id="myChart3" style="position: relative; width:100px "></canvas>
+                </div>
+                <div class="graficoMenu">
+                    <h3>Histórico de Situações Críticas</h3>
+                    <canvas id="myChart2" style="position: relative; width:100px"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+function voltar() {
+        window.location.href = '../login.html'
+    }
+
+    var total = 200;
+    var critica = 30;
+    var atencao = 40;
+    var normal = total - critica - atencao;
+
+    const labels3 = [
+        'Situação Normal',
+        'Em Atenção',
+        'Situação Crítica',
+    ];
+
+    const data3 = {
+        labels: labels3,
+        datasets: [{
+            label: 'Situação normal',
+            backgroundColor: ['rgb(50 , 255, 40)', 'rgb(255, 255, 40)', 'rgb(255, 40, 40)'],
+            borderColor: 'white',
+            data: [normal, atencao, critica]
+        }
+        ]
+    };
+
+    const config3 = {
+        type: 'pie',
+        data: data3,
+        options: {}
+    };
+
+    // SEGUNDA KPI BARRA
+
+    const labels1 = [
+        '08/01/2024',
+        '08/02/2024',
+        '08/03/2024',
+        '08/04/2024',
+        '08/05/2024',
+        '08/06/2024',
+        '08/07/2024',
+    ];
+
+    const data1 = {
+        labels: labels1,
+        datasets: [{
+            label: 'Problema',
+            backgroundColor: 'rgb(92, 162, 242)',
+            borderColor: 'white',
+            data: [1, 1, 2, 4, 3, 6, 9],
+
+        },
+        {
+            label: 'Adquiridos',
+            backgroundColor: 'rgb(6, 65, 134)',
+            borderColor: 'white',
+            data: [4, 7, 9, 10, 12, 14, 18],
+        }
+        ]
+    };
+
+    const config1 = {
+        type: 'bar',
+        data: data1,
+        options: {}
+    };
+
+    // TERCEIRA KPI PERDA
+
+
+    const labels2 = [
+        '25/04/2024',
+        '25/05/2024',
+        '25/06/2024',
+        '25/07/2024',
+        '25/08/2024',
+        '25/09/2024',
+        '25/10/2024',
+    ];
+
+    const data2 = {
+        labels: labels2,
+        datasets: [{
+            label: 'Temperatura Crítica',
+            backgroundColor: 'rgb(255, 40, 40)',
+            borderColor: 'rgb(255, 40, 40)',
+            data: [7, 16, 10, 21, 38, 24, 30]
+        }
+        ]
+    };
+
+    const config2 = {
+        type: 'bar',
+        data: data2,
+        options: {}
+    };
+
+    const myChart3 = new Chart(
+        document.getElementById('myChart3'),
+        config3
+    )
+
+    const myChart1 = new Chart(
+        document.getElementById('myChart1'),
+        config1
+    )
+
+    const myChart2 = new Chart(
+        document.getElementById('myChart2'),
+        config2
+    )
+
+</script>
+
+</html>

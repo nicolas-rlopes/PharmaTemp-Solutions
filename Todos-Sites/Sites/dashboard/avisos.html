@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificações</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="G03-removebg-preview.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="conteudo">
+        <div class="guia">
+            <div class="nome">
+                <img src="Fernando-Brandao.png" alt="Foto de identificação de usuario">
+                <h1>Fernando Brandão</h1>
+            </div>
+            <div class="info">
+                <ul class="bar">
+                    <li class="aqui"><a href="dash.html">Menu</a></li>
+                    <li><a href="atencao.html">Em Atençao</a></li>
+                    <li><a href="risco.html">Situação Crítica</a></li>
+                    <li><a href="avisos.html">Alertas</a></li>
+                    <li><a href="contato.html">Entrar em contato</a></li>
+                    <li><button onclick="voltar()"><span class="fa fa-sign-out"></span>Sair</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="caixa">
+            <div class="aviso">
+                <span>3 Avisos de <b>Temperatura Crítica</b></span>
+                <div class="subaviso">
+                    Geladeira 144 está em situação crítica
+                </div>
+                <div class="subaviso">
+                    Geladeira 148 está em situação crítica
+                </div>
+                <div class="subaviso">
+                    Geladeira 120 está em situação crítica
+                </div>
+            </div>
+
+            <div class="aviso">
+                <span>6 Avisos de <b>Atenção</b></span>
+                <div class="subaviso">
+                    Geladeira 20 está em Atenção
+                </div>
+                <div class="subaviso">
+                    Geladeira 21 está em Atenção
+                </div>
+                <div class="subaviso">
+                    Geladeira 22 está em Atenção
+                </div>
+                <div class="subaviso">
+                    Geladeira 46 está em Atenção
+                </div>
+                <div class="subaviso">
+                    Geladeira 57 está em Atenção
+                </div>
+                <div class="subaviso">
+                    Geladeira 12 está em Atenção
+                </div>
+            </div>
+            <div class="aviso">
+                <span>3 Avisos de Geladeiras que devem ser <b>revisadas</b></span>
+                <div class="subaviso">
+                    Geladeira 1 está apresentando problemas tecnicos
+                </div>
+                <div class="subaviso">
+                    Geladeira 5 está com problema no sensor LM35
+                </div>
+                <div class="subaviso">
+                    Geladeira 7 está apresentando pico de temperaturas
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+function voltar() {
+        window.location.href = '../login.html'
+    }
+
+</script>
