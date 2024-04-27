@@ -4,11 +4,9 @@ use pharmatemp;
 create table empresa(
 idEmpresa int primary key auto_increment,
 nome varchar(45) not null,
-cnpj char(14) unique not null,
-telCelular char (11) not null,
-email varchar(60) unique not null,
-fkEndereco int,
-constraint fkEnderecoEmpresa foreign key (fkEndereco) references endereco(idEndereco));
+cnpj char(18) unique not null,
+telCelular char (13) not null,
+email varchar(60) unique not null);
 
 insert into empresa values
 	(default, 'Remédio Certo', '19.411.789/0001-00', '11 91234-5678', 'remedio.certo@gmail.com'),
@@ -21,9 +19,9 @@ create table funcionario(
 idFuncionario int primary key auto_increment,
 nome varchar (45) not null,
 dtNasc date not null,
-cpf char(11) unique not null,
+cpf char(14) unique not null,
 email varchar(60) unique not null,
-telCelular char(11) not null,
+telCelular char(13) not null,
 senha varchar(45) not null,
 fkEmpresa int,
 constraint fkEmpresaFunc foreign key (fkEmpresa) references empresa(idEmpresa)
@@ -46,16 +44,22 @@ create table endereco(
 idEndereco int primary key auto_increment,
 logradouro varchar(80) not null,
 numEnd varchar (45) not null,
-cep char(9) not null);
+cep char(9) not null,
+fkEmpresa int,
+constraint fkEnderecoEmpresa foreign key (fkEmpresa) references empresa(idEmpresa));
 
 insert into endereco values
-	(default, 'Rua Rosa Cruz', 1778, '96211-120'),
-	(default, 'Rua Coronel Fabriciano', 651, '29171-744'),
-	(default, 'Rua Vista Alegre', 137, '94834-228'),
-	(default, 'Rua Prudêncio Martins', 886, '88703-500'),
-	(default, 'Rua Berilo', 120, '37701-397');
-    
-    select * from endereco;
+	(default, 'Rua Rosa Cruz', 1778, '96211-120', null),
+	(default, 'Rua Coronel Fabriciano', 651, '29171-744', null),
+	(default, 'Rua Vista Alegre', 137, '94834-228', null),
+	(default, 'Rua Prudêncio Martins', 886, '88703-500', null),
+	(default, 'Rua Berilo', 120, '37701-397', null);
+
+update endereco set fkEmpresa = 1 where idEndereco in (1, 2);
+update endereco set fkEmpresa = 2 where idEndereco in (3, 4);
+update endereco set fkEmpresa = 3 where idEndereco = 5;
+
+select * from endereco;
 
 create table parametro(
 idParametro int primary key auto_increment,
@@ -78,7 +82,11 @@ fkParametro int,
 constraint fkParametro foreign key (fkParametro) references parametro(idParametro));
 
 insert into geladeira values
-(default, 'Geladeira Convencional', 'Eletrolux', 1234, 1, 1);
+	(default, 'Freezer 3349/FV', 'Fanem', 1234, 1, 1),
+	(default, 'Câmara de Conservação', 'Thermotemp', 44, 2, 1),
+	(default, 'MC-4L316', 'Midea', 100, 3, 1);
+
+select * from geladeira;
 
 create table sensor(
 idSensor int primary key auto_increment,
@@ -88,16 +96,30 @@ fkGeladeira int,
 constraint fkGeladeira foreign key (fkGeladeira) references geladeira(idGeladeira));
 
 insert into sensor values 
-(default, 'Sensor1', 'Temperatura'),
-(default, 'Sensor2', 'Temperatura'),
-(default, 'Sensor3', 'Temperatura');
+(default, 'Sensor1', 'Temperatura', 1),
+(default, 'Sensor2', 'Temperatura', 2),
+(default, 'Sensor3', 'Temperatura', 3);
+
+select * from sensor;
 
 create table dado_sensor(
 idDado int primary key auto_increment,
-temperatura double);
+dtHora timestamp default current_timestamp,
+temperatura double,
+fkSensor int,
+constraint fkSensorDado foreign key (fkSensor)
+	references sensor (idSensor)
+);
 
 create table alerta(
 idAlerta int primary key auto_increment,
 resolvido varchar(45),
+tipo varchar(45),
 fkDadoSensor int,
 constraint fkDadoSensor foreign key (fkDadoSensor) references dado_sensor(idDado));
+
+
+insert into alerta values
+	(default, 'Resolvido', 'Alerta Crítico', 1),
+	(default, 'Não Resolvido', 'Alerta Crítico', 2),
+	(default, 'Não Resolvido', 'Manutenção de Sensor', 3);
