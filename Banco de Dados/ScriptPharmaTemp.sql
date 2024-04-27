@@ -64,7 +64,7 @@ select * from endereco;
 create table parametro(
 idParametro int primary key auto_increment,
 tempMinima double not null,
-temMaxima double not null);
+tempMaxima double not null);
 
 insert into parametro values
 	(1, 2, 8);
@@ -111,6 +111,11 @@ constraint fkSensorDado foreign key (fkSensor)
 	references sensor (idSensor)
 );
 
+insert into dado_sensor values
+	(default, default, 5, 1),
+	(default, default, 3, 1),
+	(default, default, 4, 1);
+    
 create table alerta(
 idAlerta int primary key auto_increment,
 resolvido varchar(45),
@@ -123,3 +128,30 @@ insert into alerta values
 	(default, 'Resolvido', 'Alerta Crítico', 1),
 	(default, 'Não Resolvido', 'Alerta Crítico', 2),
 	(default, 'Não Resolvido', 'Manutenção de Sensor', 3);
+    
+    
+select * from alerta;
+select * from dado_sensor;
+select * from empresa;
+select * from endereco;
+select * from funcionario;
+select * from parametro;
+select * from sensor;
+select * from geladeira;
+
+select empresa.nome as 'Nome da Empresa',
+		endereco.logradouro as Rua,
+        endereco.numEnd as 'Número',
+        funcionario.nome as 'Nome do Funcionario',
+        geladeira.modelo as 'Modelo da Geladeira',
+        geladeira.numeroSerial as 'Numero Serial',
+        parametro.tempMinima as 'Temperatura Mínima',
+        parametro.tempMaxima as 'Temperatura Máxima',
+        sensor.nome as 'Nome do Sensor'
+        from empresa join endereco on fkEmpresa = idEmpresa
+        join funcionario on funcionario.fkEmpresa = idEmpresa
+        join geladeira on geladeira.fkEmpresa = idEmpresa
+        join parametro on fkParametro = idParametro
+        join sensor on fkGeladeira = idGeladeira
+        where empresa.nome = 'Vida+' and endereco.numEnd = '137' and funcionario.nome like 'Juan %';
+        
