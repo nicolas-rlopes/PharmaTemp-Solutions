@@ -31,14 +31,18 @@
         <div class="formulario">
             <h2><b>Simulador Finaceiro</b></h2>
             
+            <span> <b>Unidades por lote: </b><input type="text" id="input_unilote">
+            <div id="div_qtdlotes" class="erro"></div>
+            </span>
+            
+            <span> <b>Valor da Unidade de termolabel:</b><input type="text" id="input_valor">
+            <div id="div_valorLote" class="erro"></div>
+            </span>
+
             <span> <b>Quantidade de lotes termolábeis:</b><input type="text" id="input_qtdlotes">
             <div id="div_qtdlotes" class="erro"></div>
             </span>
             
-            <span> <b>Valor do lote de termolabel:</b><input type="text" id="input_valor">
-            <div id="div_valorLote" class="erro"></div>
-            </span>
-
 
             <span> <b>Perda percentual nos lotes:</b><input type="text" id="input_perda">
             <div id="div_perdaLote" class="erro"></div>
@@ -66,34 +70,31 @@
         div_valorLote.innerHTML = ``;
         div_perdaLote.innerHTML = ``;
         div_investido.innerHTML = ``;
+        var unilotes = Number(input_unilote.value);
         var qtdLote = Number(input_qtdlotes.value);
         var valor = Number(input_valor.value);
         var perda = Number(input_perda.value);
         var investido = Number(input_investido.value);
 
         // Contas relacionadas a perda fixa do mercado
-        var producao = valor * qtdLote  // Calcular a produção total
+        var ganho_total = unilotes * valor * qtdLote   // Calcular o valor da produção total
         var perdaMercado = 0.3 // Definir a percentagem de perda do mercado
-        var totalVendido = producao * (1 - perdaMercado);  // Calcular o total vendido mas com perda do mercado
-        var lucroSemPerdaM = totalVendido - investido; // Calcular o lucro sem perda
+        var totalVendido = ganho_total * (1 - perdaMercado);  // Calcular o total vendido mas com perda do mercado
+        var lucro_bruto = totalVendido - investido; // Calcular o lucro sem perda
         var lucroComPerdaM = (totalVendido * 0.7) - investido;  // Calcular o lucro com perda, considerando a perda percentual nos lotes
-        var perdaMensalM = producao * perdaMercado;// Calcular a perda mensal no mercado
-        var perdaAnualM = perdaMensalM * 12;// Calcular a perda anual no mercad0
-        var mediaPerdaLote = 0;
+        var perdaMensalM = ganho_total * perdaMercado;// Calcular a perda mensal no mercado
+        // var perdaAnualM = perdaMensalM * 12;// Calcular a perda anual no mercad0
         
-        for (var cont = 1; cont <= qtdLote; cont++) {
-            mediaPerdaLote += (perda * valor) / cont; // Calcular a média de perda por lote
-        }
 
 
         //Contas relacionadas a perda do cliente
         var perdaCliente = perda / 100
 
-        var lucroSemPerdaC = producao - investido; // Calcular o     lucro sem perda        
-        var totalVendidoC = producao * perdaCliente;  // Calcular o total vendido mas com perda do cliente
-        var lucroComPerdaC = totalVendidoC - investido;  // Calcular o lucro com perda, considerando a perda do cliente 
-        var perdaMensalC = (producao * perdaCliente)// Calcular a perda mensal com o valor do cliente 
+        var lucroC = ganho_total - investido; // Calcular o lucro sem perda        
+        var totalVendidoC = ganho_total * perdaCliente;  // Calcular o total vendido mas com perda do cliente
+        var perdaMensalC = (ganho_total * perdaCliente)// Calcular a perda mensal com o valor do cliente 
         var perdaAnualC = perdaMensalC * 12;// Calcular a perda anual com o valor do cliente 
+        var lucroComPerdaC = lucroSemPerdaC - perdaMensalC;  // Calcular o lucro com perda, considerando a perda do cliente 
 
         if (qtdLote == "" || qtdLote <= 0) {
             div_qtdlotes.innerHTML = `*Coloque um valor valido`
@@ -112,7 +113,6 @@
         div_resultado_mercado.innerHTML =
             `<h2 style= "color: #064186;">Resultados para o Mercado</h2><br>
             <p><strong>A perda percentual de acordo com o mercado é de: 30%</strong></p><br>
-           <p><strong> A média da perda por lote:</strong> <strong style= "color: green;">R$${mediaPerdaLote.toFixed(2)}</strong></p><br>
            <p><strong>Lucro sem perda percentual dos lotes:</strong> <strong style= "color: green;">R$${lucroSemPerdaM.toFixed(2)}</strong></p><br>
            <p><strong>Lucro com perda de 30% dos lotes:</strong> <strong style= "color: green;">R$${lucroComPerdaM.toFixed(2)}</strong></p><br>
            <p><strong>Perda mensal:</strong> <strong style= "color: red;">R$${perdaMensalM.toFixed(2)}</strong></p><br>
