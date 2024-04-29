@@ -173,9 +173,10 @@ li a:hover {
 .graficoMenu {
     display: flex;
     width: 350px;
-    height: fit-content;
+    height: 450px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     background-color: white;
     padding: 20px;
     border: 2px solid black;
@@ -214,13 +215,13 @@ li a:hover {
 
 
 .informacao {
-    width: 200px;
+    width: 220px;
     height: 70px;
     display: flex;
     background-color: white;
     padding: 20px;
     border: 2px solid black;
-    border-radius: 5px;
+    border-radius: 50px;
     margin-bottom: 20px;
     align-items: center;
     justify-content: center;
