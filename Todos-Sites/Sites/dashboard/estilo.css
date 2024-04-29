@@ -332,16 +332,16 @@ h3 {
     text-align: center;
     margin: 35px;
     justify-content: center;
+    align-items: center;
 }
 
-.contato input {
-    height: 300px;
+.contato textarea {
     margin: 10px 0px;
+    width: 500px;
     border: 2px solid #064186;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0px 0px 5px #0642869a;
-    
 }
 
 .contato span {
