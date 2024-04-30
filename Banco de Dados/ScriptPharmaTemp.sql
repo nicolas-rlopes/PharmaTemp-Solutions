@@ -147,11 +147,18 @@ select empresa.nome as 'Nome da Empresa',
         geladeira.numeroSerial as 'Numero Serial',
         parametro.tempMinima as 'Temperatura Mínima',
         parametro.tempMaxima as 'Temperatura Máxima',
-        sensor.nome as 'Nome do Sensor'
+        sensor.nome as 'Nome do Sensor',
+        dado_sensor.temperatura as 'Temperatura Armazenada',
+        dado_sensor.dtHora as 'Dia e hora da armazenação',
+        alerta.resolvido as Situação,
+        alerta.tipo as 'Tipo de alerta'
         from empresa join endereco on fkEmpresa = idEmpresa
         join funcionario on funcionario.fkEmpresa = idEmpresa
         join geladeira on geladeira.fkEmpresa = idEmpresa
         join parametro on fkParametro = idParametro
         join sensor on fkGeladeira = idGeladeira
-        where empresa.nome = 'Vida+' and endereco.numEnd = '137' and funcionario.nome like 'Juan %';
+        join dado_sensor on fkSensor = idSensor
+        join alerta on fkDadoSensor = idDado
+        where empresa.nome = 'Remédio Certo' and endereco.numEnd = '1778' and funcionario.nome like 'Jaqueline %' and dado_sensor.temperatura = 5; 
         
+select * from 
