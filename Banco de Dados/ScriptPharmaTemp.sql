@@ -161,4 +161,4 @@ select empresa.nome as 'Nome da Empresa',
         join alerta on fkDadoSensor = idDado
         where empresa.nome = 'Remédio Certo' and endereco.numEnd = '1778' and funcionario.nome like 'Jaqueline %' and dado_sensor.temperatura = 5; 
         
-select * from 
+select * from empresa join funcionario on fkEmpresa = idEmpresa;

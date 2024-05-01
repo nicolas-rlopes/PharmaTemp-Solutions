@@ -78,9 +78,9 @@
 </html>
 <script>
     function calcular() {
-        div_formulario.style.display = "none"
-        div_resultado_mercado.style.display = "block"
-        div_resultado_cliente.style.display = "block"
+        div_formulario.style.display = "none";
+        div_resultado_mercado.style.display = "block";
+        div_resultado_cliente.style.display = "block";
         div_qtdlotes.innerHTML = ``;
         div_valorLote.innerHTML = ``;
         div_perdaLote.innerHTML = ``;
@@ -93,38 +93,37 @@
         var qtdmeses = Number(input_qtdmeses.value);
 
         // Contas relacionadas a perda fixa do mercado
-        var ganho_total = unilotes * valor * qtdLote   // Calcular o valor da produção total
-        var perdaMercado = 0.3 // Definir a percentagem de perda do mercado
-        var totalVendido = ganho_total * (1 - perdaMercado);  // Calcular o total vendido mas com perda do mercado
-        var lucro_bruto = totalVendido - investido; // Calcular o lucro sem perda
+
+        var ganho_total = unilotes * valor * qtdLote; // Calcular o valor da produção total com undidade valor e quantidade do lote
+        var perdaMercado = 0.3; // Definir a porcentagem de perda do mercado que é de 30%
+        var totalVendido = ganho_total * (1 - perdaMercado);  // Calcular o total vendido calculando o ganho_total vezes a porcentagem da perda de mercado
+        var lucro_bruto = totalVendido - investido; // Calcular o lucro bruto do mercado com o total vendido menos o investido
         var lucroComPerdaM = (totalVendido * 0.7) - investido;  // Calcular o lucro com perda, considerando a perda percentual nos lotes
-        var lucroSemPerdaM = ganho_total
+        var lucroSemPerdaM = ganho_total; // lucro sem a perda, sendo ela igual o ganho total
         var perdaMensalM = ganho_total * perdaMercado;// Calcular a perda mensal no mercado
-        var perdaAnualM = perdaMensalM * 12;// Calcular a perda anual no mercad0
+        var perdaAnualM = perdaMensalM * 12; // Calcular a perda anual no mercado
         
-
-
         //Contas relacionadas a perda do cliente
-        var perdaCliente = perda / 100
 
-        var lucroC = ganho_total - investido; // Calcular o lucro sem perda        
-        var totalVendidoC = ganho_total * perdaCliente;  // Calcular o total vendido mas com perda do cliente
-        var perdaMensalC = (ganho_total * perdaCliente)// Calcular a perda mensal com o valor do cliente 
-        var perdaAnualC = perdaMensalC * 12;// Calcular a perda anual com o valor do cliente 
-        var lucroComPerdaC = ganho_total - perdaMensalC;  // Calcular o lucro com perda, considerando a perda do cliente 
-        var lucroSemPerdaC = ganho_total
+        var perdaCliente = perda / 100
+        var lucroC = ganho_total - investido; // Calcular o lucro com o ganho total menos o investido      
+        var totalVendidoC = ganho_total * perdaCliente; // Calcular o total vendido mas com a porcentagem da perda do cliente
+        var perdaMensalC = ganho_total * perdaCliente; // Calcular a perda mensal com a porcentagem de perda do cliente 
+        var perdaAnualC = perdaMensalC * 12; // Calcular a perda anual com o valor de porcentagem do cliente 
+        var lucroComPerdaC = ganho_total - perdaMensalC; // Calcular o lucro com perda, considerando a perda do cliente 
+        var lucroSemPerdaC = ganho_total; // Lucro sem a perda sendo igual ao ganho total
     
         if (qtdLote == "" || qtdLote <= 0) {
-            div_qtdlotes.innerHTML = `*Coloque um valor valido`
+            div_qtdlotes.innerHTML = `*Coloque um valor válido`;
         }
          if (valor == "" || valor <= 0) {
-            div_valorLote.innerHTML = `*Coloque um valor valido`
+            div_valorLote.innerHTML = `*Coloque um valor válido`;
         }
          if (perda == "" || perda <= 0) {
-            div_perdaLote.innerHTML = `*Coloque um valor valido`
+            div_perdaLote.innerHTML = `*Coloque um valor válido`;
         }
          if (investido == "" || investido <= 0) {
-            div_investido.innerHTML = `*Coloque um valor valido`
+            div_investido.innerHTML = `*Coloque um valor válido`;
         } else{
 
         // Exibir os resultados para o mercado
@@ -133,19 +132,19 @@
             <p><strong>A perda percentual de acordo com o mercado é de: 30%</strong></p><br>
            <p><strong>Lucro sem perda:</strong> <strong style= "color: green;">R$${lucroSemPerdaM.toFixed(2)}</strong></p><br>
            <p><strong>Lucro com perda de 30% :</strong> <strong style= "color: green;">R$${lucroComPerdaM.toFixed(2)}</strong></p><br>
-           <p><strong>Perda por Mês: </strong>` ;
+           <p><strong>Perda por Mês: </strong>`;
            
-           var incrementoM = 0
-           var anoM = 1
+           var incrementoM = 0;
+           var anoM = 1;
            for (var cont = 1; cont <= qtdmeses; cont++) {   
-                incrementoM += perdaMensalM
-                var resto = cont % 12
+                incrementoM += perdaMensalM;
+                var resto = cont % 12;
 
                 if (resto == 0) {
-                    div_resultado_mercado.innerHTML += `<br><strong> Total ${anoM}º Ano - <strong style= "color: red;"> R$ ${incrementoM.toFixed(2)}</strong></strong><br>`  
+                    div_resultado_mercado.innerHTML += `<br><strong> Total ${anoM}º Ano - <strong style= "color: red;"> R$ ${incrementoM.toFixed(2)}</strong></strong><br>`;  
                     anoM++
                 } else {
-                    div_resultado_mercado.innerHTML += `<br><strong>${cont}º Mês - <strong style= "color: red;"> R$ ${incrementoM.toFixed(2)}</strong></strong><br>` 
+                    div_resultado_mercado.innerHTML += `<br><strong>${cont}º Mês - <strong style= "color: red;"> R$ ${incrementoM.toFixed(2)}</strong></strong><br>`; 
                 }
             }
         //    <p><strong>Perda mensal:</strong> <strong style= "color: red;">R$${perdaMensalM.toFixed(2)}</strong></p><br>
@@ -156,23 +155,24 @@
            <p><strong>A perda percentual de acordo com a inserção do Cliente foi de:</strong> <strong> ${perda}% </strong></p><br>
            <p><strong>Lucro sem perda:</strong> <strong style= "color: green;"> R$${lucroSemPerdaC.toFixed(2)}</strong></p><br>
            <p><strong>Lucro com perda de ${perda}% :</strong> <strong style= "color: green;"> R$${lucroComPerdaC.toFixed(2)}</strong></p><br>
-           <p><strong>Perda por Mês: </strong>` ;
-           var incrementoC = 0
-           var anoC = 1
+           <p><strong>Perda por Mês: </strong>`;
+
+           var incrementoC = 0;
+           var anoC = 1;
+
            for (var cont2 = 1; cont2 <= qtdmeses; cont2++) {   
-                incrementoC += perdaMensalC
-                var resto = cont2 % 12
+                incrementoC += perdaMensalC;
+                var resto = cont2 % 12;
 
                 if (resto == 0) {
-                    div_resultado_cliente.innerHTML += `<br><strong> Total ${anoC}º Ano - <strong style= "color: red;"> R$ ${incrementoC.toFixed(2)}</strong></strong><br>`  
+                    div_resultado_cliente.innerHTML += `<br><strong> Total ${anoC}º Ano - <strong style= "color: red;"> R$ ${incrementoC.toFixed(2)}</strong></strong><br>`;  
                     anoC++
                 } else {
-                    div_resultado_cliente.innerHTML += `<br><strong>${cont2}º Mês - <strong style= "color: red;"> R$ ${incrementoC.toFixed(2)}</strong></strong><br>` 
+                    div_resultado_cliente.innerHTML += `<br><strong>${cont2}º Mês - <strong style= "color: red;"> R$ ${incrementoC.toFixed(2)}</strong></strong><br>`; 
                 }
             }
-        //    <p><strong>Perda mensal:</strong> <strong style= "color: red;"> R$${perdaMensalC.toFixed(2)}</strong></p><br>
+        }
     }
-}
 
 </script>
 </body>
