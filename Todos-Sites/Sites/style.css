@@ -314,6 +314,7 @@ button {
     background-color: white;
     color: rgb(4, 4, 53);
     font-weight: bold;
+    margin-top: 10px;
 }
 
 button:hover {
@@ -369,6 +370,7 @@ button:hover {
 
 .formulario b {
     color: #064186;
+    font-size: 0.9em;
 }
 
 .box_cadastro b {
@@ -384,6 +386,7 @@ button:hover {
     display: flex;
     justify-content: center;
     color: red;
+    font-size: 12px;
 }
 
 .conteudo {

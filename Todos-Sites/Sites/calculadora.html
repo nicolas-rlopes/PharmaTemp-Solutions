@@ -31,34 +31,37 @@
         <div id="div_formulario" style="display: flex;" class="formulario">
             <h2><b>Simulador Financeiro</b></h2>
             
-            <span> <b>Unidades por lote: </b><input type="text" id="input_unilote">
-            <div id="div_qtdlotes" class="erro"></div>
+            <span> 
+                <b>Unidades por lote: </b><input type="text" id="input_unilote">
             </span>
-            
-            <span> <b>Valor da Unidade de termolabel:</b><input type="text" id="input_valor">
+            <div id="div_unidlotes" class="erro"></div>
+
+            <span> 
+                <b>Valor da Unidade de termolabel:</b><input type="text" id="input_valor">
+            </span>
             <div id="div_valorLote" class="erro"></div>
-            </span>
 
-            <span> <b>Quantidade de lotes termolábeis:</b><input type="text" id="input_qtdlotes">
+            <span> 
+                <b>Quantidade de lotes termolábeis:</b><input type="text" id="input_qtdlotes">
+            </span>
             <div id="div_qtdlotes" class="erro"></div>
-            </span>
-            
 
-            <span> <b>Perda percentual nos lotes:</b><input type="text" id="input_perda">
+            <span> 
+                <b>Perda percentual nos lotes:</b><input type="text" id="input_perda">
+            </span>
             <div id="div_perdaLote" class="erro"></div>
+
+            <span> 
+                <b>Valor Investido no Armazenamento:</b><input type="text" id="input_investido">
             </span>
-
-
-            <span> <b>Valor Investido no Armazenamento:</b><input type="text" id="input_investido">
             <div id="div_investido" class="erro"></div>
+
+            <span> 
+                <b>Quantidade de Meses: </b><input type="text" id="input_qtdmeses">
             </span>
+            <div id="div_qtdMeses" class="erro"></div>
 
-            <span> <b>Quantidade de Meses: </b><input type="text" id="input_qtdmeses">
-            <div id="div_investido" class="erro"></div>
-            </span><br>
-
-
-            <button onclick="calcular()">Calcular</button><br>
+            <button onclick="calcular()">Calcular</button>
             <div class="resultado">
                 <!-- <div id="div_resultado_mercado"></div> -->
                 <!-- <div id="div_resultado_cliente"></div> -->
@@ -78,13 +81,12 @@
 </html>
 <script>
     function calcular() {
-        div_formulario.style.display = "none";
-        div_resultado_mercado.style.display = "block";
-        div_resultado_cliente.style.display = "block";
+        
         div_qtdlotes.innerHTML = ``;
         div_valorLote.innerHTML = ``;
         div_perdaLote.innerHTML = ``;
         div_investido.innerHTML = ``;
+        div_unidlotes.innerHTML = ``;
         var unilotes = Number(input_unilote.value);
         var qtdLote = Number(input_qtdlotes.value);
         var valor = Number(input_valor.value);
@@ -113,18 +115,30 @@
         var lucroComPerdaC = ganho_total - perdaMensalC; // Calcular o lucro com perda, considerando a perda do cliente 
         var lucroSemPerdaC = ganho_total; // Lucro sem a perda sendo igual ao ganho total
     
+
+        if (unilotes == "" || unilotes <= 0) {
+            div_unidlotes.innerHTML = `*Coloque um valor válido`;
+        }
+        if (valor == "" || valor <= 0) {
+            div_valorLote.innerHTML = `*Coloque um valor válido`;
+        }
         if (qtdLote == "" || qtdLote <= 0) {
             div_qtdlotes.innerHTML = `*Coloque um valor válido`;
         }
-         if (valor == "" || valor <= 0) {
-            div_valorLote.innerHTML = `*Coloque um valor válido`;
-        }
-         if (perda == "" || perda <= 0) {
+        if (perda == "" || perda <= 0) {
             div_perdaLote.innerHTML = `*Coloque um valor válido`;
         }
          if (investido == "" || investido <= 0) {
             div_investido.innerHTML = `*Coloque um valor válido`;
-        } else{
+        } 
+        if (qtdmeses == "" || qtdmeses <= 0) {
+            div_qtdMeses.innerHTML = `*Coloque um valor válido`;
+        }
+        else {
+
+            div_formulario.style.display = "none";
+        div_resultado_mercado.style.display = "block";
+        div_resultado_cliente.style.display = "block";
 
         // Exibir os resultados para o mercado
         div_resultado_mercado.innerHTML =
