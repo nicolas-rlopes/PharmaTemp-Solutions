@@ -36,6 +36,9 @@ insert into funcionario values
     
 select * from funcionario;
 
+insert into funcionario values
+	(default, 'Fernando Brandão', '2000-10-10', '123-123-123-12', 'fernando.brandao@sptech.school', '11 91234-1234', 'Sptech#2024', 2);
+
 update funcionario set fkEmpresa = 1 where idFuncionario in (100, 101);
 update funcionario set fkEmpresa = 2 where idFuncionario in (102, 103);
 update funcionario set fkEmpresa = 3 where idFuncionario = 104;
