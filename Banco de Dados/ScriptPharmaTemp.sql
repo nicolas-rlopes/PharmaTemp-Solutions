@@ -103,12 +103,13 @@ insert into sensor values
 select * from sensor;
 
 create table dado_sensor(
-idDado int primary key auto_increment,
+idDado int auto_increment,
 dtHora timestamp default current_timestamp,
 temperatura double,
 fkSensor int,
 constraint fkSensorDado foreign key (fkSensor)
-	references sensor (idSensor)
+	references sensor (idSensor),
+primary key (idDado, fkSensor)
 );
 
 insert into dado_sensor values
