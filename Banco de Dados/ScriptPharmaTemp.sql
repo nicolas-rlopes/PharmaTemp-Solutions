@@ -36,6 +36,9 @@ insert into funcionario values
     
 select * from funcionario;
 
+insert into funcionario values
+	(default, 'Fernando Brandão', '2000-10-10', '123-123-123-12', 'fernando.brandao@sptech.school', '11 91234-1234', 'Sptech#2024', 2);
+
 update funcionario set fkEmpresa = 1 where idFuncionario in (100, 101);
 update funcionario set fkEmpresa = 2 where idFuncionario in (102, 103);
 update funcionario set fkEmpresa = 3 where idFuncionario = 104;
@@ -103,12 +106,13 @@ insert into sensor values
 select * from sensor;
 
 create table dado_sensor(
-idDado int primary key auto_increment,
+idDado int auto_increment,
 dtHora timestamp default current_timestamp,
 temperatura double,
 fkSensor int,
 constraint fkSensorDado foreign key (fkSensor)
-	references sensor (idSensor)
+	references sensor (idSensor),
+primary key (idDado, fkSensor)
 );
 
 insert into dado_sensor values
@@ -147,11 +151,18 @@ select empresa.nome as 'Nome da Empresa',
         geladeira.numeroSerial as 'Numero Serial',
         parametro.tempMinima as 'Temperatura Mínima',
         parametro.tempMaxima as 'Temperatura Máxima',
-        sensor.nome as 'Nome do Sensor'
+        sensor.nome as 'Nome do Sensor',
+        dado_sensor.temperatura as 'Temperatura Armazenada',
+        dado_sensor.dtHora as 'Dia e hora da armazenação',
+        alerta.resolvido as Situação,
+        alerta.tipo as 'Tipo de alerta'
         from empresa join endereco on fkEmpresa = idEmpresa
         join funcionario on funcionario.fkEmpresa = idEmpresa
         join geladeira on geladeira.fkEmpresa = idEmpresa
         join parametro on fkParametro = idParametro
         join sensor on fkGeladeira = idGeladeira
-        where empresa.nome = 'Vida+' and endereco.numEnd = '137' and funcionario.nome like 'Juan %';
+        join dado_sensor on fkSensor = idSensor
+        join alerta on fkDadoSensor = idDado
+        where empresa.nome = 'Remédio Certo' and endereco.numEnd = '1778' and funcionario.nome like 'Jaqueline %' and dado_sensor.temperatura = 5; 
         
+select * from empresa join funcionario on fkEmpresa = idEmpresa;
