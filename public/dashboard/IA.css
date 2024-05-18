@@ -1,0 +1,269 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(16, 50, 163), white);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+h1 {
+    color: #1F2A44;
+}
+
+button {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: all-scroll;
+}
+
+button:hover {
+    background-color: #ffffff;
+}
+
+#resposta {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #18a7e9;
+    border: 1px solid #18a7e9;
+    text-align: left;
+    display: none;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat {
+    height: 100%;
+    display: flex;
+}
+
+.box {
+    padding: 10px;
+    width: 85%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    background-color: #064286ab;
+    border-radius: 20px;
+}
+
+.social {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: center;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+.bonequinho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bonequinho img {
+    width: 180px;
+}
+
+.mensagem {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+
+.input {
+    width: 100%;
+    margin-top: auto;
+    display: flex;
+    border-radius: 10px;
+    border: 1px #aaa solid;
+    align-items: center;
+    background-color: white;
+}
+
+.input_pergunta {
+    color: black;
+    height: 50px;
+    padding: 0 10px;
+    border-radius: 10px;
+    width: 100%;
+    border: none;
+}
+
+.pesquisa {
+    display: flex;
+    margin-bottom: 0px 150px 150px 0px;
+    width: 30px;
+    height: 30px;
+}
+
+
+.aqui a {
+    font-weight: bold;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.329);
+}
+
+.header {
+    border-bottom: 3px solid black;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+.header .container {
+    justify-content: space-between;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    width: 450px;
+    justify-content: space-between;
+
+    align-items: center;
+    text-decoration: none;
+}
+
+a {
+    color: rgb(0, 68, 255);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(0, 40, 148);
+}
+
+button {
+    border: none;
+    color: #064186;
+    font-size: 25px;
+    background-color: white;
+}
+
+button:hover {
+    color: #1077ec;
+    cursor: pointer;
+}
+
+.conteudo {
+    display: flex;
+}
+
+.guia {
+    display: flex;
+    flex-direction: column;
+    border-right: 3px solid black;
+    height: 100vh;
+    width: 20%;
+    background-color: #064286ab;
+}
+
+.nome {
+    padding-top: 16%;
+    text-align: center;
+    height: 27%;
+
+    border-bottom: 3px solid black;
+    background-color: #064186;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.177);
+}
+
+.nome h1 {
+    margin: 0;
+    margin: auto;
+    width: 70%;
+    font-size: 25px;
+    color: white;
+    text-shadow: 0px 0px 10px black;
+}
+
+.nome img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.64);
+    margin-bottom: 10px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+}
+
+.bar {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    justify-content: center;
+
+}
+
+.bar li {
+    text-align: center;
+    margin: 10px 30px;
+    padding: 5px 0px;
+
+    border: 3px solid #064186;
+    border-radius: 6px;
+    background-color: white;
+    box-shadow: 0px 0px 10px #064286bb;
+}
+
+.nome li {
+    list-style: none;
+    text-decoration: none;
+
+    text-align: center;
+    margin: 10px 30px;
+    padding: 5px 0px;
+}
+
+li a {
+    font-size: 25px;
+    color: #064186;
+}
+
+li a:hover {
+    color: #1077ec;
+}
+
+.nome li a span {
+    padding-right: 5px;
+}

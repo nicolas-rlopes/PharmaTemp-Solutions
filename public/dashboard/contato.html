@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entre em contato</title>
+    <link rel="stylesheet" href="IA.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="G03-removebg-preview.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="conteudo">
+        <div class="guia">
+            <div class="nome">
+                <img src="imagens/Fernando-Brandao.png" alt="Foto de identificação de usuario">
+                <h1>Fernando Brandão</h1>
+            </div>
+            <div class="info">
+                <ul class="bar">
+                    <li><a href="dash.html">Menu</a></li>
+                    <li><a href="atencao.html">Em Atençao</a></li>
+                    <li><a href="risco.html">Situação Crítica</a></li>
+                    <li class="aqui"><a href="contato.html">Entrar em contato</a></li>
+                    <li><button onclick="voltar()"><span class="fa fa-sign-out"></span>Sair</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="box">
+                <div class="social">
+                    <span class="titulo">PHARMA.TEMP IA </span>
+                </div>
+                <div class="bonequinho">
+                    <img src="imagens/Captura_de_tela_de_2024-05-16_10-03-56-removebg-preview.png" alt="">
+                </div>
+                <div class="chat">
+                    <div class="mensagem">
+                    </div>
+                </div>
+                
+                <div class="input">
+                    <input id="input_pergunta" type="text" class="input_pergunta" placeholder="Faça sua Pergunta">
+                    <button onclick="gerarResposta()" class="btnIcon" id="btnIcon">
+                        <img class="pesquisa" src="imagens/sendIcon.png">
+                    </button>
+                </div>
+                <div class="resposta"></div>
+            </div>
+        </div>
+    </div>
+   
+
+</body>
+
+</html>
+
+<script>
+
+    function voltar() {
+        window.location.href = '../login.html'
+    }
+    async function gerarResposta() {
+        const pergunta = document.getElementById('pergunta').value;
+
+        const response = await fetch('/perguntar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ pergunta })
+        });
+
+        const data = await response.json();
+
+        resposta.style.display = 'block';
+        document.getElementById('resposta').innerText = data.resultado;
+    }
+
+</script>

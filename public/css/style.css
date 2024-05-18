@@ -316,7 +316,7 @@ input {
     padding: 3px 0px 3px 10px;
 }
 
-#select_empresa {
+#listaEmpresas {
     height: 38px;
     width: 362px;
     justify-content: flex-end;
