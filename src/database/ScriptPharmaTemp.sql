@@ -27,21 +27,21 @@ fkEmpresa int,
 constraint fkEmpresaFunc foreign key (fkEmpresa) references empresa(idEmpresa)
 )auto_increment = 100;
 
-insert into funcionario values
-	(default, 'Cecília Fabiana Aurora', '1992-01-15', '567.637.942-15', 'cecilia.fabiana@gmail.com', '13 99768-5730', 'hqhhull33#', null),
-	(default, 'Jaqueline Sabrina de Paula', '1980-01-12', '670.834.039-96', 'jaqueline.dpaula@gmail.com', '11 98896-6300', '!jt9qgnxas', null),
-	(default, 'Vinicius da Rocha', '1999-01-10', '468.078.578-02', 'vinicius.rocha@gmail.com', '14 98613-1290', '6cf3%8dlwg', null),
-	(default, 'Juan Fernandes Pereira', '2001-06-19', '361.549.148-30', 'juan.pereira@gmail.com', '19 99573-6826', '##n46h0i0q', null),
-	(default, 'Augusto Lopes', '1998-07-20', '776.832.758-67', 'augusto.lopes@gmail.com', '11 98640-2239', '6fx04!elb%', null);
+-- insert into usuario values
+	-- (default, 'Cecília Fabiana Aurora', '1992-01-15', '567.637.942-15', 'cecilia.fabiana@gmail.com', '13 99768-5730', 'hqhhull33#', null),
+	-- (default, 'Jaqueline Sabrina de Paula', '1980-01-12', '670.834.039-96', 'jaqueline.dpaula@gmail.com', '11 98896-6300', '!jt9qgnxas', null),
+	-- (default, 'Vinicius da Rocha', '1999-01-10', '468.078.578-02', 'vinicius.rocha@gmail.com', '14 98613-1290', '6cf3%8dlwg', null),
+	-- (default, 'Juan Fernandes Pereira', '2001-06-19', '361.549.148-30', 'juan.pereira@gmail.com', '19 99573-6826', '##n46h0i0q', null),
+	-- (default, 'Augusto Lopes', '1998-07-20', '776.832.758-67', 'augusto.lopes@gmail.com', '11 98640-2239', '6fx04!elb%', null);
    
 select * from usuario;
 
-insert into funcionario values
-	(default, 'Fernando Brandão', '2000-10-10', '123-123-123-12', 'fernando.brandao@sptech.school', '11 91234-1234', 'Sptech#2024', 2);
+-- insert into usuario values
+	-- (default, 'Fernando Brandão', '2000-10-10', '123-123-123-12', 'fernando.brandao@sptech.school', '11 91234-1234', 'Sptech#2024', 2);
 
-update funcionario set fkEmpresa = 1 where idFuncionario in (100, 101);
-update funcionario set fkEmpresa = 2 where idFuncionario in (102, 103);
-update funcionario set fkEmpresa = 3 where idFuncionario = 104;
+-- update usuario set fkEmpresa = 1 where idusuario in (100, 101);
+-- update usuario set fkEmpresa = 2 where idusuario in (102, 103);
+-- update usuario set fkEmpresa = 3 where idusuario = 104;
 
 create table endereco(
 idEndereco int primary key auto_increment,
@@ -51,16 +51,16 @@ cep char(9) not null,
 fkEmpresa int,
 constraint fkEnderecoEmpresa foreign key (fkEmpresa) references empresa(idEmpresa));
 
-insert into endereco values
-	(default, 'Rua Rosa Cruz', 1778, '96211-120', null),
-	(default, 'Rua Coronel Fabriciano', 651, '29171-744', null),
-	(default, 'Rua Vista Alegre', 137, '94834-228', null),
-	(default, 'Rua Prudêncio Martins', 886, '88703-500', null),
-	(default, 'Rua Berilo', 120, '37701-397', null);
+-- insert into endereco values
+	-- (default, 'Rua Rosa Cruz', 1778, '96211-120', null),
+	-- (default, 'Rua Coronel Fabriciano', 651, '29171-744', null),
+	-- (default, 'Rua Vista Alegre', 137, '94834-228', null),
+	-- (default, 'Rua Prudêncio Martins', 886, '88703-500', null),
+	-- (default, 'Rua Berilo', 120, '37701-397', null);
 
-update endereco set fkEmpresa = 1 where idEndereco in (1, 2);
-update endereco set fkEmpresa = 2 where idEndereco in (3, 4);
-update endereco set fkEmpresa = 3 where idEndereco = 5;
+-- update endereco set fkEmpresa = 1 where idEndereco in (1, 2);
+-- update endereco set fkEmpresa = 2 where idEndereco in (3, 4);
+-- update endereco set fkEmpresa = 3 where idEndereco = 5;
 
 select * from endereco;
 
@@ -138,7 +138,7 @@ select * from alerta;
 select * from dado_sensor;
 select * from empresa;
 select * from endereco;
-select * from funcionario;
+select * from usuario;
 select * from parametro;
 select * from sensor;
 select * from geladeira;
@@ -146,7 +146,7 @@ select * from geladeira;
 select empresa.nome as 'Nome da Empresa',
 		endereco.logradouro as Rua,
         endereco.numEnd as 'Número',
-        funcionario.nome as 'Nome do Funcionario',
+        usuario.nome as 'Nome do usuario',
         geladeira.modelo as 'Modelo da Geladeira',
         geladeira.numeroSerial as 'Numero Serial',
         parametro.tempMinima as 'Temperatura Mínima',
@@ -157,12 +157,12 @@ select empresa.nome as 'Nome da Empresa',
         alerta.resolvido as Situação,
         alerta.tipo as 'Tipo de alerta'
         from empresa join endereco on fkEmpresa = idEmpresa
-        join funcionario on funcionario.fkEmpresa = idEmpresa
+        join usuario on usuario.fkEmpresa = idEmpresa
         join geladeira on geladeira.fkEmpresa = idEmpresa
         join parametro on fkParametro = idParametro
         join sensor on fkGeladeira = idGeladeira
         join dado_sensor on fkSensor = idSensor
         join alerta on fkDadoSensor = idDado
-        where empresa.nome = 'Remédio Certo' and endereco.numEnd = '1778' and funcionario.nome like 'Jaqueline %' and dado_sensor.temperatura = 5; 
+        where empresa.nome = 'Remédio Certo' and endereco.numEnd = '1778' and usuario.nome like 'Jaqueline %' and dado_sensor.temperatura = 5; 
         
-select * from empresa join funcionario on fkEmpresa = idEmpresa;
+select * from empresa join usuario on fkEmpresa = idEmpresa;
