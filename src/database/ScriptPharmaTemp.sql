@@ -15,8 +15,8 @@ insert into empresa values
 
 select * from empresa;
 
-create table funcionario(
-idFuncionario int primary key auto_increment,
+create table usuario(
+idCadastro int primary key auto_increment,
 nome varchar (45) not null,
 dtNasc date not null,
 cpf char(14) unique not null,
@@ -33,8 +33,8 @@ insert into funcionario values
 	(default, 'Vinicius da Rocha', '1999-01-10', '468.078.578-02', 'vinicius.rocha@gmail.com', '14 98613-1290', '6cf3%8dlwg', null),
 	(default, 'Juan Fernandes Pereira', '2001-06-19', '361.549.148-30', 'juan.pereira@gmail.com', '19 99573-6826', '##n46h0i0q', null),
 	(default, 'Augusto Lopes', '1998-07-20', '776.832.758-67', 'augusto.lopes@gmail.com', '11 98640-2239', '6fx04!elb%', null);
-    
-select * from funcionario;
+   
+select * from usuario;
 
 insert into funcionario values
 	(default, 'Fernando Brandão', '2000-10-10', '123-123-123-12', 'fernando.brandao@sptech.school', '11 91234-1234', 'Sptech#2024', 2);

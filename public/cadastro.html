@@ -10,138 +10,65 @@
 
   <script src="./js/sessao.js"></script>
 
-  <link rel="stylesheet" href="./css/estilo.css" />
+  <link rel="stylesheet" href="./css/style.css" />
   <link rel="icon" href="assets/icon/favicon.png" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
-<body>
-  <!--header inicio-->
-  <!-- <div class="header">
-    <div class="container">
-      <h1 class="titulo">AquaTech</h1>
-      <ul class="navbar">
-        <li>
-          <a href="index.html">Inicial</a>
-        </li>
-        <li>
-          <a href="simulador.html">Simulador</a>
-        </li>
-        <li>|</li>
-        <li>
-          <a href="login.html">Login</a>
-        </li>
-        <li class="agora">
-          <a href="#">Cadastro</a>
-        </li>
-      </ul>
-    </div>
-  </div> -->
-  <!--header fim-->
-
-  <!-- <div class="login">
-    <div class="alerta_erro">
-      <div class="card_erro" id="cardErro">
-        <span id="mensagem_erro"></span>
+<body class="body_login_cadastro">
+  <div class="body">
+    <div class="header">
+      <div class="container">
+        <h1 class="titulo"><img src="imagem/LOGO.PNG" alt=""></h1>
+        <ul class="navbar">
+          <li><a href="Site institucional.html">Inicio</a></li>
+          <li><a href="calculadora.html">Simulador</a></li>
+          <li>|</li>
+          <li><a href="login.html">Login</a></li>
+          <li class="agora">Cadastro</li>
+        </ul>
       </div>
     </div>
-    <div class="container">
-      <div class="card card-cadastro">
-        <h2>Bem-vindo!</h2>
-        <div class="formulario"> -->
-
-  <body class="body_login_cadastro">
-    <div class="body">
-      <div class="header">
-        <div class="container">
-          <h1 class="titulo"><img src="assets/imgs/LOGO.PNG" alt=""></h1>
-          <ul class="navbar">
-            <li><a href="">Inicio</a></li>
-            <li><a href="">Simulador</a></li>
-            <li>|</li>
-            <li><a href="login.html">Login</a></li>
-            <li class="agora">Cadastro</li>
-          </ul>
-        </div>
+  </div>
+  <div class="box_cadastro">
+    <h2><b>CADASTRO</b></h2>
+    <div class="formulario_cadastro">
+      <div class="esquerda">
+        <span><input type="text" placeholder="Nome Completo" id="nome_input"></span>
+        <div id="div_nome" class="resposta"></div>
+        <span><input type="text" placeholder="Data de Nascimento" id="dtNasc_input"></span>
+        <div id="div_nascimento" class="resposta"></div>
+        <span><input type="text" placeholder="CPF" id="cpf_input"></span>
+        <div id="div_cpf" class="resposta"></div>
+        <span><input type="email" placeholder="E-mail" id="email_input"></span>
+        <div id="div_email" class="resposta"></div>
+      </div>
+      <div class="direta">
+        <span><input type="tel" placeholder="Telefone" id="tel_input"></span>
+        <div id="div_telefone" class="resposta"></div>
+        <span><input type="password" placeholder="Senha" id="senha_input"></span>
+        <div id="div_senha" class="resposta"></div>
+        <span><input type="password" placeholder="Confirme a sua senha" id="confirmacao_senha_input"></span>
+        <div id="div_senha_confirme" class="resposta"></div>
+        <span><select id="listaEmpresas">
+            <option value="0" selected disabled>Selecionar Empresa que trabalha</option>
+            <option value="1">Remédio Certo</option>
+            <option value="2">Vida+</option>
+            <option value="3">Bem Estar</option>
+          </select></span>
+        <div id="div_empresa" class="resposta"></div>
       </div>
     </div>
-    <div class="container">
-      <div class="card card-cadastro">
-        <h2>Bem-vindo!</h2>
-        <div class="formulario">
-          <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
-          <div class="campo">
-            <span>Empresa:</span>
-            <select name="empresas" id="listaEmpresas">
-              <option value="0" selected disabled>Selecionar Empresa que trabalha</option>
-              <option value="1">Remédio Certo</option>
-              <option value="2">Vida+</option>
-              <option value="3">Bem Estar</option>
-            </select>
-            <div id="div_empresa"></div>
-          </div>
-          <div class="campo">
-            <span>Nome:</span>
-            <input id="nome_input" type="text" placeholder="Seu nome" />
-            <div id="div_nome" class="resposta"></div>
-          </div>
-          <div class="campo">
-            <span>Data de Nasc:</span>
-            <input id="dtNasc_input" type="text" placeholder="DD/MM/YYYY" />
-            <div id="div_nascimento" class="resposta"></div>
-          </div>
-          <div class="campo">
-            <span>CPF:</span>
-            <input id="cpf_input" type="text" placeholder="000.000.000-00" />
-            <div id="div_cpf" class="resposta"></div>
-          </div>
-          <div class="campo">
-            <span>E-mail:</span>
-            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
-            <div id="div_email" class="resposta"></div>
-          </div>
-          <div class="campo">
-            <span>Telefone Celular:</span>
-            <input id="tel_input" type="text" placeholder="11900000000" />
-            <div id="div_telefone" class="resposta"></div>
-          </div>
-          <div class="campo">
-            <span>Senha:</span>
-            <input id="senha_input" type="password" placeholder="******" />
-            <div id="div_senha" class="resposta"></div>
-          </div>
-          <div class="campo">
-            <span>Confirmação da Senha:</span>
-            <input id="confirmacao_senha_input" type="password" placeholder="******" />
-            <div id="div_senha_confirme" class="resposta"></div>
-          </div>
-          <button class="botao" onclick="cadastrar()">Cadastrar</button>
-          <div id="div_nulo" class="resposta"></div>
-        </div>
+    <span><button onclick="cadastrar()">Cadastre-se</button></span>
+    <div id="div_nulo" class="resposta"></div>
+    <h3>Tem uma conta? <a class="li_black" href="login.html">Faça Login</a></h3>
+  </div>
+  <div id="div_aguardar" class="loading-div">
+    <img src="./assets/circle-loading.gif" id="loading-gif" />
+  </div>
+</body>
 
 
-
-        <div id="div_aguardar" class="loading-div">
-          <img src="./assets/circle-loading.gif" id="loading-gif" />
-        </div>
-
-        <!-- <div id="div_erros_login"></div>
-      </div>
-    </div>
-  </div> -->
-
-        <!--footer inicio-->
-        <!-- <div class="footer">
-    <div class="container">
-      <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-      <span class="version">v1.0.0</span>
-    </div>
-  </div> -->
-        <!--footer fim-->
-  </body>
 
 </html>
 
@@ -270,56 +197,54 @@
       }
     }
 
-  
 
 
 
 
-  // } else {
-  //   setInterval(sumirMensagem, 5000);
-  // }
 
-  // Enviando o valor da nova input
-  fetch("/usuarios/cadastrar", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      // crie um atributo que recebe o valor recuperado aqui
-      // Agora vá para o arquivo routes/usuario.js
-      nomeServer: nomeVar,
-      dtNascServer: dtNascVar,
-      cpfServer: cpfVar,
-      emailServer: emailVar,
-      telServer: telVar,
-      senhaServer: senhaVar,
-      empresaServer: empresaVar
-    }),
-  })
-    .then(function (resposta) {
-      console.log("resposta: ", resposta);
+    // } else {
+    //   setInterval(sumirMensagem, 5000);
+    // }
 
-      if (resposta.ok) {
-        cardErro.style.display = "block";
-
-        mensagem_erro.innerHTML =
-          "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-        setTimeout(() => {
-          window.location = "login.html";
-        }, "2000");
-
-        limparFormulario();
-        finalizarAguardar();
-      } else {
-        throw "Houve um erro ao tentar realizar o cadastro!";
-      }
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        dtNascServer: dtNascVar,
+        cpfServer: cpfVar,
+        emailServer: emailVar,
+        telServer: telVar,
+        senhaServer: senhaVar,
+        empresaServer: empresaVar
+      }),
     })
-    .catch(function (resposta) {
-      console.log(`#ERRO: ${resposta}`);
-      finalizarAguardar();
-    });
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        finalizarAguardar();
+      });
 
   }
 
@@ -340,7 +265,4 @@
       });
   }
 
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
 </script>

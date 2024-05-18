@@ -54,7 +54,7 @@
     padding: 40px 0;
     color: black;
     height: 400px;
-    background-image: url("imagem/remedio2.webp");
+    background-image: url("remedio2.webp");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -118,6 +118,23 @@
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.403);
 }
 
+.card_erro {
+    display: none;
+    background-color: #fff;
+    color: black;
+    width: 230px;
+    position: fixed;
+    border-radius: 4px;
+    border: #e6005a 3px solid;
+    padding: 10px;
+    margin-right: 10%;
+  }
+  
+  .card_erro #mensagem_erro{
+    font-weight: 500;
+    font-size: 20px;
+  }
+
 .imagem {
     width: 300px;
     height: 300px;
@@ -145,6 +162,18 @@
     font-size: 24px;
     color: #000000;
 }
+
+.loading-div {
+    width: 50px;
+    margin: auto;
+    display: none;
+  }
+  
+  .loading-div img {
+    height: 50px;
+    width: 50px;
+  }
+  
 
 .box {
     display: flex;
