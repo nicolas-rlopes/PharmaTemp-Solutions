@@ -108,8 +108,6 @@
       empresaVar == ""
     ) {
       div_nulo.innerHTML = `*Preencha o(s) campo(s) acima com seus dados`
-      finalizarAguardar();
-      return false;
     } else {
       div_nulo.innerHTML = ''
     }
@@ -117,14 +115,8 @@
     if (cadastro = true) {
       if (nomeVar >= 0 || nomeVar <= 0) {
         div_nome.innerHTML = `*Coloque apenas letras nesse campo`
-        cadastro = false;
-        finalizarAguardar();
-        return false;
       } else if (tamanho_nome < 8) {
         div_nome.innerHTML = `Coloque não possui 8 letras`
-        cadastro = false;
-        finalizarAguardar();
-        return false;
       } else {
         div_nome.innerHTML = ''
       }
@@ -132,8 +124,6 @@
       if (nascimento_barra < 0) {
         div_nascimento.innerHTML = `Separa as datas dessa maneira DD/MM/AAAA`
         cadastro = false;
-        finalizarAguardar();
-        return false;
       } else {
         div_nascimento.innerHTML = ''
       }
@@ -141,8 +131,6 @@
       if (tamanho_cpf != 11) {
         div_cpf.innerHTML = `Coloque um CPF válido 'apenas números'`
         cadastro = false;
-        finalizarAguardar();
-        return false;
       } else {
         div_cpf.innerHTML = ''
       }
@@ -150,16 +138,12 @@
       if (tamanho_telefone != 11) {
         div_telefone.innerHTML = `Siga o exemplo de telefone valido 55119XXXXYYYY`
         cadastro = false;
-        finalizarAguardar();
-        return false;
       } else {
         div_telefone.innerHTML = ''
       }
 
       if (arroba < 0 || school < 0) {
         div_email.innerHTML = `Coloque um E-mail valido`
-        finalizarAguardar();
-        return false;
       } else {
         div_email.innerHTML = ''
       }
@@ -167,13 +151,9 @@
       if (tamanho_senha < 8) {
         div_senha.innerHTML = `A senha deve conter no mínimo 8 caracteres`
         cadastro = false;
-        finalizarAguardar();
-        return false;
       } else if (caracter_senha == false) {
         div_senha.innerHTML = `Precisa de um dos três caracteres especiais '!' '#' '%'`
         cadastro = false;
-        finalizarAguardar();
-        return false;
       } else {
         div_senha.innerHTML = ''
       }
@@ -181,8 +161,6 @@
       if (confirmacaoSenhaVar != senhaVar) {
         div_senha_confirme.innerHTML = `A senha não está igual a senha anterior`
         cadastro = false;
-        finalizarAguardar();
-        return false;
       } else {
         div_senha_confirme.innerHTML = ''
       }

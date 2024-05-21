@@ -16,7 +16,6 @@
 </head>
 
 <body>
-
     <body class="body_login_cadastro">
         <div class="body">
             <div class="header">
@@ -62,12 +61,22 @@
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
-            return false;
+        if (emailVar == ""){
+            div_email.innerHTML = "Preencha o email corretamente!";
+        } else {
+            div_email.innerHTML = "";
         }
+        if (senhaVar == ""){
+            div_senha.innerHTML = "Preencha a senha corretamente!";
+        } else {
+            div_senha.innerHTML = "";
+        }
+        if (emailVar == "" || senhaVar == "") {
+            div_nulo.innerHTML = "Preencha todos os campos";
+        } else {
+            div_nulo.innerHTML = "";
+        }
+
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
