@@ -89,13 +89,13 @@
 
     var cadastro = true;
     var tamanho_nome = nomeVar.length;
-    var nascimento_barra = dtNascVar.indexOf('-');
+    var nascimento_traco = dtNascVar.indexOf('-');
     var tamanho_cpf = cpfVar.length;
     var arroba = emailVar.indexOf('@');
-    var school = emailVar.indexOf('.school');
+    var com = emailVar.indexOf('.com');
     var tamanho_telefone = telVar.length;
     var tamanho_senha = senhaVar.length;
-    var caracter_senha = senhaVar.indexOf('#') >= 0 || senhaVar.indexOf('%') >= 0 || senhaVar.indexOf('!') >= 0
+    var caracter_senha = senhaVar.indexOf('#') >= 0 || senhaVar.indexOf('%') >= 0 || senhaVar.indexOf('!') >= 0 || senhaVar.indexOf('@') >= 0;
 
     if (
       nomeVar == "" ||
@@ -112,68 +112,67 @@
       div_nulo.innerHTML = ''
     }
 
-    if (cadastro = true) {
-      if (nomeVar >= 0 || nomeVar <= 0) {
-        div_nome.innerHTML = `*Coloque apenas letras nesse campo`
-      } else if (tamanho_nome < 8) {
-        div_nome.innerHTML = `Coloque não possui 8 letras`
-      } else {
-        div_nome.innerHTML = ''
-      }
-
-      if (nascimento_barra < 0) {
-        div_nascimento.innerHTML = `Separa as datas dessa maneira DD/MM/AAAA`
-        cadastro = false;
-      } else {
-        div_nascimento.innerHTML = ''
-      }
-
-      if (tamanho_cpf != 11) {
-        div_cpf.innerHTML = `Coloque um CPF válido 'apenas números'`
-        cadastro = false;
-      } else {
-        div_cpf.innerHTML = ''
-      }
-
-      if (tamanho_telefone != 11) {
-        div_telefone.innerHTML = `Siga o exemplo de telefone valido 55119XXXXYYYY`
-        cadastro = false;
-      } else {
-        div_telefone.innerHTML = ''
-      }
-
-      if (arroba < 0 || school < 0) {
-        div_email.innerHTML = `Coloque um E-mail valido`
-      } else {
-        div_email.innerHTML = ''
-      }
-
-      if (tamanho_senha < 8) {
-        div_senha.innerHTML = `A senha deve conter no mínimo 8 caracteres`
-        cadastro = false;
-      } else if (caracter_senha == false) {
-        div_senha.innerHTML = `Precisa de um dos três caracteres especiais '!' '#' '%'`
-        cadastro = false;
-      } else {
-        div_senha.innerHTML = ''
-      }
-
-      if (confirmacaoSenhaVar != senhaVar) {
-        div_senha_confirme.innerHTML = `A senha não está igual a senha anterior`
-        cadastro = false;
-      } else {
-        div_senha_confirme.innerHTML = ''
-      }
-
-      if (empresaVar == 0) {
-        div_empresa.innerHTML = 'Selecione a empresa em que trabalha'
-        cadastro = false;
-        finalizarAguardar();
-        return false;
-      } else {
-        div_empresa.innerHTML = ''
-      }
+    if (nomeVar == Number) {
+      div_nome.innerHTML = `*Coloque apenas letras nesse campo`
     }
+    if (tamanho_nome < 8) {
+      div_nome.innerHTML = `*O nome deve possuir no mínimo 8 letras`
+    } else {
+      div_nome.innerHTML = ''
+    }
+
+    if (nascimento_traco < 0) {
+      div_nascimento.innerHTML = `*Separa as datas dessa maneira AAAA/MM/DD`
+      cadastro = false;
+    } else {
+      div_nascimento.innerHTML = ''
+    }
+
+    if (tamanho_cpf != 11) {
+      div_cpf.innerHTML = `*Coloque um CPF válido`
+      cadastro = false;
+    } else {
+      div_cpf.innerHTML = ''
+    }
+
+    if (tamanho_telefone != 11) {
+      div_telefone.innerHTML = `*Siga o exemplo de telefone valido 119XXXXYYYY`
+      cadastro = false;
+    } else {
+      div_telefone.innerHTML = ''
+    }
+
+    if (arroba < 0 || com < 0) {
+      div_email.innerHTML = `*O email deve conter "@" e ".com"`
+    } else {
+      div_email.innerHTML = ''
+    }
+
+    if (tamanho_senha < 8) {
+      div_senha.innerHTML = `*A senha deve conter no mínimo 8 caracteres`
+      cadastro = false;
+    } else if (caracter_senha == false) {
+      div_senha.innerHTML = `*Precisa de um dos três caracteres especiais '!' '#' '%' '@'`
+      cadastro = false;
+    } else {
+      div_senha.innerHTML = ''
+    }
+
+    if (confirmacaoSenhaVar != senhaVar) {
+      div_senha_confirme.innerHTML = `*A confirmação de senha precisa ser igual a anterior`
+      cadastro = false;
+    } else {
+      div_senha_confirme.innerHTML = ''
+    }
+
+    if (empresaVar == 0) {
+      div_empresa.innerHTML = '*Selecione a empresa em que trabalha'
+      cadastro = false;
+      return false;
+    } else {
+      div_empresa.innerHTML = ''
+    }
+    finalizarAguardar();
 
 
 
@@ -185,62 +184,67 @@
     // }
 
     // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        dtNascServer: dtNascVar,
-        cpfServer: cpfVar,
-        emailServer: emailVar,
-        telServer: telVar,
-        senhaServer: senhaVar,
-        empresaServer: empresaVar
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ",resposta);
+    if (cadastro == true) {
+      fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          nomeServer: nomeVar,
+          dtNascServer: dtNascVar,
+          cpfServer: cpfVar,
+          emailServer: emailVar,
+          telServer: telVar,
+          senhaServer: senhaVar,
+          empresaServer: empresaVar
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
 
-        if (resposta.ok) {
+          if (resposta.ok) {
 
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+            mensagem_erro.innerHTML =
+              "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
 
-          limparFormulario();
+
+            limparFormulario();
+            finalizarAguardar();
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
           finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        finalizarAguardar();
-      });
-
-  }
-
-
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
-          });
         });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
+
+
+
+
+      function listar() {
+        fetch("/empresas/listar", {
+          method: "GET",
+        })
+          .then(function (resposta) {
+            resposta.json().then((empresas) => {
+              empresas.forEach((empresa) => {
+                listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
+              });
+            });
+          })
+          .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+          });
+      }
+
+      setTimeout(() => {
+        window.location = "login.html";
+      }, "2000");
+    }
   }
 
 </script>
