@@ -108,15 +108,18 @@
       empresaVar == ""
     ) {
       div_nulo.innerHTML = `*Preencha o(s) campo(s) acima com seus dados`
+      cadastro = false;
     } else {
       div_nulo.innerHTML = ''
     }
 
-    if (nomeVar == Number) {
-      div_nome.innerHTML = `*Coloque apenas letras nesse campo`
-    }
-    if (tamanho_nome < 8) {
-      div_nome.innerHTML = `*O nome deve possuir no mínimo 8 letras`
+    // if (nomeVar == Number) {
+    //   div_nome.innerHTML = `*Coloque apenas letras nesse campo`
+    //   cadastro = false;
+    // }
+    if (nomeVar == "" ) {
+      div_nome.innerHTML = `*Preencha o campo acima com o seu nome`
+      cadastro = false;
     } else {
       div_nome.innerHTML = ''
     }
@@ -144,6 +147,7 @@
 
     if (arroba < 0 || com < 0) {
       div_email.innerHTML = `*O email deve conter "@" e ".com"`
+      cadastro = false;
     } else {
       div_email.innerHTML = ''
     }

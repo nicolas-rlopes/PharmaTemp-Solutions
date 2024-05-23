@@ -21,8 +21,7 @@
             <div class="info">
                 <ul class="bar">
                     <li class="aqui"><a href="dash.html">Menu</a></li>
-                    <li><a href="atencao.html">Em Atenção</a></li>
-                    <li><a href="risco.html">Situação Crítica</a></li>
+                    <li><a href="atencao.html">Dashboard</a></li>
                     <li><a href="contato.html">Entrar em contato</a></li>
                     <li><button onclick="voltar()"><span class="fa fa-sign-out"></span>Sair</a></li>
                 </ul>
@@ -31,29 +30,51 @@
         <div class="menu">
     
             <div class="descricao">
-                
-                <div class="informacao">
-                    <h2><img width="20" height="20" src="https://img.icons8.com/ios-filled/50/chevron-up.png" alt="chevron-up"/> <span class="verde">2</span> Sensores </h2>
-                </div>
-                <div class="informacao">
-                    <h2><span class="vermelho"></span> </h2>
+                <div class="dash">
+                    <div id="alerta">
+                    </div>
+                    <div class="area-parametros-alerta">
+                        <p class="titulo-legenda">
+                            Legenda - Parâmetros para Alertas
+                        </p>
+                        <div class="parametros-alerta">
+                            <div class="item-regua perigo-frio">
+                                <p>Perigo</p>
+                                <p>&lt;=-2°C</p>
+                            </div>
+                            <div class="item-regua alerta-frio">
+                                <p>Alerta</p>
+                                <p>&lt;=1°C</p>
+                            </div>
+                            <div class="item-regua ideal">
+                                <p>Ideal</p>
+                                <p>5°C</p>
+                            </div>
+                            <div class="item-regua alerta-quente">
+                                <p>Alerta</p>
+                                <p>&gt;=9°C</p>
+                            </div>
+                            <div class="item-regua perigo-quente">
+                                <p>Perigo</p>
+                                <p>&gt;=11°C</p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="cards" id="cardAquarios">
+        
+                    </div>
+        
                 </div>
             </div>
 
             <div class="cont">
+                
                 <div class="graficoMenu">
-                    <h3>loren</h3>
-                    <canvas id="myChart1" style="position: relative; width:100px"></canvas>
-                    <p>Referente<br>Ao leonardo</p>
-                </div>
-                <div class="graficoMenu">
-                    <h3>loren</h3>
+                    <h3>Situações das Geladeiras</h3>
                     <canvas id="myChart3" style="position: relative; width:100px "></canvas>
                 </div>
-                <div class="graficoMenu">
-                    <h3>ai calica</h3>
-                    <canvas id="myChart2" style="position: relative; width:100px"></canvas>
-                </div>
+                
             </div>
         </div>
     </div>
