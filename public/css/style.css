@@ -8,7 +8,7 @@
 .body_login_cadastro {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(16, 50, 163), white);
+    background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(61,103, 243), white);
     justify-content: center;
 }
 
@@ -76,12 +76,12 @@
 }
 
 .social {
-    background-color: #87cefa;
+    background-color: #ffffff;
     padding: 40px 40px;
 }
 
 .social_sobre {
-    background-color: #87cefa;
+    background-color: #ffffff;
     padding: 40px 40px;
     align-items: center;
     display: flex;
@@ -96,7 +96,7 @@
 }
 
 .card {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     width: 300px;
     text-align: center;
     border: 5px solid black;
@@ -106,6 +106,16 @@
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.403);
 }
 
+.card_index{
+   background-image:  linear-gradient(to bottom, #b1e1ff, #ffff);
+    width: 300px;
+    text-align: center;
+    border: 5px solid black;
+    padding: 20px 50px;
+    border-radius: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.403);
+}
 .card_sobre {
     width: 600px;
     background-color: white;
@@ -153,6 +163,9 @@
     width: 100px;
 }
 
+.card_index img {
+    width: 100px;
+}
 .card h4 {
     font-size: 24px;
     color: #000000;
@@ -421,4 +434,115 @@ button:hover {
 .conteudo {
     display: flex;
     flex-direction: row;
+}
+.icones_index {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start; 
+    gap: 20px; 
+}
+
+.icones_index .formatacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+}
+
+.icones_index img {
+    width: 70px;
+    transition: transform 0.3s ease;
+}
+ .quemsomos h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 3rem;
+display: flex;
+justify-content: center;
+
+ }
+ .servicos h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 4rem;
+display: flex;
+justify-content: center;
+
+
+ }
+
+.icones_index img:hover {
+    transform: translateY(-10px); 
+}
+.linha{
+    margin-top: 6rem;
+    margin-left: 8rem;
+    display: flex;
+    justify-content: center;
+    width: 1200px;
+    border-bottom: 3px solid black;
+}
+.informativo {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    overflow: hidden;
+    flex-direction: row;
+    margin-top: 8rem;
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.slides {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+.slide img {
+  
+    border-radius: 5%;
+    width: 20rem;
+    height: 20rem;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slide:hover img {
+    transform: scale(1.1);
+
+    border-radius: 5%;
+}
+
+.text {
+    width: 50%;
+}
+
+.text h2 {
+    margin-bottom: 20px;
+}
+
+.text p {
+    margin-bottom: 10px;
 }
