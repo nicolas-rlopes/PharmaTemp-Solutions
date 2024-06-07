@@ -2,7 +2,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(16, 50, 163), white);
+    background-color: #87cefa;
+    width: 1425px;
 }
 
 * {
@@ -39,7 +40,7 @@ button:hover {
 }
 
 .container {
-    width: 100vw;
+    width: 100vh;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -60,6 +61,7 @@ button:hover {
     flex-direction: column;
     background-color: #064286ab;
     border-radius: 20px;
+    margin-left: 6rem;
 }
 
 .social {
@@ -144,16 +146,17 @@ button:hover {
     justify-content: space-between;
 }
 
+
 .navbar {
     display: flex;
     flex-direction: row;
     list-style: none;
     width: 450px;
     justify-content: space-between;
-
+    
     align-items: center;
     text-decoration: none;
-}
+}   
 
 a {
     color: rgb(0, 68, 255);
@@ -187,13 +190,14 @@ button:hover {
     height: 100vh;
     width: 20%;
     background-color: #064286ab;
+    
 }
 
 .nome {
     padding-top: 16%;
     text-align: center;
     height: 27%;
-
+    
     border-bottom: 3px solid black;
     background-color: #064186;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.177);
@@ -230,9 +234,10 @@ button:hover {
     text-decoration: none;
     padding: 0;
     margin: 0;
-    height: 100%;
-    justify-content: center;
+    height: 95%;
 
+    justify-content: center;
+    
 }
 
 .bar li {
@@ -245,7 +250,7 @@ button:hover {
     background-color: white;
     box-shadow: 0px 0px 10px #064286bb;
 }
-
+/* SAIR */
 .nome li {
     list-style: none;
     text-decoration: none;

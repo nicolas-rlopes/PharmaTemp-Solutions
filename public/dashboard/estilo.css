@@ -33,7 +33,7 @@ body {
     display: flex;
     flex-direction: row;
     list-style: none;
-    width: 450px;
+    width: 420px;
     justify-content: space-between;
     
     align-items: center;
