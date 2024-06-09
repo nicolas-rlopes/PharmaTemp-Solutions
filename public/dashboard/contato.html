@@ -5,29 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entre em contato</title>
-    <link rel="stylesheet" href="IA.css">
+    <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="G03-removebg-preview.png" type="image/x-icon">
 </head>
 
-<body>
+<body class="body_IA">
     <div class="conteudo">
         <div class="guia">
             <div class="nome">
                 <img src="imagens/Fernando-Brandao.png" alt="Foto de identificação de usuario">
-                <h1>Fernando Brandão</h1>
+                <h1><span id="b_usuario">usuário</span></h1>
             </div>
             <div class="info">
                 <ul class="bar">
                     <li><a href="dash.html">Menu</a></li>
                     <li><a href="atencao.html">Dashboard</a></li>
                     <li class="aqui"><a href="contato.html">Entrar em contato</a></li>
-                    <li><button onclick="voltar()"><span class="fa fa-sign-out"></span>Sair</a></li>
+                    <button onclick="voltar()"><span class="fa fa-sign-out"></span>Sair
                 </ul>
             </div>
         </div>
-        <div class="container">
+        <div class="container_IA">
             <div class="box">
                 <div class="social">
                     <span class="titulo">PHARMA.TEMP IA </span>
@@ -57,7 +57,7 @@
 </html>
 
 <script>
-
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     function voltar() {
         window.location.href = '../login.html'
     }

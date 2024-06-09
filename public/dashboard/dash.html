@@ -16,14 +16,14 @@
         <div class="guia">
             <div class="nome">
                 <img src="imagens/Fernando-Brandao.png" alt="Foto de identificação de usuario">
-                <h1>Fernando Brandão</h1>
+                <h1><span id="b_usuario">usuário</span></h1>
             </div>
             <div class="info">
                 <ul class="bar">
                     <li class="aqui"><a href="dash.html">Menu</a></li>
                     <li><a href="atencao.html">Dashboard</a></li>
                     <li><a href="contato.html">Entrar em contato</a></li>
-                    <li><button onclick="voltar()"><span class="fa fa-sign-out"></span>Sair</a></li>
+                    <button onclick="voltar()"><span class="fa fa-sign-out"></span>Sair
                 </ul>
             </div>
         </div>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="area-parametros-alerta">
                         <p class="titulo-legenda">
-                            Legenda - Parâmetros para Alertas
+                           Parâmetros para Alertas
                         </p>
                         <div class="parametros-alerta">
                             <div class="item-regua perigo-frio">
@@ -81,14 +81,14 @@
 </body>
 
 <script>
-
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 function voltar() {
         window.location.href = '../login.html'
     }
 
-    var total = 200;
-    var critica = 30;
-    var atencao = 40;
+    var total = 3;
+    var critica = 1;
+    var atencao = 1;
     var normal = total - critica - atencao;
 
     const labels3 = [

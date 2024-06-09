@@ -2,7 +2,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #87cefa6c;
+   background-image: url(../css/remedio2.webp);
+    
     /* background-image: linear-gradient(to left, rgb(255, 255, 255), rgb(16, 50, 163), white); */
 }
 
@@ -46,21 +47,40 @@ a {
 }
 
 a:hover {
-    color: rgb(0, 40, 148);
+    text-decoration: underline;
+    color: rgb(247, 13, 13);
+
 }
 
 button {
     border: none;
     color: #064186;
     font-size: 25px;
-    background-color: white;
+   width: 220px;
+   height: 35px;
+   margin-left: 33px;
+   border-radius: 4%;
 }
 
-button:hover {
-    color: #1077ec;
-    cursor: pointer;
+
+
+
+.bar li:hover{
+    background-color: #87cefa;
+    color: white;
+    transition: 0.5s;
+    transform: scale(105%,105%);
+
 }
 
+.bar li {
+    background-color: #87cefa;
+}
+.bar button:hover{
+    background-color: #87cefa;
+    text-decoration: underline;
+
+}
 .grafico {
     display: flex;
     justify-content: space-around;
@@ -78,15 +98,13 @@ button:hover {
     border-right: 3px solid black;
     height: 100vh;
     width: 20%;
-    background-color: #064286ab;
+    background-color: #064286;
 }
 
 .nome {
     padding-top: 16%;
     text-align: center;
     height: 27%;
-
-    border-bottom: 3px solid black;
     background-color: #064186;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.177);
 }
@@ -101,6 +119,7 @@ button:hover {
 }
 
 .nome img {
+    margin-top: 30px;
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -124,6 +143,7 @@ button:hover {
     margin: 0;
     height: 100%;
     justify-content: center;
+    background-color: #064186;
     
 }
 
@@ -141,7 +161,6 @@ button:hover {
 .nome li {
     list-style: none;
     text-decoration: none;
-
     text-align: center;
     margin: 10px 30px;
     padding: 5px 0px;
@@ -433,11 +452,13 @@ h3 {
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: #212124;
+    height: 80%;
+    background-color: transparent;
+    backdrop-filter: blur(80px);
   }
   
   .area-parametros-alerta .titulo-legenda {
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: 600;
     width: fit-content;
     margin: 10px 20px;
@@ -450,6 +471,7 @@ h3 {
   }
   
   .item-regua {
+   
     width: 70%;
     text-align: center;
     height: 80px;
@@ -487,3 +509,98 @@ h3 {
   .ideal {
     background-color: #9ccc65;
   }
+     /*CHAT */
+
+
+     .chat {
+        height: 100%;
+        display: flex;
+    }
+    
+    .box {
+        padding: 10px;
+       width: 60rem;
+       height: 40rem;
+        display: flex;
+        flex-direction: column;
+        background-color: #064286ab;
+        border-radius: 20px;
+        margin-left: 15rem;
+    }
+    
+    .social {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .titulo {
+        font-size: 30px;
+        font-weight: bold;
+        color: #ffffff;
+    }
+    
+    .bonequinho {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .bonequinho img {
+        width: 180px;
+    }
+    
+    .mensagem {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin-top: auto;
+        margin-bottom: 30px;
+    }
+    
+    .input {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: auto;
+        border: 1px solid #aaa;
+        border-radius: 10px;
+        background-color: white;
+    }
+    
+    .input_pergunta {
+        width: 100%;
+        height: 50px;
+        padding: 0 10px;
+        border: none;
+        border-radius: 10px;
+        color: black;
+    }
+    
+    .pesquisa {
+        width: 30px;
+        height: 30px;
+      
+
+    }
+    .pesquisa img{
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    .container_IA{
+        width: 80%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .body_IA{
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #87cefa;
+        width: 1425px;
+    }
