@@ -52,14 +52,12 @@
     <script>
         let proximaAtualizacao;
         b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
         function voltar() {
             window.location.href = '../login.html';
         }
 
-        function fetchChartData(idGeladeira, chartElementId, chartConfig) {
-            if (proximaAtualizacao != undefined) {
-                clearTimeout(proximaAtualizacao);
-            }
+        function BuscarDados(idGeladeira, chartElementId, chartConfig, myChart) {
             fetch(`/medidas/ultimas/${idGeladeira}`, { cache: 'no-store' })
                 .then(response => response.json())
                 .then(data => {
@@ -68,12 +66,68 @@
 
                     chartConfig.data.labels = labels;
                     chartConfig.data.datasets[0].data = temperaturas;
-                    new Chart(document.getElementById(chartElementId), chartConfig);
+
+                    if (myChart) {
+                        myChart.update();
+                    } else {
+                        const ctx = document.getElementById(chartElementId).getContext('2d');
+                        const newChart = new Chart(ctx, chartConfig);
+                        return newChart;
+                    }
                 })
                 .catch(error => console.error('Erro na obtenção dos dados p/ gráfico:', error));
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
+        function atualizarGrafico(idSensor, chartConfig, myChart) {
+            fetch(`/medidas/tempo-real/${idSensor}`, { cache: 'no-store' })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Nenhum dado encontrado ou erro na API');
+                    }
+                })
+                .then(novoRegistro => {
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(chartConfig.data);
+
+                    let avisoCaptura = document.getElementById(`avisoCaptura${idSensor}`);
+                    avisoCaptura.innerHTML = "";
+
+                    if (novoRegistro.length > 0 && novoRegistro[0].momento_grafico == chartConfig.data.labels[chartConfig.data.labels.length - 1]) {
+                        console.log("---------------------------------------------------------------");
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.");
+                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
+                        console.log("Horário do novo dado capturado:");
+                        console.log(novoRegistro[0].momento_grafico);
+                        console.log("Horário do último dado capturado:");
+                        console.log(chartConfig.data.labels[chartConfig.data.labels.length - 1]);
+                        console.log("---------------------------------------------------------------");
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        chartConfig.data.labels.shift(); // apagar o primeiro
+                        chartConfig.data.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+
+                        chartConfig.data.datasets[0].data.shift(); // apagar o primeiro de temperatura
+                        chartConfig.data.datasets[0].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+
+                        myChart.update();
+                    }
+                })
+                .catch(error => {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                });
+        }
+
+        const geladeiras = [1, 2, 3];
+        let charts = [];
+
+        geladeiras.forEach((id, index) => {
+            const chartElementId = `myChart${id}`;
+            const canvas = document.getElementById(chartElementId);
+            const ctx = canvas.getContext('2d');
+            
             const configTemplate = {
                 type: 'line',
                 data: {
@@ -90,13 +144,13 @@
                 options: {}
             };
 
-            const geladeiras = [1, 2, 3, 4];
-            geladeiras.forEach((id, index) => {
-                fetchChartData(id, `myChart${index + 1}`, JSON.parse(JSON.stringify(configTemplate)));
-            });
-        });
+            const newChart = new Chart(ctx, configTemplate);
+            charts.push(newChart);
 
-        proximaAtualizacao = setTimeout(() => fetchChartData(idSensor, dados, myChart), 2000);
+            BuscarDados(id, chartElementId, configTemplate, newChart);
+            setInterval(() => BuscarDados(id, chartElementId, configTemplate, charts[index]), 2000); 
+            setInterval(() => BuscarDados(id, configTemplate, charts[index]), 2000); 
+        });
     </script>
 </body>
 

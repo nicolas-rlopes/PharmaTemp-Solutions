@@ -7,8 +7,8 @@ function buscarUltimasMedidas(idSensor, limite_linhas) {
     DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
     FROM dado_sensor
     WHERE fkSensor = ${idSensor}
-    ORDER BY idDado 
-    LIMIT ${limite_linhas}`;
+    ORDER BY idDado DESC 
+    LIMIT  7`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
