@@ -105,7 +105,7 @@ insert into sensor values
 
 select * from sensor;
 
-create table dado_sensor(
+create table medida(
 idDado int auto_increment,
 dtHora timestamp default current_timestamp,
 temperatura double,
@@ -115,7 +115,7 @@ constraint fkSensorDado foreign key (fkSensor)
 primary key (idDado, fkSensor)
 );
 
-insert into dado_sensor values
+insert into medida values
 	(default, default, 5, 1),
 	(default, default, 3, 1),
 	(default, default, 4, 1);
@@ -125,7 +125,7 @@ idAlerta int primary key auto_increment,
 resolvido varchar(45),
 tipo varchar(45),
 fkDadoSensor int,
-constraint fkDadoSensor foreign key (fkDadoSensor) references dado_sensor(idDado));
+constraint fkDadoSensor foreign key (fkDadoSensor) references medida(idDado));
 
 
 insert into alerta values
@@ -135,7 +135,7 @@ insert into alerta values
     
     
 select * from alerta;
-select * from dado_sensor;
+select * from medida;
 select * from empresa;
 select * from endereco;
 select * from usuario;
@@ -152,8 +152,8 @@ select empresa.nome as 'Nome da Empresa',
         parametro.tempMinima as 'Temperatura Mínima',
         parametro.tempMaxima as 'Temperatura Máxima',
         sensor.nome as 'Nome do Sensor',
-        dado_sensor.temperatura as 'Temperatura Armazenada',
-        dado_sensor.dtHora as 'Dia e hora da armazenação',
+        medida.temperatura as 'Temperatura Armazenada',
+        medida.dtHora as 'Dia e hora da armazenação',
         alerta.resolvido as Situação,
         alerta.tipo as 'Tipo de alerta'
         from empresa join endereco on fkEmpresa = idEmpresa
@@ -161,8 +161,8 @@ select empresa.nome as 'Nome da Empresa',
         join geladeira on geladeira.fkEmpresa = idEmpresa
         join parametro on fkParametro = idParametro
         join sensor on fkGeladeira = idGeladeira
-        join dado_sensor on fkSensor = idSensor
+        join medida on fkSensor = idSensor
         join alerta on fkDadoSensor = idDado
-        where empresa.nome = 'Remédio Certo' and endereco.numEnd = '1778' and usuario.nome like 'Jaqueline %' and dado_sensor.temperatura = 5; 
+        where empresa.nome = 'Remédio Certo' and endereco.numEnd = '1778' and usuario.nome like 'Jaqueline %' and medida.temperatura = 5; 
         
 select * from empresa join usuario on fkEmpresa = idEmpresa;
