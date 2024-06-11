@@ -106,13 +106,13 @@ insert into sensor values
 select * from sensor;
 
 create table medida(
-idDado int auto_increment,
+idMedida int auto_increment,
 dtHora timestamp default current_timestamp,
 temperatura double,
 fkSensor int,
 constraint fkSensorDado foreign key (fkSensor)
 	references sensor (idSensor),
-primary key (idDado, fkSensor)
+primary key (idMedida, fkSensor)
 );
 
 insert into medida values
@@ -125,7 +125,7 @@ idAlerta int primary key auto_increment,
 resolvido varchar(45),
 tipo varchar(45),
 fkDadoSensor int,
-constraint fkDadoSensor foreign key (fkDadoSensor) references medida(idDado));
+constraint fkDadoSensor foreign key (fkDadoSensor) references medida(idMedida));
 
 
 insert into alerta values
@@ -162,7 +162,7 @@ select empresa.nome as 'Nome da Empresa',
         join parametro on fkParametro = idParametro
         join sensor on fkGeladeira = idGeladeira
         join medida on fkSensor = idSensor
-        join alerta on fkDadoSensor = idDado
+        join alerta on fkDadoSensor = idMedida
         where empresa.nome = 'Remédio Certo' and endereco.numEnd = '1778' and usuario.nome like 'Jaqueline %' and medida.temperatura = 5; 
         
 select * from empresa join usuario on fkEmpresa = idEmpresa;
