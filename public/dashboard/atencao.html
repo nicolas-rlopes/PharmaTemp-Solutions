@@ -78,6 +78,8 @@
                 .catch(error => console.error('Erro na obtenção dos dados p/ gráfico:', error));
         }
 
+        var sensors = JSON.parse(sessionStorage.SENSOR);
+
         function atualizarGrafico(idSensor, chartConfig, myChart) {
             fetch(`/medidas/tempo-real/${idSensor}`, { cache: 'no-store' })
                 .then(response => {

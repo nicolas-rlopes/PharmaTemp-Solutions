@@ -37,20 +37,20 @@
                 </div>
                 <div class="chat">
                     <div class="mensagem">
+                        <div id="resposta" class="resposta"></div>
                     </div>
                 </div>
-                
+
                 <div class="input">
-                    <input id="input_pergunta" type="text" class="input_pergunta" placeholder="Faça sua Pergunta">
+                    <input id="pergunta" type="text" class="input_pergunta" placeholder="Faça sua Pergunta">
                     <button onclick="gerarResposta()" class="btnIcon" id="btnIcon">
                         <img class="pesquisa" src="imagens/sendIcon.png">
                     </button>
                 </div>
-                <div class="resposta"></div>
             </div>
         </div>
     </div>
-   
+
 
 </body>
 
@@ -58,24 +58,25 @@
 
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    
     function voltar() {
         window.location.href = '../login.html'
     }
     async function gerarResposta() {
-        const pergunta = document.getElementById('pergunta').value;
+            const pergunta = document.getElementById('pergunta').value;
 
-        const response = await fetch('/perguntar', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ pergunta })
-        });
+            const response = await fetch('http://localhost:3340/perguntar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ pergunta })
+            });
 
-        const data = await response.json();
+            const data = await response.json();
 
-        resposta.style.display = 'block';
-        document.getElementById('resposta').innerText = data.resultado;
-    }
+            resposta.style.display = 'block';
+            document.getElementById('resposta').innerText = data.resultado;
+        }
 
 </script>
