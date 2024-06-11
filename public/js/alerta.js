@@ -104,12 +104,12 @@ function exibirCards() {
 
 function transformarEmDiv({ idSensor, temp, grauDeAviso, grauDeAvisoCor }) {
 
-    var descricao = JSON.parse(sessionStogere.SENSOR).find(item => item.id == idSensor).descricao;
+    // var descricao = JSON.parse(sessionStorage.SENSOR).find(item => item.id == idSensor).descricao;
     return `
     <div class="mensagem-alarme">
         <div class="informacao">
             <div class="${grauDeAvisoCor}">&#12644;</div> 
-            <h3>${descricao} está em estado de ${grauDeAviso}!</h3>
+            <h3>Estado de ${grauDeAviso}!</h3>
             <small>Temperatura capturada: ${temp}°C.</small>   
         </div>
         <div class="alarme-sino"></div>

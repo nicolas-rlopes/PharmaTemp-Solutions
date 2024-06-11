@@ -10,5 +10,9 @@ router.get("/ultimas/:idSensor", function (req, res) {
 router.get("/tempo-real/:idSensor", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
 });
+router.post("/pegarAlertas", function (req, res) {
+    medidaController.pegarAlertas(req, res);
+});
+
 
 module.exports = router;

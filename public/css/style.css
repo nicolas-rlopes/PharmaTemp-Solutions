@@ -580,3 +580,20 @@ button:hover {
 .social h1 {
     color: #064186;
 }
+
+.box_ajuda{
+  background-color: #fff ;
+    width: 300px;
+    text-align: center;
+    border: 3px solid black;
+    padding: 20px 50px;
+    border-radius: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.403);
+}
+.central_ajuda{
+    padding: 60px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}

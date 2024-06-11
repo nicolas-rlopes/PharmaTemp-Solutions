@@ -7,7 +7,7 @@ function buscarUltimasMedidas(idSensor) {
     DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
     FROM medida
     WHERE fkSensor = ${idSensor}
-    ORDER BY idDado DESC 
+    ORDER BY idMedida DESC 
     LIMIT  7`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -21,8 +21,16 @@ function buscarMedidasEmTempoReal(idSensor) {
         DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
     FROM medida
     WHERE fkSensor = ${idSensor}
-    ORDER BY idDado DESC
+    ORDER BY idMedida DESC
     LIMIT 1`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function pegarAlertas(email) {
+    var instrucaoSql = `
+SELECT temperatura, DATE_FORMAT(dtHora, '%H:%i:%s') as momentoRegistro FROM usuario u join empresa e on u.fkEmpresa = e.idEmpresa join geladeira g on e.idEmpresa = g.fkEmpresa join sensor s on g.idGeladeira = s.fkGeladeira join medida m on s.idSensor = m.fkSensor where u.email = '${email}' and (temperatura >= 9 or temperatura <= 1);`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -30,5 +38,6 @@ function buscarMedidasEmTempoReal(idSensor) {
 
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    pegarAlertas
 };

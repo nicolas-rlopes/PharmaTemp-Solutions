@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/alerta.js"></script>
     <link rel="icon" href="G03-removebg-preview.png" type="image/x-icon">
 </head>
 
-<body>
+<body onload="setInterval(obterdados(sessionStorage.SENSOR), 1000);">
     <div class="conteudo">
         <div class="guia">
             <div class="nome">
@@ -28,14 +29,14 @@
             </div>
         </div>
         <div class="menu">
-    
+
             <div class="descricao">
                 <div class="dash">
                     <div id="alerta">
                     </div>
                     <div class="area-parametros-alerta">
                         <p class="titulo-legenda">
-                           Parâmetros para Alertas
+                            Parâmetros para Alertas
                         </p>
                         <div class="parametros-alerta">
                             <div class="item-regua perigo-frio">
@@ -60,21 +61,21 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="cards" id="cardAquarios">
-        
+
                     </div>
-        
+
                 </div>
             </div>
 
             <div class="cont">
-                
+
                 <div class="graficoMenu">
                     <h3>Situações das Geladeiras</h3>
                     <canvas id="myChart3" style="position: relative; width:100px "></canvas>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -82,7 +83,7 @@
 
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-function voltar() {
+    function voltar() {
         window.location.href = '../login.html'
     }
 
@@ -194,7 +195,29 @@ function voltar() {
         document.getElementById('myChart2'),
         config2
     )
+    function mostrarAlertas() {
+        fetch("/medidas/pegarAlertas", {
+            method: "post",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: sessionStorage.EMAIL_USUARIO
+            })
+        }).then((resposta) => {
+            // console.log(resposta);
+            if (resposta.ok) {
+                resposta.json().then(dados => {
 
+                    // console.log(`Dados recebidos: ${JSON.stringify(dados)}`);
+
+                    alertar(dados, sessionStorage.SENSOR)
+                });
+            }
+        }).catch((erro) => {
+            console.log("Erro ao pegar os alertas", erro);
+        });
+    }
 </script>
 
 </html>
