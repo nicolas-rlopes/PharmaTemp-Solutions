@@ -597,3 +597,14 @@ button:hover {
     justify-content: space-around;
     flex-direction: row;
 }
+
+.box_ajuda a{
+    margin-bottom:10px ;
+    text-decoration: none;
+    color: #000000;
+    font-size: 25px;
+}
+.box_ajuda img{
+    padding-top: 8px;
+    margin-left: 30px;
+}
