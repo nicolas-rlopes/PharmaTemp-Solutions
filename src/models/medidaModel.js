@@ -6,7 +6,35 @@ function buscarUltimasMedidas(idSensor) {
         dtHora as momento,
     DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
     FROM medida
-    WHERE fkSensor = ${idSensor}
+    WHERE fkSensor = 1
+    ORDER BY idMedida DESC 
+    LIMIT  7`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidas2(idSensor) {
+    var instrucaoSql = `SELECT 
+        temperatura, 
+        dtHora as momento,
+    DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
+    FROM medida
+    WHERE fkSensor = 2
+    ORDER BY idMedida DESC 
+    LIMIT  7`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidas3(idSensor) {
+    var instrucaoSql = `SELECT 
+        temperatura, 
+        dtHora as momento,
+    DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
+    FROM medida
+    WHERE fkSensor = 3
     ORDER BY idMedida DESC 
     LIMIT  7`;
 
@@ -20,7 +48,35 @@ function buscarMedidasEmTempoReal(idSensor) {
         dtHora as momento,
         DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
     FROM medida
-    WHERE fkSensor = ${idSensor}
+    WHERE fkSensor = 1
+    ORDER BY idMedida DESC
+    LIMIT 1`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoReal2(idSensor) {
+    var instrucaoSql = `SELECT 
+        temperatura, 
+        dtHora as momento,
+        DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
+    FROM medida
+    WHERE fkSensor = 2
+    ORDER BY idMedida DESC
+    LIMIT 1`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoReal3(idSensor) {
+    var instrucaoSql = `SELECT 
+        temperatura, 
+        dtHora as momento,
+        DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
+    FROM medida
+    WHERE fkSensor = 3
     ORDER BY idMedida DESC
     LIMIT 1`;
 
@@ -38,6 +94,10 @@ SELECT temperatura, DATE_FORMAT(dtHora, '%H:%i:%s') as momentoRegistro FROM usua
 
 module.exports = {
     buscarUltimasMedidas,
+    buscarUltimasMedidas2,
+    buscarUltimasMedidas3,
     buscarMedidasEmTempoReal,
+    buscarMedidasEmTempoReal2,
+    buscarMedidasEmTempoReal3,
     pegarAlertas
 };

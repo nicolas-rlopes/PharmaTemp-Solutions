@@ -94,7 +94,50 @@
                     console.log(`Dados atuais do gráfico:`);
                     console.log(chartConfig.data);
 
-                    let avisoCaptura = document.getElementById(`avisoCaptura${idSensor}`);
+                    let avisoCaptura = document.getElementById(`avisoCaptura${idSensor}.1`);
+                    avisoCaptura.innerHTML = "";
+
+                    if (novoRegistro.length > 0 && novoRegistro[0].momento_grafico == chartConfig.data.labels[chartConfig.data.labels.length - 1]) {
+                        console.log("---------------------------------------------------------------");
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.");
+                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
+                        console.log("Horário do novo dado capturado:");
+                        console.log(novoRegistro[0].momento_grafico);
+                        console.log("Horário do último dado capturado:");
+                        console.log(chartConfig.data.labels[chartConfig.data.labels.length - 1]);
+                        console.log("---------------------------------------------------------------");
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        chartConfig.data.labels.shift(); // apagar o primeiro
+                        chartConfig.data.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+
+                        chartConfig.data.datasets[0].data.shift(); // apagar o primeiro de temperatura
+                        chartConfig.data.datasets[0].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+
+                        myChart.update();
+                        
+                    }
+                })
+                .catch(error => {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                });
+        }
+
+        function atualizarGrafico2(idSensor, chartConfig, myChart) {
+            fetch(`/medidas/tempo-real/${idSensor}`, { cache: 'no-store' })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Nenhum dado encontrado ou erro na API');
+                    }
+                })
+                .then(novoRegistro => {
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(chartConfig.data);
+
+                    let avisoCaptura = document.getElementById(`avisoCaptura${idSensor}.2`);
                     avisoCaptura.innerHTML = "";
 
                     if (novoRegistro.length > 0 && novoRegistro[0].momento_grafico == chartConfig.data.labels[chartConfig.data.labels.length - 1]) {
@@ -121,6 +164,50 @@
                     console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
                 });
         }
+
+        function atualizarGrafico3(idSensor, chartConfig, myChart) {
+            fetch(`/medidas/tempo-real/${idSensor}`, { cache: 'no-store' })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Nenhum dado encontrado ou erro na API');
+                    }
+                })
+                .then(novoRegistro => {
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(chartConfig.data);
+
+                    let avisoCaptura = document.getElementById(`avisoCaptura${idSensor}.3`);
+                    avisoCaptura.innerHTML = "";
+
+                    if (novoRegistro.length > 0 && novoRegistro[0].momento_grafico == chartConfig.data.labels[chartConfig.data.labels.length - 1]) {
+                        console.log("---------------------------------------------------------------");
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.");
+                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
+                        console.log("Horário do novo dado capturado:");
+                        console.log(novoRegistro[0].momento_grafico);
+                        console.log("Horário do último dado capturado:");
+                        console.log(chartConfig.data.labels[chartConfig.data.labels.length - 1]);
+                        console.log("---------------------------------------------------------------");
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        chartConfig.data.labels.shift(); // apagar o primeiro
+                        chartConfig.data.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+
+                        chartConfig.data.datasets[0].data.shift(); // apagar o primeiro de temperatura
+                        chartConfig.data.datasets[0].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+
+                        myChart.update();
+                    }
+                })
+                .catch(error => {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                });
+        }
+
+        
 
         const geladeiras = [1, 2, 3];
         let charts = [];
