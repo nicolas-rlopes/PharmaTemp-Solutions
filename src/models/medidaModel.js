@@ -8,7 +8,7 @@ function buscarUltimasMedidas(idSensor) {
     FROM medida
     WHERE fkSensor = 1
     ORDER BY idMedida DESC 
-    LIMIT  7`;
+   `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -22,7 +22,7 @@ function buscarUltimasMedidas2(idSensor) {
     FROM medida
     WHERE fkSensor = 2
     ORDER BY idMedida DESC 
-    LIMIT  7`;
+   `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -36,7 +36,7 @@ function buscarUltimasMedidas3(idSensor) {
     FROM medida
     WHERE fkSensor = 3
     ORDER BY idMedida DESC 
-    LIMIT  7`;
+   `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -48,7 +48,7 @@ function buscarMedidasEmTempoReal(idSensor) {
         dtHora as momento,
         DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
     FROM medida
-    WHERE fkSensor = 1
+    WHERE fkSensor = ${idSensor}
     ORDER BY idMedida DESC
     LIMIT 1`;
 
@@ -76,8 +76,8 @@ function graficoGeladeira(idGeladeira) {
         dtHora as momento,
         DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
         FROM medida
-        WHERE fkSensor = '${idGeladeira}'
-        order by desc limit 7`;
+        WHERE fkSensor = '${idGeladeira}' order by idMedida desc
+        limit 7`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

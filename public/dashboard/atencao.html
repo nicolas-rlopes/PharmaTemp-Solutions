@@ -72,16 +72,26 @@
             .catch(error => {
                 console.error("Erro ao atulizar o gráfico:", error);
             })
+            
+           // update.myChart()
         }
 
         function exibirGeladeiras(idGeladeira) {
             
-            document.getElementById("dash-grafico").innerHTML += `
+            document.getElementById("dash-grafico").innerHTML = `
                 <div class="geladeira">
-                    <h3>Geladeira ${idGeladeira}</h3>
-                    <canvas id="myChart${idGeladeira}" style="position: relative; width: 300px;"></canvas>
+                    <h3>Geladeira 1</h3>
+                    <canvas id="myChart1" style="position: relative; width: 300px;"></canvas>
                 </div>
-            `;
+                <div class="geladeira">
+                    <h3>Geladeira 2</h3>
+                    <canvas id="myChart2" style="position: relative; width: 300px;"></canvas>
+                </div>
+                <div class="geladeira">
+                    <h3>Geladeira 3</h3>
+                    <canvas id="myChart3" style="position: relative; width: 300px;"></canvas>
+                </div>
+                `;
             obterTemperaturaGeladeira(idGeladeira);
         }
 
@@ -145,9 +155,18 @@ function plotarGrafico(resposta, idGeladeira) {
     console.log('------------');
     console.log(resposta);
 
+    function formatarTempo(valor) {
+        return valor < 10 ? `0${valor}` : valor;
+    }
+
     for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
-            labels.push(registro.momento);
+            let horario = new Date(registro.momento);
+            let horas = formatarTempo(horario.getHours());
+            let minutos = formatarTempo(horario.getMinutes());
+
+
+            labels.push(`${horas}:${minutos}`);
             dados.datasets[0].data.push(registro.temperatura);
         }
 
@@ -162,6 +181,12 @@ function plotarGrafico(resposta, idGeladeira) {
         )
 
 }
+
+setInterval(tabelaGraficos, 3000);
+
+// setInterval(() => {
+//     window.location.reload();
+// }, 5000);
 
     </script>
 </body>
