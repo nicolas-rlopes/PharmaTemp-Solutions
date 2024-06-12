@@ -76,7 +76,8 @@ function graficoGeladeira(idGeladeira) {
         dtHora as momento,
         DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
         FROM medida
-        WHERE fkSensor = '${idGeladeira}'`;
+        WHERE fkSensor = '${idGeladeira}'
+        order by desc limit 7`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
