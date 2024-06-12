@@ -1,100 +1,108 @@
-var medidaModel = require("../models/medidaModel");
+var usuarioModel = require("../models/usuarioModel");
+var aquarioModel = require("../models/aquarioModel");
 
+function autenticar(req, res) {
+    var email = req.body.emailServer;
+    var senha = req.body.senhaServer;
 
-function graficoGeladeira(req, res) {
-    var idGeladeira = req.params.idGeladeira;
-
-    medidaModel.graficoGeladeira(idGeladeira)
-      .then(
-        function (resultado) {
-          res.json(resultado);
-        }
-      ).catch(
-        function (erro) {
-          console.log(erro);
-          console.log(
-            "\nErro ao Exibir o Grafico Loja1! Erro:",
-            erro.sqlMessage
-          );
-          res.status(500).json(erro.sqlMessage);
-        }
-      )
-  }
-
-function quantidadeGeladeiras(req, res) {
-medidaModel
-    .quantidadeGeladeiras()
-    .then((data) => {
-    if (data && data.length > 0) {
-        console.log("Geladeira obtida com sucesso:", data);
-        res.json(data);
+    if (email == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (senha == undefined) {
+        res.status(400).send("Sua senha está indefinida!");
     } else {
-        res.status(404).json({ error: "ERRO Geladeira não encontrada" });
+
+        usuarioModel.autenticar(email, senha)
+            .then(
+                function (resultadoAutenticar) {
+                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+
+                    if (resultadoAutenticar.length == 1) {
+                        console.log(resultadoAutenticar);
+
+                        res.status(200).json(resultadoAutenticar);
+
+                        // aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].idEmpresa)
+                        //     .then((resultadoAquarios) => {
+                        //         if (resultadoAquarios.length > 0) {
+                        //             res.json({
+                        //                 id: resultadoAutenticar[0].id,
+                        //                 email: resultadoAutenticar[0].email,
+                        //                 nome: resultadoAutenticar[0].nome,
+                        //                 senha: resultadoAutenticar[0].senha,
+                        //                 aquarios: resultadoAquarios
+                        //             });
+                        //         } else {
+                        //             res.status(204).json({ aquarios: [] });
+                        //         }
+                            // })
+                    } else if (resultadoAutenticar.length == 0) {
+                        res.status(403).send("Email e/ou senha inválido(s)");
+                    } else {
+                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
     }
-    })
-    .catch((error) => {
-    console.error("Erro ao obter Geladeira:", error);
-    res.status(500).json({ error: "Erro ao obter Geladeira:" });
-    });
+
 }
 
-function buscarUltimasMedidas(req, res) {
-    var idSensor = req.params.idSensor;
-    var limite_linhas = 7;
+function cadastrar(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var nome = req.body.nomeServer;
+    var email = req.body.emailServer;
+    var senha = req.body.senhaServer;
+    var idEmpresa = req.body.empresaServer;
+    var dtNasc = req.body.dtNascServer;
+    var cpf = req.body.cpfServer;
+    var telCelular = req.body.telServer;
 
-    console.log(`Recuperando as ultimas ${limite_linhas} medidas do sensor ${idSensor}`);
 
-    medidaModel.buscarUltimasMedidas(idSensor, limite_linhas).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!");
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
 
-function buscarMedidasEmTempoReal(req, res) {
-    var idSensor = req.params.idSensor;
+    // Faça as validações dos valores
+    if (nome == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else if (email == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (senha == undefined) {
+        res.status(400).send("Sua senha está undefined!");
+    } else if (idEmpresa == undefined) {
+        res.status(400).send("Sua empresa está undefined!");
+    } else if (dtNasc == undefined) {
+        res.status(400).send("Sua data de nascimento está undefined!");
+    } else if (cpf == undefined) {
+        res.status(400).send("Seu cpf está undefined!");
+    } else if (telCelular == undefined) {
+        res.status(400).send("Seu número de telefone celular está undefined!");
 
-    console.log(`Recuperando medidas em tempo real do sensor ${idSensor}`);
+    } else {
 
-    medidaModel.buscarMedidasEmTempoReal(idSensor).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!");
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
-
-function pegarAlertas(req, res) {
-    var email = req.body.email;
-
-    medidaModel.pegarAlertas(email).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!");
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.cadastrar(nome, dtNasc, cpf, email, telCelular, senha, idEmpresa)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
 }
 
 module.exports = {
-    buscarUltimasMedidas,
-    buscarMedidasEmTempoReal,
-    pegarAlertas,
-    graficoGeladeira,
-    quantidadeGeladeiras
-};
+    autenticar,
+    cadastrar
+}

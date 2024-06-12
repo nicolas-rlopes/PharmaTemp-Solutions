@@ -62,20 +62,22 @@
                 </div>
             </div>
             <div id="alerta"></div>
-      
+
             <div class="cont">
                 <div class="graficoMenu">
                     <h3>Situações das Geladeiras</h3>
-                    
+
                     <div class="cards" id="cardMedidas">
-                        <!-- Cards de temperatura serão adicionados aqui -->
+                        <div id="div_geladeira1"></div>
+                        <div id="div_geladeira2"></div>
+                        <div id="div_geladeira3"></div>
                     </div>
                     <canvas id="myChart3" style="position: relative; width:100px"></canvas>
                 </div>
-                
+
             </div>
         </div>
-        
+
     </div>
 
     <script>
@@ -88,31 +90,49 @@
         function initDashboard() {
             const sensors = [1, 2, 3]; // IDs dos sensores que você deseja buscar
             sensors.forEach(idSensor => fetchTemperatura(idSensor));
-            setInterval(() => sensors.forEach(idSensor => fetchTemperatura(idSensor)), 1000);
+            setInterval(() => sensors.forEach(idSensor => fetchTemperatura(idSensor)), 5000);
         }
 
         function fetchTemperatura(idSensor) {
-            fetch(`/medidas/ultimas/${idSensor}`)
+            fetch(`/medidas/buscarUltima/${idSensor}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.length > 0) {
-                        const latestData = data[0];
-                        displayTemperatura(latestData.temperatura, idSensor);
-                    }
-                })
-                .catch(error => console.error('Error fetching data:', error));
+                    console.log("\n\n\ndata:: ")
+                    console.log(idSensor)   
+                    console.log(data);
+                    displayTemperatura(data[0].temperatura, idSensor);
+                }).catch(err => console.log(err))
+
+
+            // fetch(`/medidas/ultimas/${idSensor}`)
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         console.log(data)
+            //         if (data.length > 0) {
+            //             const latestData = data[0];
+            //             displayTemperatura(latestData.temperatura, idSensor);
+            //         }
+            //     })
+            //     .catch(error => console.error('Error fetching data:', error));
         }
 
         function displayTemperatura(temperatura, idSensor) {
-            let sensorCard = document.getElementById(`sensor-${idSensor}`);
 
-            if (!sensorCard) {
-                const cardMedidas = document.getElementById('cardMedidas');
-                sensorCard = document.createElement('div');
-                sensorCard.className = 'sensor-card';
-                sensorCard.id = `sensor-${idSensor}`;
-                cardMedidas.appendChild(sensorCard);
-            }
+            console.log("\n\ndisplay: ")
+            console.log(temperatura)
+            console.log(idSensor)
+
+            const cardGeladeira = document.getElementById(`div_geladeira${idSensor}`);
+
+            cardGeladeira.innerHTML = `
+                <h2>Geladeira ${idSensor}</h2>
+                <p>Temperatura: ${temperatura}°C</p>
+            `;
 
             let corBackground = '#FFFFFF'; // cor padrão (branco) se não houver correspondência
 
@@ -128,11 +148,7 @@
                 corBackground = '#ff7043'; // laranja
             }
 
-            sensorCard.innerHTML = `
-                <h2>Geladeira ${idSensor}</h2>
-                <p>Temperatura: ${temperatura}°C</p>
-            `;
-            sensorCard.style.backgroundColor = corBackground;
+            cardGeladeira.style.backgroundColor = corBackground;
 
             alertar({ temperatura, idSensor });
         }
@@ -203,15 +219,15 @@
             }
         }
 
-        function atualizacaoPeriodica() {
-            const sensors = JSON.parse(sessionStorage.SENSOR);
-            sensors.forEach(sensor => {
-                obterdados(sensor.id);
-            });
-            setTimeout(atualizacaoPeriodica, 5000);
-        }
+        // function atualizacaoPeriodica() {
+        //     const sensor = JSON.parse(sessionStorage.SENSOR);
+        //     obterdados(sensor);
+        //     // sensors.forEach(sensor => {
+        //     // });
+        //     setTimeout(atualizacaoPeriodica, 5000);
+        // }
 
-        atualizacaoPeriodica();
+        // atualizacaoPeriodica();
     </script>
 </body>
 

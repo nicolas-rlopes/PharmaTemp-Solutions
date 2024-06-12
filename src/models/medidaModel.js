@@ -56,13 +56,13 @@ function buscarMedidasEmTempoReal(idSensor) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal2(idSensor) {
+function buscarUltima(idSensor) {
     var instrucaoSql = `SELECT 
         temperatura, 
         dtHora as momento,
         DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
     FROM medida
-    WHERE fkSensor = 2
+    WHERE fkSensor = ${idSensor}
     ORDER BY idMedida DESC
     LIMIT 1`;
 
@@ -117,7 +117,7 @@ module.exports = {
     buscarUltimasMedidas2,
     buscarUltimasMedidas3,
     buscarMedidasEmTempoReal,
-    buscarMedidasEmTempoReal2,
+    buscarUltima,
     buscarMedidasEmTempoReal3,
     pegarAlertas,
     graficoGeladeira,

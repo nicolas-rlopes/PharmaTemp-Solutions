@@ -104,12 +104,12 @@ function transformarEmDiv({ idSensor, temp, grauDeAviso, classe_temperatura }) {
     `;
 }
 
-function atualizacaoPeriodica() {
-    JSON.parse(sessionStorage.SENSOR).forEach(item => {
-        obterdados(item.id);
-    });
-    setTimeout(atualizacaoPeriodica, 5000);
-}
+// function atualizacaoPeriodica() {
+//     JSON.parse(sessionStorage.SENSOR).forEach(item => {
+//         obterdados(item.id);
+//     });
+//     setTimeout(atualizacaoPeriodica, 5000);
+// }
 
 // Iniciar a atualização periódica dos dados
-atualizacaoPeriodica();
+// atualizacaoPeriodica();

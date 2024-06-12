@@ -20,5 +20,10 @@ router.get("/quantidadeGeladeiras", function (req, res) {
     medidaController.quantidadeGeladeiras(req, res);
 });
 
+router.get("/buscarUltima/:idGeladeira", function (req, res) {
+    medidaController.buscarUltima(req, res);
+});
+
+
 
 module.exports = router;

@@ -1,6 +1,24 @@
 var medidaModel = require("../models/medidaModel");
 
 
+function buscarUltima(req, res) {
+    var idGeladeira = req.params.idGeladeira;
+
+    if (idGeladeira == undefined) {
+        res.status(400).send("ID geladeira inválido!");
+    } else {
+
+        medidaModel.buscarUltima(idGeladeira)
+        .then(function (resultado) {
+            res.json(resultado)
+        }).catch(function () {
+            res.status(500).json(erro.sqlMessage)
+        })
+
+    }
+
+}
+
 function graficoGeladeira(req, res) {
     var idGeladeira = req.params.idGeladeira;
 
@@ -92,6 +110,7 @@ function pegarAlertas(req, res) {
 }
 
 module.exports = {
+    buscarUltima,
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
     pegarAlertas,
