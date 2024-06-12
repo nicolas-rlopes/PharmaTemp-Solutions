@@ -6,7 +6,7 @@ function buscarUltimasMedidas(idSensor) {
         dtHora as momento,
     DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
     FROM medida
-    WHERE fkSensor = 1
+    WHERE fkSensor = ${idSensor}
     ORDER BY idMedida DESC 
     LIMIT  7`;
 
@@ -20,7 +20,7 @@ function buscarUltimasMedidas2(idSensor) {
         dtHora as momento,
     DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
     FROM medida
-    WHERE fkSensor = 2
+    WHERE fkSensor = ${idSensor}
     ORDER BY idMedida DESC 
     LIMIT  7`;
 

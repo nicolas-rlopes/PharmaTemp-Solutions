@@ -12,7 +12,7 @@
     <link rel="icon" href="G03-removebg-preview.png" type="image/x-icon">
 </head>
 
-<body onload="setInterval(obterdados(sessionStorage.SENSOR), 1000);">
+<body onload="initDashboard()">
     <div class="conteudo">
         <div class="guia">
             <div class="nome">
@@ -24,7 +24,7 @@
                     <li class="aqui"><a href="dash.html">Menu</a></li>
                     <li><a href="atencao.html">Dashboard</a></li>
                     <li><a href="contato.html">Entrar em contato</a></li>
-                    <button onclick="voltar()"><span class="fa fa-sign-out"></span>Sair
+                    <button onclick="voltar()"><span class="fa fa-sign-out"></span>Sair</button>
                 </ul>
             </div>
         </div>
@@ -32,8 +32,6 @@
 
             <div class="descricao">
                 <div class="dash">
-                    <div id="alerta">
-                    </div>
                     <div class="area-parametros-alerta">
                         <p class="titulo-legenda">
                             Parâmetros para Alertas
@@ -61,163 +59,160 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="cards" id="cardAquarios">
-
-                    </div>
-
                 </div>
             </div>
-
+            <div id="alerta"></div>
+      
             <div class="cont">
-
                 <div class="graficoMenu">
                     <h3>Situações das Geladeiras</h3>
-                    <canvas id="myChart3" style="position: relative; width:100px "></canvas>
+                    
+                    <div class="cards" id="cardMedidas">
+                        <!-- Cards de temperatura serão adicionados aqui -->
+                    </div>
+                    <canvas id="myChart3" style="position: relative; width:100px"></canvas>
                 </div>
-
+                
             </div>
         </div>
+        
     </div>
-</body>
 
-<script>
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    function voltar() {
-        window.location.href = '../login.html'
-    }
+    <script>
+        document.getElementById('b_usuario').innerText = sessionStorage.NOME_USUARIO;
 
-    var total = 3;
-    var critica = 1;
-    var atencao = 1;
-    var normal = total - critica - atencao;
-
-    const labels3 = [
-        'Situação Normal',
-        'Em Atenção',
-        'Situação Crítica',
-    ];
-
-    const data3 = {
-        labels: labels3,
-        datasets: [{
-            label: 'Situação normal',
-            backgroundColor: ['rgb(50 , 255, 40)', 'rgb(255, 255, 40)', 'rgb(255, 40, 40)'],
-            borderColor: 'white',
-            data: [normal, atencao, critica]
+        function voltar() {
+            window.location.href = '../login.html';
         }
-        ]
-    };
 
-    const config3 = {
-        type: 'pie',
-        data: data3,
-        options: {}
-    };
-
-    // SEGUNDA KPI BARRA
-
-    const labels1 = [
-        '08/01/2024',
-        '08/02/2024',
-        '08/03/2024',
-        '08/04/2024',
-        '08/05/2024',
-        '08/06/2024',
-        '08/07/2024',
-    ];
-
-    const data1 = {
-        labels: labels1,
-        datasets: [{
-            label: 'Problema',
-            backgroundColor: 'rgb(92, 162, 242)',
-            borderColor: 'white',
-            data: [1, 1, 2, 4, 3, 6, 9],
-
-        },
-        {
-            label: 'Adquiridos',
-            backgroundColor: 'rgb(6, 65, 134)',
-            borderColor: 'white',
-            data: [4, 7, 9, 10, 12, 14, 18],
+        function initDashboard() {
+            const sensors = [1, 2, 3]; // IDs dos sensores que você deseja buscar
+            sensors.forEach(idSensor => fetchTemperatura(idSensor));
+            setInterval(() => sensors.forEach(idSensor => fetchTemperatura(idSensor)), 1000);
         }
-        ]
-    };
 
-    const config1 = {
-        type: 'bar',
-        data: data1,
-        options: {}
-    };
-
-    // TERCEIRA KPI PERDA
-
-
-    const labels2 = [
-        '25/04/2024',
-        '25/05/2024',
-        '25/06/2024',
-        '25/07/2024',
-        '25/08/2024',
-        '25/09/2024',
-        '25/10/2024',
-    ];
-
-    const data2 = {
-        labels: labels2,
-        datasets: [{
-            label: 'Temperatura Crítica',
-            backgroundColor: 'rgb(255, 40, 40)',
-            borderColor: 'rgb(255, 40, 40)',
-            data: [7, 16, 10, 21, 38, 24, 30]
+        function fetchTemperatura(idSensor) {
+            fetch(`/medidas/ultimas/${idSensor}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const latestData = data[0];
+                        displayTemperatura(latestData.temperatura, idSensor);
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
         }
-        ]
-    };
 
-    const config2 = {
-        type: 'bar',
-        data: data2,
-        options: {}
-    };
+        function displayTemperatura(temperatura, idSensor) {
+            let sensorCard = document.getElementById(`sensor-${idSensor}`);
 
-    const myChart3 = new Chart(
-        document.getElementById('myChart3'),
-        config3
-    )
-
-    const myChart1 = new Chart(
-        document.getElementById('myChart1'),
-        config1
-    )
-
-    const myChart2 = new Chart(
-        document.getElementById('myChart2'),
-        config2
-    )
-    function mostrarAlertas() {
-        fetch("/medidas/pegarAlertas", {
-            method: "post",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email: sessionStorage.EMAIL_USUARIO
-            })
-        }).then((resposta) => {
-            // console.log(resposta);
-            if (resposta.ok) {
-                resposta.json().then(dados => {
-
-                    // console.log(`Dados recebidos: ${JSON.stringify(dados)}`);
-
-                    alertar(dados, sessionStorage.SENSOR)
-                });
+            if (!sensorCard) {
+                const cardMedidas = document.getElementById('cardMedidas');
+                sensorCard = document.createElement('div');
+                sensorCard.className = 'sensor-card';
+                sensorCard.id = `sensor-${idSensor}`;
+                cardMedidas.appendChild(sensorCard);
             }
-        }).catch((erro) => {
-            console.log("Erro ao pegar os alertas", erro);
-        });
-    }
-</script>
+
+            let corBackground = '#FFFFFF'; // cor padrão (branco) se não houver correspondência
+
+            if (temperatura <= -2) {
+                corBackground = '#42a5f5'; // azul
+            } else if (temperatura <= 1 && temperatura > -2) {
+                corBackground = '#5c6bc0'; // roxo
+            } else if (temperatura >= 2 && temperatura < 9) {
+                corBackground = '#9ccc65'; // verde
+            } else if (temperatura >= 9 && temperatura < 11) {
+                corBackground = '#ffee58'; // amarelo
+            } else if (temperatura >= 11) {
+                corBackground = '#ff7043'; // laranja
+            }
+
+            sensorCard.innerHTML = `
+                <h2>Geladeira ${idSensor}</h2>
+                <p>Temperatura: ${temperatura}°C</p>
+            `;
+            sensorCard.style.backgroundColor = corBackground;
+
+            alertar({ temperatura, idSensor });
+        }
+
+        function alertar({ temperatura, idSensor }) {
+            var limites = {
+                muito_quente: 11,
+                quente: 9,
+                ideal: 5,
+                frio: 1,
+                muito_frio: -2
+            };
+
+            var classe_temperatura = 'cor-alerta';
+            var grauDeAviso = '';
+
+            if (temperatura >= limites.muito_quente) {
+                classe_temperatura = 'cor-alerta perigo-quente';
+                grauDeAviso = 'perigo quente';
+            } else if (temperatura < limites.muito_quente && temperatura >= limites.quente) {
+                classe_temperatura = 'cor-alerta alerta-quente';
+                grauDeAviso = 'alerta quente';
+            } else if (temperatura <= limites.frio && temperatura > limites.muito_frio) {
+                classe_temperatura = 'cor-alerta alerta-frio';
+                grauDeAviso = 'alerta frio';
+            } else if (temperatura <= limites.muito_frio) {
+                classe_temperatura = 'cor-alerta perigo-frio';
+                grauDeAviso = 'perigo frio';
+            } else {
+                // Temperatura ideal, não exibe alerta
+                removerAlerta(idSensor);
+                return;
+            }
+
+            var card = document.getElementById(`card_${idSensor}`);
+
+            if (!card) {
+                const alertaContainer = document.getElementById('alerta');
+                card = document.createElement('div');
+                card.id = `card_${idSensor}`;
+                card.className = `mensagem-alarme ${classe_temperatura}`;
+                card.innerHTML = `
+                    <div class="informacao ${classe_temperatura}">
+                        &#12644;
+                        <h3>Estado de ${grauDeAviso} na Geladeira ${idSensor}!</h3>
+                        <small>Temperatura capturada: ${temperatura}°C.</small>   
+                    </div>
+                    <div class="alarme-sino" onclick="removerAlerta(${idSensor})">&#128276;</div>
+                `;
+                alertaContainer.appendChild(card);
+            } else {
+                card.className = `mensagem-alarme ${classe_temperatura}`;
+                card.innerHTML = `
+                    <div class="informacao ${classe_temperatura}">
+                        &#12644;
+                        <h3>Estado de ${grauDeAviso} na Geladeira ${idSensor}!</h3>
+                        <small>Temperatura capturada: ${temperatura}°C.</small>   
+                    </div>
+                    <div class="alarme-sino" onclick="removerAlerta(${idSensor})">&#128276;</div>
+                `;
+            }
+        }
+
+        function removerAlerta(idSensor) {
+            var card = document.getElementById(`card_${idSensor}`);
+            if (card) {
+                card.remove();
+            }
+        }
+
+        function atualizacaoPeriodica() {
+            const sensors = JSON.parse(sessionStorage.SENSOR);
+            sensors.forEach(sensor => {
+                obterdados(sensor.id);
+            });
+            setTimeout(atualizacaoPeriodica, 5000);
+        }
+
+        atualizacaoPeriodica();
+    </script>
+</body>
 
 </html>
