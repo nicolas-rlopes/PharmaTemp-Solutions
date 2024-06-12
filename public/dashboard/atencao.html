@@ -31,19 +31,7 @@
             <h1 id="h1_mensagem">Situações das Geladeiras</h1>
             <div class="dash-grafico" id="dash-grafico">
 
-                <div class="geladeira" id="geladeira">
-                    <h3>Geladeira 1</h3>
-                    <canvas id="myChart1" style="position: relative; width: 300px;"></canvas>
-                </div>
 
-                <div class="geladeira">
-                    <h3>Geladeira 2</h3>
-                    <canvas id="myChart2" style="position: relative; width: 300px;"></canvas>
-                </div>
-                <div class="geladeira">
-                    <h3>Geladeira 3</h3>
-                    <canvas id="myChart3" style="position: relative; width: 300px;"></canvas>
-                </div>
 
             </div>
         </div>
@@ -58,34 +46,75 @@
             window.location.href = '../login.html';
         }
 
+        function tabelaGraficos() {
+        fetch('/medidas/quantidadeGeladeiras')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar geladeiras');
+                }
+                return response.json();
+            })
+            .then (dados => {
+                console.log(dados.length)
+                for (let i = 0; i < dados.length; i++) {
+                    let data = dados[i]
+                    let linha = i;
+                    console.log(data)
+                    console.log(linha)
+                    if (data.idGeladeira > 0) {
+                        console.log(data.modelo);
+                        frigorificoAtual(linha);
+                    } else {
+                        throw new Error("Erro ao receber temperaturas");
+                    }
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao atulizar o gráfico:", error);
+            })
+        }
+
+        function exibirGeladeiras(idGeladeira) {
+            
+            document.getElementById("dash-grafico").innerHTML += `
+                <div class="geladeira">
+                    <h3>Geladeira ${idGeladeira}</h3>
+                    <canvas id="myChart${idGeladeira}" style="position: relative; width: 300px;"></canvas>
+                </div>
+            `;
+            obterTemperaturaGeladeira(idGeladeira);
+        }
+
+        function frigorificoAtual(linha) {
+        const idDiv = Number(linha) + 1;
+        
+            if (idDiv != undefined) {
+                for (var index = 0; index < 1; index ++){
+                    exibirGeladeiras(idDiv);
+            }
+            } else {
+                cervejada.innerHTML += `Nenhum frigorifico fora do ideal.`;
+            }
+        }
+
+    tabelaGraficos();
 
 
 
-function exibirGeladeiras() {
-    
-    document.getElementById("dash-grafico").innerHTML = `
-        <div class="geladeira">
-            <h3>Geladeira 1</h3>
-            <canvas id="myChart" style="position: relative; width: 300px;"></canvas>
-        </div>
-    `;
-    obterTemperaturaGeladeira();
-}
 
-
-function obterTemperaturaGeladeira() {
+function obterTemperaturaGeladeira(idGeladeira) {
     
     if (proximaAtualizacao != undefined) {
         clearTimeout(proximaAtualizacao);
     }
 
-    fetch(`/medidas/graficoGeladeira`,{cache: 'no-store'}).then(function (response) {
+    fetch(`/medidas/graficoGeladeira/${idGeladeira}`,{cache: 'no-store'}).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 resposta.reverse();
 
-                plotarGrafico(resposta);
+                plotarGrafico(resposta, idGeladeira);
             });
         } else {
             console.error('Erro na requisição')
@@ -96,7 +125,8 @@ function obterTemperaturaGeladeira() {
         });
 }
 
-function plotarGrafico(resposta) {
+function plotarGrafico(resposta, idGeladeira) {
+    console.log(`${idGeladeira}`)
     console.log('Começando PLotagem dos graficos');
 
     let labels = [];
@@ -127,13 +157,11 @@ function plotarGrafico(resposta) {
         }
 
         let myChart = new Chart(
-            document.getElementById(`myChart`),
+            document.getElementById(`myChart${idGeladeira}`),
             config
         )
 
 }
-
-exibirGeladeiras();
 
     </script>
 </body>

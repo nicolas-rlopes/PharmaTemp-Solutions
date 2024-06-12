@@ -13,8 +13,11 @@ router.get("/tempo-real/:idSensor", function (req, res) {
 router.post("/pegarAlertas", function (req, res) {
     medidaController.pegarAlertas(req, res);
 });
-router.get("/graficoGeladeira", function (req, res) {
+router.get("/graficoGeladeira/:idGeladeira", function (req, res) {
     medidaController.graficoGeladeira(req, res);
+});
+router.get("/quantidadeGeladeiras", function (req, res) {
+    medidaController.quantidadeGeladeiras(req, res);
 });
 
 

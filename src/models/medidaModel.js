@@ -70,17 +70,25 @@ function buscarMedidasEmTempoReal2(idSensor) {
     return database.executar(instrucaoSql);
 }
 
-function graficoGeladeira() {
+function graficoGeladeira(idGeladeira) {
     var instrucaoSql = `SELECT 
         temperatura, 
         dtHora as momento,
         DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
         FROM medida
-        WHERE fkSensor = 2`;
+        WHERE fkSensor = '${idGeladeira}'`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+function quantidadeGeladeiras() {
+    var instrucaoSql = `select * from geladeira;`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 
 function buscarMedidasEmTempoReal3(idSensor) {
     var instrucaoSql = `SELECT 
@@ -112,5 +120,6 @@ module.exports = {
     buscarMedidasEmTempoReal2,
     buscarMedidasEmTempoReal3,
     pegarAlertas,
-    graficoGeladeira
+    graficoGeladeira,
+    quantidadeGeladeiras
 };
