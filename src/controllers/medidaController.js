@@ -1,5 +1,25 @@
 var medidaModel = require("../models/medidaModel");
 
+
+function graficoGeladeira(req, res) {
+    medidaModel.graficoGeladeira()
+      .then(
+        function (resultado) {
+          res.json(resultado);
+        }
+      ).catch(
+        function (erro) {
+          console.log(erro);
+          console.log(
+            "\nErro ao Exibir o Grafico Loja1! Erro:",
+            erro.sqlMessage
+          );
+          res.status(500).json(erro.sqlMessage);
+        }
+      )
+  }
+
+
 function buscarUltimasMedidas(req, res) {
     var idSensor = req.params.idSensor;
     var limite_linhas = 7;
@@ -56,5 +76,6 @@ function pegarAlertas(req, res) {
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
-    pegarAlertas
+    pegarAlertas,
+    graficoGeladeira
 };

@@ -6,7 +6,7 @@ function buscarUltimasMedidas(idSensor) {
         dtHora as momento,
     DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
     FROM medida
-    WHERE fkSensor = ${idSensor}
+    WHERE fkSensor = 1
     ORDER BY idMedida DESC 
     LIMIT  7`;
 
@@ -20,7 +20,7 @@ function buscarUltimasMedidas2(idSensor) {
         dtHora as momento,
     DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
     FROM medida
-    WHERE fkSensor = ${idSensor}
+    WHERE fkSensor = 2
     ORDER BY idMedida DESC 
     LIMIT  7`;
 
@@ -70,6 +70,18 @@ function buscarMedidasEmTempoReal2(idSensor) {
     return database.executar(instrucaoSql);
 }
 
+function graficoGeladeira() {
+    var instrucaoSql = `SELECT 
+        temperatura, 
+        dtHora as momento,
+        DATE_FORMAT(dtHora, '%H:%i:%s') as momento_grafico
+        FROM medida
+        WHERE fkSensor = 2`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function buscarMedidasEmTempoReal3(idSensor) {
     var instrucaoSql = `SELECT 
         temperatura, 
@@ -99,5 +111,6 @@ module.exports = {
     buscarMedidasEmTempoReal,
     buscarMedidasEmTempoReal2,
     buscarMedidasEmTempoReal3,
-    pegarAlertas
+    pegarAlertas,
+    graficoGeladeira
 };

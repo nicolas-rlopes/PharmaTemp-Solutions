@@ -29,9 +29,9 @@
         </div>
         <div class="grafico_dash">
             <h1 id="h1_mensagem">Situações das Geladeiras</h1>
-            <div class="dash-grafico">
+            <div class="dash-grafico" id="dash-grafico">
 
-                <div class="geladeira">
+                <div class="geladeira" id="geladeira">
                     <h3>Geladeira 1</h3>
                     <canvas id="myChart1" style="position: relative; width: 300px;"></canvas>
                 </div>
@@ -51,195 +51,90 @@
 
     <script>
         let proximaAtualizacao;
+
         b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
         function voltar() {
             window.location.href = '../login.html';
         }
 
-        function BuscarDados(idGeladeira, chartElementId, chartConfig, myChart) {
-            fetch(`/medidas/ultimas/${idGeladeira}`, { cache: 'no-store' })
-                .then(response => response.json())
-                .then(data => {
-                    const labels = data.map(item => item.momento_grafico);
-                    const temperaturas = data.map(item => item.temperatura);
 
-                    chartConfig.data.labels = labels;
-                    chartConfig.data.datasets[0].data = temperaturas;
 
-                    if (myChart) {
-                        myChart.update();
-                    } else {
-                        const ctx = document.getElementById(chartElementId).getContext('2d');
-                        const newChart = new Chart(ctx, chartConfig);
-                        return newChart;
-                    }
-                })
-                .catch(error => console.error('Erro na obtenção dos dados p/ gráfico:', error));
+
+function exibirGeladeiras() {
+    
+    document.getElementById("dash-grafico").innerHTML = `
+        <div class="geladeira">
+            <h3>Geladeira 1</h3>
+            <canvas id="myChart" style="position: relative; width: 300px;"></canvas>
+        </div>
+    `;
+    obterTemperaturaGeladeira();
+}
+
+
+function obterTemperaturaGeladeira() {
+    
+    if (proximaAtualizacao != undefined) {
+        clearTimeout(proximaAtualizacao);
+    }
+
+    fetch(`/medidas/graficoGeladeira`,{cache: 'no-store'}).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+
+                plotarGrafico(resposta);
+            });
+        } else {
+            console.error('Erro na requisição')
         }
-
-        var sensors = JSON.parse(sessionStorage.SENSOR);
-
-        function atualizarGrafico(idSensor, chartConfig, myChart) {
-            fetch(`/medidas/tempo-real/${idSensor}`, { cache: 'no-store' })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Nenhum dado encontrado ou erro na API');
-                    }
-                })
-                .then(novoRegistro => {
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(chartConfig.data);
-
-                    let avisoCaptura = document.getElementById(`avisoCaptura${idSensor}.1`);
-                    avisoCaptura.innerHTML = "";
-
-                    if (novoRegistro.length > 0 && novoRegistro[0].momento_grafico == chartConfig.data.labels[chartConfig.data.labels.length - 1]) {
-                        console.log("---------------------------------------------------------------");
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.");
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
-                        console.log("Horário do novo dado capturado:");
-                        console.log(novoRegistro[0].momento_grafico);
-                        console.log("Horário do último dado capturado:");
-                        console.log(chartConfig.data.labels[chartConfig.data.labels.length - 1]);
-                        console.log("---------------------------------------------------------------");
-                    } else {
-                        // tirando e colocando valores no gráfico
-                        chartConfig.data.labels.shift(); // apagar o primeiro
-                        chartConfig.data.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-                        chartConfig.data.datasets[0].data.shift(); // apagar o primeiro de temperatura
-                        chartConfig.data.datasets[0].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
-
-                        myChart.update();
-                        
-                    }
-                })
-                .catch(error => {
-                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-                });
-        }
-
-        function atualizarGrafico2(idSensor, chartConfig, myChart) {
-            fetch(`/medidas/tempo-real/${idSensor}`, { cache: 'no-store' })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Nenhum dado encontrado ou erro na API');
-                    }
-                })
-                .then(novoRegistro => {
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(chartConfig.data);
-
-                    let avisoCaptura = document.getElementById(`avisoCaptura${idSensor}.2`);
-                    avisoCaptura.innerHTML = "";
-
-                    if (novoRegistro.length > 0 && novoRegistro[0].momento_grafico == chartConfig.data.labels[chartConfig.data.labels.length - 1]) {
-                        console.log("---------------------------------------------------------------");
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.");
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
-                        console.log("Horário do novo dado capturado:");
-                        console.log(novoRegistro[0].momento_grafico);
-                        console.log("Horário do último dado capturado:");
-                        console.log(chartConfig.data.labels[chartConfig.data.labels.length - 1]);
-                        console.log("---------------------------------------------------------------");
-                    } else {
-                        // tirando e colocando valores no gráfico
-                        chartConfig.data.labels.shift(); // apagar o primeiro
-                        chartConfig.data.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-                        chartConfig.data.datasets[0].data.shift(); // apagar o primeiro de temperatura
-                        chartConfig.data.datasets[0].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
-
-                        myChart.update();
-                    }
-                })
-                .catch(error => {
-                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-                });
-        }
-
-        function atualizarGrafico3(idSensor, chartConfig, myChart) {
-            fetch(`/medidas/tempo-real/${idSensor}`, { cache: 'no-store' })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Nenhum dado encontrado ou erro na API');
-                    }
-                })
-                .then(novoRegistro => {
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(chartConfig.data);
-
-                    let avisoCaptura = document.getElementById(`avisoCaptura${idSensor}.3`);
-                    avisoCaptura.innerHTML = "";
-
-                    if (novoRegistro.length > 0 && novoRegistro[0].momento_grafico == chartConfig.data.labels[chartConfig.data.labels.length - 1]) {
-                        console.log("---------------------------------------------------------------");
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.");
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
-                        console.log("Horário do novo dado capturado:");
-                        console.log(novoRegistro[0].momento_grafico);
-                        console.log("Horário do último dado capturado:");
-                        console.log(chartConfig.data.labels[chartConfig.data.labels.length - 1]);
-                        console.log("---------------------------------------------------------------");
-                    } else {
-                        // tirando e colocando valores no gráfico
-                        chartConfig.data.labels.shift(); // apagar o primeiro
-                        chartConfig.data.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-                        chartConfig.data.datasets[0].data.shift(); // apagar o primeiro de temperatura
-                        chartConfig.data.datasets[0].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
-
-                        myChart.update();
-                    }
-                })
-                .catch(error => {
-                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-                });
-        }
-
-        
-
-        const geladeiras = [1, 2, 3];
-        let charts = [];
-
-        geladeiras.forEach((id, index) => {
-            const chartElementId = `myChart${id}`;
-            const canvas = document.getElementById(chartElementId);
-            const ctx = canvas.getContext('2d');
-            
-            const configTemplate = {
-                type: 'line',
-                data: {
-                    labels: [],
-                    datasets: [{
-                        label: 'Temperatura',
-                        backgroundColor: 'rgb(199, 52, 52)',
-                        borderColor: 'rgb(199, 52, 52)',
-                        fill: false,
-                        tension: 0.1,
-                        data: []
-                    }]
-                },
-                options: {}
-            };
-
-            const newChart = new Chart(ctx, configTemplate);
-            charts.push(newChart);
-
-            BuscarDados(id, chartElementId, configTemplate, newChart);
-            setInterval(() => BuscarDados(id, chartElementId, configTemplate, charts[index]), 2000); 
-            setInterval(() => BuscarDados(id, configTemplate, charts[index]), 2000); 
+    })
+        .catch(function (error) {
+            console.error(`Erro na requisição dos dados para o grafico: ${error.message}`);
         });
+}
+
+function plotarGrafico(resposta) {
+    console.log('Começando PLotagem dos graficos');
+
+    let labels = [];
+
+    let dados = {
+        labels: labels,
+        datasets: [{
+            label: 'Temperatura',
+            data: [],
+            fill: false,
+            borderColor: 'red',
+            tension: 0.1,
+        }]
+    };
+
+    console.log('------------');
+    console.log(resposta);
+
+    for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.momento);
+            dados.datasets[0].data.push(registro.temperatura);
+        }
+
+        const config = {
+            type: 'line',
+            data: dados,
+        }
+
+        let myChart = new Chart(
+            document.getElementById(`myChart`),
+            config
+        )
+
+}
+
+exibirGeladeiras();
+
     </script>
 </body>
 
