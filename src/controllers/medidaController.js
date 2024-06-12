@@ -2,7 +2,9 @@ var medidaModel = require("../models/medidaModel");
 
 
 function graficoGeladeira(req, res) {
-    medidaModel.graficoGeladeira()
+    var idGeladeira = req.params.idGeladeira;
+
+    medidaModel.graficoGeladeira(idGeladeira)
       .then(
         function (resultado) {
           res.json(resultado);
@@ -19,6 +21,22 @@ function graficoGeladeira(req, res) {
       )
   }
 
+function quantidadeGeladeiras(req, res) {
+medidaModel
+    .quantidadeGeladeiras()
+    .then((data) => {
+    if (data && data.length > 0) {
+        console.log("Geladeira obtida com sucesso:", data);
+        res.json(data);
+    } else {
+        res.status(404).json({ error: "ERRO Geladeira não encontrada" });
+    }
+    })
+    .catch((error) => {
+    console.error("Erro ao obter Geladeira:", error);
+    res.status(500).json({ error: "Erro ao obter Geladeira:" });
+    });
+}
 
 function buscarUltimasMedidas(req, res) {
     var idSensor = req.params.idSensor;
@@ -77,5 +95,6 @@ module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
     pegarAlertas,
-    graficoGeladeira
+    graficoGeladeira,
+    quantidadeGeladeiras
 };
