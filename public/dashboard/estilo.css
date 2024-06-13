@@ -53,13 +53,14 @@ a:hover {
 }
 
 button {
+    margin-top: 13px;
     border: none;
     color: #064186;
     font-size: 25px;
-   width: 220px;
+width: 134px;
    height: 35px;
-   margin-left: 33px;
-   border-radius: 4%;
+   margin-left: 28%;
+   border-radius: 5%;
 }
 
 
@@ -67,7 +68,7 @@ button {
 
 .bar li:hover{
     background-color: #87cefa;
-    color: white;
+    color: #1077ec;
     transition: 0.5s;
     transform: scale(105%,105%);
 
@@ -79,6 +80,9 @@ button {
 .bar button:hover{
     background-color: #87cefa;
     text-decoration: underline;
+   color: #1077ec;
+    transition: 0.5s;
+    transform: scale(105%,105%);
 
 }
 .grafico {
@@ -90,6 +94,7 @@ button {
 
 .conteudo {
     display: flex;
+
 }
 
 .guia {
@@ -97,16 +102,17 @@ button {
     flex-direction: column;
     border-right: 3px solid black;
     height: 100vh;
-    width: 20%;
+ width: 25%;
     background-color: #064286;
 }
 
 .nome {
+    margin-bottom:120px ;
     padding-top: 16%;
     text-align: center;
     height: 27%;
     background-color: #064186;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.177);
+   
 }
 
 .nome h1 {
@@ -119,7 +125,7 @@ button {
 }
 
 .nome img {
-    margin-top: 30px;
+    margin-top: 70px;
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -192,16 +198,10 @@ li a:hover {
 }
 
 .graficoMenu {
-    display: flex;
-    width: 350px;
-    height: 450px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: white;
-    padding: 20px;
-    border: 2px solid black;
-    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.graficoMenu h3 {
     margin-bottom: 20px;
 }
 
@@ -245,7 +245,24 @@ li a:hover {
     display: flex;
     background-color: white;
     padding: 20px;
-    border: 2px solid black;
+
+    border-radius: 50px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color:red ;
+}
+.informacao h3 {
+    font-size: 12px; /* Ajuste o tamanho da fonte conforme necessário */
+    font-weight: normal; /* Ajuste o peso da fonte, se necessário */
+}
+.informacao_alerta{
+    width: 300px;
+    height: 70px;
+    display: flex;
+    background-color: white;
+    padding: 20px;
+   
     border-radius: 50px;
     margin-bottom: 20px;
     align-items: center;
@@ -262,28 +279,100 @@ li a:hover {
     font-size: 23px;
 }
 
-.informacao h2 {
-    font-size: 20px;
-    margin: 0;
-    text-align: center;
+#alerta {
+   display: flex;
+   flex-direction: row;
+    position: relative;
+  width: 100%;
+justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
-.alerta {
+.mensagem-alarme {
+    height: 90px;
+    width: 200px;
+    border-radius:20% ;
     display: flex;
-    align-items: center;
-    width: 75px;
-    height: 50px;
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 40, 40);
-    border: 3px dashed rgb(255, 40, 40);
-    border-radius: 50px;
-    flex-wrap: wrap;
-    font-weight: bold;
-    font-size: 11px;
-    text-shadow: 0px 0px 10px rgba(255, 40, 40, 0.686);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.697);
-    margin: 10px;
+    flex-direction: column;
+    position: relative;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduz a sombra */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    flex-direction: column;
+    background-color:red ;
 }
+
+.mensagem-alarme.critical {
+    background-color: red;
+    color: #721c24;
+}
+
+.mensagem-alarme.critical .informacao {
+    background-color: red;
+    color: #721c24;
+}
+
+.mensagem-alarme.critical h3 {
+    color: #ffffff; /* Texto branco para maior contraste */
+}
+
+.mensagem-alarme.critical .alarme-sino {
+    color: #ffffff; /* Ícone sino em branco para maior contraste */
+}
+.mensagem-alarme.critical .alarme-sino:hover {
+    opacity: .75;
+}
+.mensagem-alarme img{
+    margin-left:85px ;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.mensagem-alarme .informacao {
+    position: relative;
+    padding: 8px; 
+    border-radius: 6px;
+}
+
+.mensagem-alarme .informacao h3,
+.mensagem-alarme .informacao h5 {
+    margin-right: 20px;
+font-size: 15px;
+   
+  
+}
+
+.mensagem-alarme .informacao small {
+    
+    color: #000;
+}
+
+.mensagem-alarme .alarme-sino {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.mensagem-alarme.critical {
+
+    background-color: red;
+    color: #721c24;
+}
+
+.mensagem-alarme.warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.mensagem-alarme.normal {
+    background-color: #d4edda;
+    color: #155724;
+}
+
 
 /* RISCO */
 
@@ -534,7 +623,8 @@ h3 {
         justify-content: center;
     }
     
-    .titulo {
+    .social .titulo  {
+        margin-top: 3%;
         font-size: 30px;
         font-weight: bold;
         color: #ffffff;
@@ -589,6 +679,34 @@ h3 {
         justify-content: flex-end;
     }
     
+    .cards {
+
+        display: flex;
+        gap: 30px;
+    }
+    
+    .cards div {
+        margin-top: 130px;
+        width: 200px;
+        flex: 1;
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .titulo_Menu{
+        font-size: 35px;
+        text-align: center;
+    color: white;
+    background-color: #064186;
+    border: 2px solid black;
+    margin: auto;
+    padding: 10px 100px;
+    text-shadow: 0px 0px 5px black;
+    border-radius: 5px;
+    width:500px;
+    margin-bottom: 5px;
+    }
     .container_IA{
         width: 80%;
         margin: auto;
@@ -603,4 +721,31 @@ h3 {
         font-family: Arial, Helvetica, sans-serif;
         background-color: #87cefa;
         width: 1425px;
+    }
+    .box_IA{
+        margin-top:5%;
+    margin-right: 9.5%;
+        padding: 0;
+        width: 60rem;
+        height: 40rem;
+         display: flex;
+         flex-direction: column;
+         background-color: #064286ab;
+         border-radius: 20px;
+         margin-left: 15rem;
+    }
+    .resposta {
+        text-align: center;
+        font-size: 25px;
+        color: white;
+        padding: 0;
+        width: 45rem;
+        height: 22rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centraliza verticalmente */
+        align-items: center; 
+        background-color: #064286ab;
+        border-radius: 20px;
+        margin-left: 12%;
     }

@@ -12,14 +12,14 @@
     <link rel="icon" href="G03-removebg-preview.png" type="image/x-icon">
 </head>
 
-<body onload="initDashboard()">
+<body class="body_IA" onload="initDashboard()">
     <div class="conteudo">
         <div class="guia">
             <div class="nome">
-                <img src="imagens/Fernando-Brandao.png" alt="Foto de identificação de usuario">
+                <img src="imagens/550980-de-icone-de-usuario-gratis-vetor.jpg" alt="Foto do Perfil">
                 <h1><span id="b_usuario">usuário</span></h1>
             </div>
-            <div class="info">
+            <div>
                 <ul class="bar">
                     <li class="aqui"><a href="dash.html">Menu</a></li>
                     <li><a href="atencao.html">Dashboard</a></li>
@@ -29,7 +29,6 @@
             </div>
         </div>
         <div class="menu">
-
             <div class="descricao">
                 <div class="dash">
                     <div class="area-parametros-alerta">
@@ -61,25 +60,26 @@
                     </div>
                 </div>
             </div>
-            <div id="alerta"></div>
 
             <div class="cont">
                 <div class="graficoMenu">
-                    <h3>Situações das Geladeiras</h3>
 
+                    <div class="titulo_Menu">Situações Gerais Geladeiras</div>
                     <div class="cards" id="cardMedidas">
                         <div id="div_geladeira1"></div>
                         <div id="div_geladeira2"></div>
                         <div id="div_geladeira3"></div>
                     </div>
                     <canvas id="myChart3" style="position: relative; width:100px"></canvas>
+                    <div class="alerta" id="alerta"></div>
                 </div>
-
             </div>
+        
         </div>
-
     </div>
 
+    
+   
     <script>
         document.getElementById('b_usuario').innerText = sessionStorage.NOME_USUARIO;
 
@@ -103,7 +103,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log("\n\n\ndata:: ")
-                    console.log(idSensor)   
+                    console.log(idSensor)
                     console.log(data);
                     displayTemperatura(data[0].temperatura, idSensor);
                 }).catch(err => console.log(err))
@@ -166,17 +166,13 @@
             var grauDeAviso = '';
 
             if (temperatura >= limites.muito_quente) {
-                classe_temperatura = 'cor-alerta perigo-quente';
-                grauDeAviso = 'perigo quente';
+                grauDeAviso = 'acima do limite de temperatura';
             } else if (temperatura < limites.muito_quente && temperatura >= limites.quente) {
-                classe_temperatura = 'cor-alerta alerta-quente';
-                grauDeAviso = 'alerta quente';
+                grauDeAviso = 'perto do limite '
             } else if (temperatura <= limites.frio && temperatura > limites.muito_frio) {
-                classe_temperatura = 'cor-alerta alerta-frio';
-                grauDeAviso = 'alerta frio';
+                grauDeAviso = 'perto do limite';
             } else if (temperatura <= limites.muito_frio) {
-                classe_temperatura = 'cor-alerta perigo-frio';
-                grauDeAviso = 'perigo frio';
+                grauDeAviso = 'abaixo do limite de temperatura';
             } else {
                 // Temperatura ideal, não exibe alerta
                 removerAlerta(idSensor);
@@ -186,32 +182,28 @@
             var card = document.getElementById(`card_${idSensor}`);
 
             if (!card) {
-                const alertaContainer = document.getElementById('alerta');
-                card = document.createElement('div');
-                card.id = `card_${idSensor}`;
-                card.className = `mensagem-alarme ${classe_temperatura}`;
-                card.innerHTML = `
-                    <div class="informacao ${classe_temperatura}">
-                        &#12644;
-                        <h3>Estado de ${grauDeAviso} na Geladeira ${idSensor}!</h3>
-                        <small>Temperatura capturada: ${temperatura}°C.</small>   
-                    </div>
-                    <div class="alarme-sino" onclick="removerAlerta(${idSensor})">&#128276;</div>
-                `;
-                alertaContainer.appendChild(card);
-            } else {
-                card.className = `mensagem-alarme ${classe_temperatura}`;
-                card.innerHTML = `
-                    <div class="informacao ${classe_temperatura}">
-                        &#12644;
-                        <h3>Estado de ${grauDeAviso} na Geladeira ${idSensor}!</h3>
-                        <small>Temperatura capturada: ${temperatura}°C.</small>   
-                    </div>
-                    <div class="alarme-sino" onclick="removerAlerta(${idSensor})">&#128276;</div>
-                `;
-            }
-        }
-
+    const alertaContainer = document.getElementById('alerta');
+    card = document.createElement('div');
+    card.id = `card_${idSensor}`;
+    card.className = `mensagem-alarme critical`; 
+    card.innerHTML = `
+      <img src="imagens/257195.png" alt="" style="width: 30px; height: 30px;">
+        <div class="informacao ${classe_temperatura}">
+            <h3>Geladeira ${idSensor} ${grauDeAviso}!</h3>
+        </div>
+        <div class="alarme-sino" onclick="removerAlerta(${idSensor})"></div>
+    `;
+    alertaContainer.appendChild(card);
+} else {
+    card.className = `mensagem-alarme critical `; 
+    card.innerHTML = `
+        <div class="informacao ${classe_temperatura}">
+            <h3>Geladeira ${idSensor} estado de ${grauDeAviso}!</h3>
+        </div>
+        <div class="alarme-sino" onclick="removerAlerta(${idSensor})"></div>
+    `;
+}
+}
         function removerAlerta(idSensor) {
             var card = document.getElementById(`card_${idSensor}`);
             if (card) {
