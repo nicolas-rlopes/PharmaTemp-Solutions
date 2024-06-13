@@ -724,9 +724,9 @@ h3 {
     }
     .box_IA{
         margin-top:5%;
-    margin-right: 9.5%;
+    margin-left: 30px;
         padding: 0;
-        width: 60rem;
+        width: 70rem;
         height: 40rem;
          display: flex;
          flex-direction: column;
@@ -745,7 +745,7 @@ h3 {
         flex-direction: column;
         justify-content: center; /* Centraliza verticalmente */
         align-items: center; 
-        background-color: #064286ab;
+        
         border-radius: 20px;
         margin-left: 12%;
     }
